@@ -1,0 +1,35 @@
+.badge {
+    border-radius: 0;
+}
+
+.btn-link{
+    font-size: 1.2em;
+    transition: .2s ease-in-out;
+}
+.btn-link:hover{
+    margin-left: 5px;
+} 
+
+
+.home-btn-link::after{
+    display:block;
+    content: '';
+    background: #000;
+    width: 0;
+    border-bottom: solid 1px #2e2e2e;  
+    transition: width .3s ease-in-out; 
+}
+
+.home-btn-link:hover::after{
+    width: 80%;
+}
+
+.new-arrival-badge{
+    height: 30px;
+    width: 70px;
+    font-size: 1em;
+}
+
+.card-body{
+    border-bottom: 0;
+}
