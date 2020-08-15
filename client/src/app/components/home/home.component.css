@@ -3,7 +3,7 @@
 }
 
 .btn-link{
-    font-size: 1.2em;
+    font-size: 1em;
     transition: .2s ease-in-out;
 }
 .btn-link:hover{
@@ -25,11 +25,27 @@
 }
 
 .new-arrival-badge{
-    height: 30px;
-    width: 70px;
-    font-size: 1em;
+    font-size: 15px;
 }
 
 .card-body{
     border-bottom: 0;
+}
+
+.new-arrival-items{
+    max-height: 900px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+}
+
+.new-arrival-items::-webkit-scrollbar {
+    background: transparent; 
+    width: 10px;
+}
+/* Optional: show position indicator in red */
+.new-arrival-items::-webkit-scrollbar-thumb {
+    background: #afafaf;
 }

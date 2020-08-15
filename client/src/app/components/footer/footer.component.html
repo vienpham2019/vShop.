@@ -1,0 +1,132 @@
+<div class="py-9 bg-secondary mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-3" *ngFor = "let feature of features">
+
+                <div class="d-flex mb-6 mb-md-0">
+                    <i [ngClass]="[feature.class_name , 'font-size-lg']"></i>
+
+                    <div class="ml-3">
+                        <h6 class="heading-xxs mb-1"> {{feature.title}}</h6>
+
+                        <p class="mb-0 font-size-sm text-white"> {{feature.content}} </p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+
+  <div class="py-12 border-bottom border-gray-700 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-3">
+
+          <!-- Heading -->
+          <h4 class="mb-6">{{ shop_title }}</h4>
+
+          <!-- Social -->
+          <ul class="list-unstyled list-inline mb-7 mb-md-0 text-gray-350">
+            <li class="list-inline-item" *ngFor = "let social of footer_socials">
+                <i [ngClass] = "[social]"></i>
+            </li>
+          </ul>
+
+        </div>
+        <div class="col-6 col-sm">
+
+          <!-- Heading -->
+          <h6 class="heading-xxs mb-4">
+            Support
+          </h6>
+
+          <!-- Links -->
+          <ul class="list-unstyled mb-7 mb-sm-0">
+            <li>
+              <a class="text-dark" href="./contact-us.html">Contact Us</a>
+            </li>
+            <li>
+              <a class="text-dark" href="./faq.html">FAQs</a>
+            </li>
+            <li>
+              <a class="text-dark" data-toggle="modal" href="#modalSizeChart">Size Guide</a>
+            </li>
+            <li>
+              <a class="text-dark" href="./shipping-and-returns.html">Shipping &amp; Returns</a>
+            </li>
+          </ul>
+
+        </div>
+        <div class="col-6 col-sm">
+
+          <!-- Heading -->
+          <h6 class="heading-xxs mb-4">
+            Shop
+          </h6>
+
+          <!-- Links -->
+          <ul class="list-unstyled mb-7 mb-sm-0">
+            <li>
+              <a class="text-dark" href="./shop.html">Men's Shopping</a>
+            </li>
+            <li>
+              <a class="text-dark" href="./shop.html">Women's Shopping</a>
+            </li>
+            <li>
+              <a class="text-dark" href="./shop.html">Kids' Shopping</a>
+            </li>
+            <li>
+              <a class="text-dark" href="./shop.html">Discounts</a>
+            </li>
+          </ul>
+
+        </div>
+        <div class="col-6 col-sm">
+
+          <!-- Heading -->
+          <h6 class="heading-xxs mb-4">
+            Company
+          </h6>
+
+          <!-- Links -->
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a class="text-dark" href="./about.html">Our Story</a>
+            </li>
+            <li>
+              <a class="text-dark" href="#!">Careers</a>
+            </li>
+            <li>
+              <a class="text-dark" href="#!">Terms &amp; Conditions</a>
+            </li>
+            <li>
+              <a class="text-dark" href="#!">Privacy &amp; Cookie policy</a>
+            </li>
+          </ul>
+
+        </div>
+        <div class="col-6 col-sm">
+
+          <!-- Heading -->
+          <h6 class="heading-xxs mb-4">
+            Contact
+          </h6>
+
+          <!-- Links -->
+          <ul class="list-unstyled mb-0">
+            <li>
+                1-202-555-0106
+            </li>
+            <li>
+                customer_service@shopper.com
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
