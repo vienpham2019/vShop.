@@ -244,8 +244,8 @@
         <!-- Heading -->
         <h2 class="mb-7 text-center border-bottom">New Arrivals</h2>
 
-        <div class="d-flex flex-wrap justify-content-center bg-light new-arrival-items">
-            <div class="card mx-3 bg-transparent pt-5" style="width: 18rem;" *ngFor = "let new_item of new_arrivals">
+        <div class="d-flex flex-wrap justify-content-center bg-light">
+            <div class="card mx-3 bg-transparent pt-5" style="width: 18rem;" *ngFor = "let new_item of display_new_arrivals">
                 <div class="badge badge-dark  card-badge new-arrival-badge">
                   {{new_item.price}}
                 </div>
@@ -274,15 +274,29 @@
             </div>
         </div>
         <!-- Button -->
+        <nav class="d-flex justify-content-center justify-content-md-end" *ngIf = "new_arrivals.length > 6">
+          <ul class="pagination pagination-sm text-gray-400">
+            <li class="page-item">
+              <span class="page-link page-link-arrow" (click) = "change_page('prev')">
+                <i class="fa fa-caret-left"></i>
+              </span>
+            </li>
+            <li [ngClass] = "new_arrival_class(i)" *ngFor = "let num of new_arrival_length; let i = index" >
+              <a class="page-link" href="#">{{i + 1}}</a>
+            </li>
+            <li class="page-item">
+              <span class="page-link page-link-arrow" (click) = "change_page('next')" >
+                <i class="fa fa-caret-right"></i>
+              </span>
+            </li>
+          </ul>
+        </nav>
         <div class="text-center mt-2">
           <a class="btn btn-dark" href="shop.html">
-              Shop Now <i class="fas fa-angle-right ml-2"></i>
+            Shop Now <i class="fas fa-angle-right ml-2"></i>
           </a>
         </div>
 
       </div>
     </div>
   </div>
-
-  <!-- footer -->
-  <app-footer></app-footer>

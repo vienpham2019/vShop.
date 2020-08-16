@@ -25,11 +25,57 @@ export class HomeComponent implements OnInit {
     {title: 'Adidas Runfalcon' , price: '$89.99' , new: false , sale: true, link: "#" , img_url: 'https://assets.adidas.com/images/h_320,f_auto,q_auto:sensitive,fl_lossy/449c838942da409f8ba9a97f00d3cffe_9366/Runfalcon_Shoes_Black_F36199_01_standard.jpg' , type: 'shoes'},
     {title: 'Greggo Flat' , price: '$850.00' , new: false , sale: true, link: "#" , img_url: 'https://images.us.christianlouboutin.com/media/catalog/product/cache/1/thumbnail/1200x/602f0fa2c1f0d1ba5e241f914e856ff9/1/1/5/0/christianlouboutin-greggo-1150377_BK01_4_1200x1200_1572437058.jpg' , type: 'shoes'},
     {title: 'Land Baby Bag' , price: '$28.99' , new: false , sale: true, link: "#" , img_url: 'https://images-na.ssl-images-amazon.com/images/I/91wid0n8V6L._SL1500_.jpg' , type: 'bagpack'},
-    {title: 'Paraside is Real' , price: '$75.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'}
+    {title: 'Paraside is Real' , price: '$75.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'},
+    {title: 'Paraside is Real' , price: '$75.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'},
+    {title: 'Paraside is Real' , price: '$75.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'},
+    {title: 'Paraside is Real' , price: '$75.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'},
+    {title: 'Paraside is Real' , price: '$75.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'},
+    {title: 'Paraside is Real' , price: '$75.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'},
+    {title: 'Paraside is Real' , price: '$75.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'},
+    {title: 'Paraside is Real' , price: '$75.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'},
+    {title: 'Paraside is Real' , price: '$75.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'},
+    {title: 'Paraside is Real' , price: '$75.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'},
+    {title: 'Paraside is Real' , price: '$65.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'},
+    {title: 'Paraside is Real' , price: '$75.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'},
+    {title: 'Paraside is Real' , price: '$75.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'},
+    {title: 'Paraside is Real' , price: '$65.00' , new: false , sale: true, link: "#" , img_url: 'https://images.squarespace-cdn.com/content/v1/548ec3bee4b068057bfb6db7/1555524365342-FSB67T1LCR7M776FHNTB/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/palm+trees+bag.jpg' , type: 'bagpack'}
   ]
+
+  display_new_arrivals: any[]
+  start_index: number = 0 
+  end_index: number = 6
+
+  new_arrival_length: any[] = new Array(Math.ceil(this.new_arrivals.length / 6)).fill(0)
   constructor() { }
 
   ngOnInit(): void {
+    this.slice_new_arrivals()
+  }
+
+  slice_new_arrivals(){
+    this.display_new_arrivals = this.new_arrivals.slice(this.start_index, this.end_index)
+  }
+
+  change_page(value):void{
+    if(value === 'next'){
+      if(this.start_index + 6 < this.new_arrivals.length){
+        this.start_index += 6 
+        this.end_index += 6 
+      }
+    }else{
+      if(this.start_index - 6 >= 0){
+        this.start_index -= 6
+        this.end_index -= 6
+      }
+    }
+
+    this.slice_new_arrivals()
+  }
+
+  new_arrival_class(current_index){
+    let c_i = Math.floor(current_index)
+    let t_i = Math.floor(this.start_index / 6)
+    return c_i === t_i ? "page-item active" : "page-item"
   }
 
   price_class (item) {
