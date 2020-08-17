@@ -15,6 +15,8 @@ import { OrderMordalComponent } from './components/order-mordal/order-mordal.com
 import { PaymentComponent } from './components/payment/payment.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { LoginRegisterComponent } from './components/login-register/login-register.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { LoginRegisterComponent } from './components/login-register/login-regist
     OrderMordalComponent,
     PaymentComponent,
     UserProfileComponent,
-    LoginRegisterComponent
+    LoginRegisterComponent,
+    ContactComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
