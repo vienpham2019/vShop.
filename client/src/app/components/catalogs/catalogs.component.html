@@ -36,7 +36,7 @@
                                     <li 
                                         *ngFor = "let size of sizes , let i = index"
                                         [ngClass] = "price_class(size.selected)"
-                                        (click) = "select_price(size , i)"
+                                        (click) = "select_size(size , i)"
                                     >
                                         {{size.value}}
                                     </li>
@@ -53,7 +53,7 @@
                                 <ul>
                                     <p *ngFor = "let price of price_range">
                                         <label>
-                                            <input type="radio" name="group1" class="mr-2"/>
+                                            <input type="radio" name="group1" id={{price}} class="mr-2" (click) = "select_price(price)"/>
                                             <span>{{price}}</span>
                                         </label>
                                     </p>
@@ -154,7 +154,7 @@
                           <!-- action -->
                           <div class="card-actions">
                             <span class="card-action">
-                              <button class="btn btn-xs btn-circle btn-light mx-2" data-toggle="modal" data-target="#modalProduct">
+                              <button class="btn btn-xs btn-circle btn-light mx-2" data-toggle="modal" data-target="#modalProduct" [routerLink] = "['/item']">
                                 <i class="fas fa-eye"></i>
                               </button>
                             </span>

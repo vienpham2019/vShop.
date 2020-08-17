@@ -36,8 +36,12 @@ export class CatalogsComponent implements OnInit {
 
   remove_filter(detail){
     this.filter_details = this.filter_details.filter(d => d.value !== detail.value)
-    if(detail.title === "price"){
+    if(detail.title === "size"){
       this.sizes[detail.index] = {value: detail.value, selected: false}
+    }
+    if(detail.title === 'price'){
+      let input = document.getElementById(detail.value)
+      console.log(input)
     }
   }
 
@@ -46,14 +50,21 @@ export class CatalogsComponent implements OnInit {
     return `${default_class} ${selected ? " border-success" : ""}`
   }
 
-  select_price(size , index){
+  select_size(size , index){
     let {value , selected} = size 
     if(!selected){
-      this.filter_details.push({value , title: 'price' , index})
+      this.filter_details.push({value , title: 'size' , index})
     }else{
       this.filter_details = this.filter_details.filter(d => d.value !== value)
     }
     this.sizes[index] = {value, selected: !selected}
+  }
+
+  select_price(price){
+    if(this.filter_details.find(d => d.title === 'price')){
+      this.filter_details = this.filter_details.filter(d => d.title !== 'price')
+    }
+    this.filter_details.push({value: price , title: "price"})
   }
 
 }
