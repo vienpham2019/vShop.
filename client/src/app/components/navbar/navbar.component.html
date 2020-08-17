@@ -16,14 +16,14 @@
 
         <!-- Nav -->
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item dropdown hovered">
+          <li class="nav-item dropdown hovered cursor">
 
             <!-- Toggle -->
             <a class="nav-link" [routerLink] = "['/']">Home</a>
 
 
           </li>
-          <li class="nav-item dropdown position-static">
+          <li class="nav-item dropdown position-static cursor">
 
             <!-- Toggle -->
             <span class="nav-link cursor" data-toggle="dropdown">Catalog</span>
@@ -115,16 +115,12 @@
 
           </li>
           
-          <li class="nav-item hovered">
+          <li class="nav-item hovered cursor">
             <a class="nav-link" href="#">Contact</a>
           </li>
 
-          <li class="nav-item hovered">
-            <a class="nav-link" href="#">Login</a>
-          </li>
-
-          <li class="nav-item hovered">
-            <a class="nav-link" href="#">Register</a>
+          <li class="nav-item hovered cursor">
+            <a class="nav-link" data-toggle="tab" data-toggle="modal" data-target="#loginModal">Login/Register</a>
           </li>
           
         </ul>
@@ -133,7 +129,7 @@
         <ul class="navbar-nav flex-row">
           
           <li class="nav-item ml-lg-n4">
-            <a class="nav-link" href="./account-orders.html">
+            <a class="nav-link" [routerLink] = "['/user-profile']">
                 <i class="fas fa-user"></i>
             </a>
           </li>

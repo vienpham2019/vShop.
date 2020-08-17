@@ -13,6 +13,8 @@ import { SizeChartComponent } from './components/size-chart/size-chart.component
 import { WaitingListComponent } from './components/waiting-list/waiting-list.component';
 import { OrderMordalComponent } from './components/order-mordal/order-mordal.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { LoginRegisterComponent } from './components/login-register/login-register.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { PaymentComponent } from './components/payment/payment.component';
     SizeChartComponent,
     WaitingListComponent,
     OrderMordalComponent,
-    PaymentComponent
+    PaymentComponent,
+    UserProfileComponent,
+    LoginRegisterComponent
   ],
   imports: [
     BrowserModule,
