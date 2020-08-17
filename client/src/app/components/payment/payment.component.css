@@ -1,0 +1,28 @@
+.breadcrumb-item+.breadcrumb-item::before {
+    font-family: Feather;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    display: inline-block;
+    padding-right: .5rem;
+    color: inherit;
+    content: "\203A";
+}
+
+.checkout-items{
+    max-height: 700px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+}
+
+.checkout-items::-webkit-scrollbar {
+    background: transparent; 
+    width: 10px;
+}
+/* Optional: show position indicator in red */
+.checkout-items::-webkit-scrollbar-thumb {
+    background: #afafaf;
+}

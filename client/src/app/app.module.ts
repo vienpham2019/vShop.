@@ -12,6 +12,7 @@ import { ItemComponent } from './components/item/item.component';
 import { SizeChartComponent } from './components/size-chart/size-chart.component';
 import { WaitingListComponent } from './components/waiting-list/waiting-list.component';
 import { OrderMordalComponent } from './components/order-mordal/order-mordal.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { OrderMordalComponent } from './components/order-mordal/order-mordal.com
     ItemComponent,
     SizeChartComponent,
     WaitingListComponent,
-    OrderMordalComponent
+    OrderMordalComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,
