@@ -1,0 +1,12 @@
+.list-styled-item::after{
+    display:block;
+    content: '';
+    background: #000;
+    width: 0;
+    border-bottom: solid 1px #019fb6;  
+    transition: width .3s ease-in-out; 
+}
+
+.list-styled-item:hover::after{
+    width: 100%;
+}
