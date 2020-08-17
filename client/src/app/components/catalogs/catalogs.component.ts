@@ -23,21 +23,11 @@ export class CatalogsComponent implements OnInit {
   slide_imgs: string[] = ["https://media.offbroadwayshoes.com/images/2020/Q3/homepage/20200715-cb-adidas.jpg" , "https://confidentialman.com/wp-content/uploads/2016/10/Shoes-too-Consider-if-You-Cant-Afford-the-Nike-Air-MAG-950x600.jpg" , "https://theplaybook.asia/wp-content/uploads/sites/27/2016/10/DSC_2539-950x634-950x600.jpg"]
   current_catalog: string = "Women's Clothing"
 
-  filter_details: any = {
-    category: [],
-    size: [],
-    price: []
-  }
+  filter_details: any = []
 
-  display_filter_details: string[] = []
   constructor() { }
 
   ngOnInit(): void {
-    this.setup_filter()
-  }
-
-  setup_filter(){
-    this.display_filter_details = [...this.filter_details.category,...this.filter_details.size,...this.filter_details.price]
   }
 
   slide_class (index) {
@@ -45,9 +35,10 @@ export class CatalogsComponent implements OnInit {
   }
 
   remove_filter(detail){
-    let size = this.filter_details.size.filter(d => d !== detail )
-    this.filter_details = {...this.filter_details , size }
-    this.setup_filter()
+    this.filter_details = this.filter_details.filter(d => d.value !== detail.value)
+    if(detail.title === "price"){
+      this.sizes[detail.index] = {value: detail.value, selected: false}
+    }
   }
 
   price_class(selected){
@@ -58,12 +49,11 @@ export class CatalogsComponent implements OnInit {
   select_price(size , index){
     let {value , selected} = size 
     if(!selected){
-      this.filter_details.size.push(value)
+      this.filter_details.push({value , title: 'price' , index})
     }else{
-      this.filter_details.size = this.filter_details.size.filter(d => d !== value)
+      this.filter_details = this.filter_details.filter(d => d.value !== value)
     }
     this.sizes[index] = {value, selected: !selected}
-    this.setup_filter()
   }
 
 }

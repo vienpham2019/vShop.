@@ -125,9 +125,9 @@
       
                         <span 
                             class="btn btn-xs btn-light font-weight-normal text-muted mr-3 mb-3"
-                            *ngFor = "let detail of display_filter_details"
+                            *ngFor = "let detail of filter_details"
                             >
-                                {{detail}}
+                                {{detail.value}}
                             <a class="text-reset ml-2" role="button" (click) = "remove_filter(detail)">
                                 <i class="fas fa-times"></i>
                             </a>
