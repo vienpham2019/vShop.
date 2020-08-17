@@ -1,302 +1,304 @@
+<div class="my-9">
+  <div class="container mt-5">
+      <div class="row">
+          <div class="col-12 col-md-8 col-lg-9 d-none d-md-block offset-md-n2 order-2 carousel slide "  id="carouselExampleControls" data-ride="carousel">
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-12 col-md-8 col-lg-9 d-none d-md-block offset-md-n2 order-2 carousel slide "  id="carouselExampleControls" data-ride="carousel">
+              <!-- Slider -->
+              <div class="carousel-inner">
+                  <!-- image 800 x 430 -->
+                  <div class="carousel-item active">
+                    <img src="https://shoesng.com/image/cache/catalog/heels-800x430.jpg" class="d-block img-fluid" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="https://pariswebservices.com/wp-content/uploads/2018/01/pixabay-bb483fce9b26464b5e-800x430.jpg" class="d-block" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="https://pariswebservices.com/wp-content/uploads/2018/01/pixabay-bb4832cb97264e425e-800x430.jpg" class="d-block" alt="...">
+                  </div>
+              </div>
 
-            <!-- Slider -->
-            <div class="carousel-inner">
-                <!-- image 800 x 430 -->
-                <div class="carousel-item active">
-                  <img src="https://shoesng.com/image/cache/catalog/heels-800x430.jpg" class="d-block img-fluid" alt="...">
+          </div>
+          <div class="col-12 col-md-6 col-lg-5 py-12 order-1">
+
+              <!-- Heading -->
+              <h1 class="display-4 mb-8">
+                2019 Summer Collection
+              </h1>
+
+              <!-- Button -->
+              <a class="btn btn-dark" href="shop.html">
+                Shop Now <i class="fas fa-angle-right ml-2"></i>
+              </a>
+
+          </div>
+      </div>
+  </div>
+
+  <div class="container text-center mt-10">
+    <h2 class="border-bottom">Top Selling</h2>
+  </div>
+
+  <!-- Top selling -->
+  <div class="section py-10">
+      <div class="container">
+        <!-- first row  -->
+        <div class="row">
+          <div [ngClass] = "top_1.class_name" *ngFor = "let top_1 of top_selling.first_row">
+            <div class="row align-items-center">
+              <div class="col-8 col-lg-6" >
+
+                <!-- Card -->
+                <div class="card ">
+
+                  <!-- Price -->
+                  <div [ngClass]="price_class(top_1)">{{top_1.price}}</div>
+
+                  <div class="badge badge-primary card-badge card-badge-left text-uppercase" *ngIf = "top_1.sale">
+                    Sale
+                  </div>
+
+                  <div class="badge badge-dark card-badge card-badge-left text-uppercase" *ngIf = "top_1.new">
+                    New
+                  </div>
+                  <!-- Image -->
+                  <img src={{top_1.img_url}} alt="{{top_1.title}}" class="card-img-top" />
+
                 </div>
-                <div class="carousel-item">
-                  <img src="https://pariswebservices.com/wp-content/uploads/2018/01/pixabay-bb483fce9b26464b5e-800x430.jpg" class="d-block" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="https://pariswebservices.com/wp-content/uploads/2018/01/pixabay-bb4832cb97264e425e-800x430.jpg" class="d-block" alt="...">
-                </div>
+
+              </div>
+              <div class="col-7 col-lg-6 offset-n3 offset-lg-n1 bg-white shadow-sm p-3 mb-5">
+
+                <!-- Heading -->
+                <h4 class="mb-2">
+                  {{top_1.title}}
+                </h4>
+
+                <!-- link -->
+                <a class="btn btn-link home-btn-link px-0 text-body" href={{top_1.link}}>
+                  Shop Now <i class="fas fa-angle-right ml-2"></i>
+                </a>
+
+              </div>
             </div>
-
+          </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-5 py-12 order-1">
 
-            <!-- Heading -->
-            <h1 class="display-4 mb-8">
-              2019 Summer Collection
-            </h1>
+        <!-- second row  -->
+        <div class="row justify-content-center pt-12">
+          <div class="col-12 col-md-10">
+            <div class="row align-items-center">
+              <div class="col-10 col-md-8">
 
-            <!-- Button -->
+                <!-- Card -->
+                <div class="card">
+
+                  <!-- Price -->
+                  <div [ngClass]="price_class(top_selling.second_row)">
+                    {{top_selling.second_row.price}}
+                  </div>
+
+                  <!-- Badge -->
+                  <div 
+                    class="badge badge-primary card-badge card-badge-left text-uppercase" 
+                    *ngIf = "top_selling.second_row.sale"
+                  >
+                    Sale
+                  </div>
+
+                  <div 
+                    class="badge badge-dark card-badge card-badge-left text-uppercase" 
+                    *ngIf = "top_selling.second_row.new"
+                  >
+                    New
+                  </div>
+
+                  <!-- Image -->
+                  <img src={{top_selling.second_row.img_url}} alt={{top_selling.second_row.title}} class="card-img-top">
+
+                </div>
+
+              </div>
+              <div class="col-7 col-md-4 offset-n5 offset-md-n1 shadow-sm p-3 mb-5 bg-white">
+
+                <!-- Heading -->
+                <h4 class="mb-0">
+                  {{top_selling.second_row.title}}
+                </h4>
+
+                <!-- Link -->
+                <a class="btn btn-link home-btn-link px-0 text-body" href={{top_selling.second_row.link}}>
+                  Shop Now <i class="fas fa-angle-right ml-2"></i>
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- third row  -->
+        <div class="row pt-12">
+          <div [ngClass] = "top_3.class_name" *ngFor = "let top_3 of top_selling.third_row">
+            <div class="row align-items-center">
+              <div class="col-8 col-lg-6">
+
+                <!-- Card -->
+                <div class="card">
+
+                  <!-- Price -->
+                  <div [ngClass] = "price_class(top_3)">{{top_3.price}}</div>
+
+                  <div 
+                    class="badge badge-primary card-badge card-badge-left text-uppercase" 
+                    *ngIf = "top_3.sale"
+                  >
+                    Sale
+                  </div>
+
+                  <div 
+                    class="badge badge-dark card-badge card-badge-left text-uppercase" 
+                    *ngIf = "top_3.new"
+                  >
+                    New
+                  </div>
+
+                  <!-- Image-->
+                  <img src={{top_3.img_url}} alt={{top_3.title}} class="card-img-top">
+
+                </div>
+
+              </div>
+              <div class="col-7 col-lg-6 offset-n3 offset-lg-n1 mt-10 shadow-sm p-3 mb-5 bg-white">
+
+                <!-- Heading -->
+                <h4 class="mb-0">
+                  {{top_3.title}}
+                </h4>
+
+                <!-- Link -->
+                <a class="btn btn-link home-btn-link px-0 text-body" href={{top_3.link}}>
+                  Shop Now <i class="fas fa-angle-right ml-2"></i>
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- fourth row -->
+        <div class="row justify-content-center pt-12">
+          <div class="col-12 col-md-10">
+            <div class="row align-items-center">
+              <div class="col-10 col-md-8">
+
+                <!-- Card -->
+                <div class="card">
+
+                  <!-- Price -->
+                  <div [ngClass] = "price_class(top_selling.fourth_row)">{{top_selling.fourth_row.price}}</div>
+
+                  <div 
+                    class="badge badge-primary card-badge card-badge-left text-uppercase" 
+                    *ngIf = "top_selling.fourth_row.sale"
+                  >
+                    Sale
+                  </div>
+
+                  <div 
+                    class="badge badge-dark card-badge card-badge-left text-uppercase" 
+                    *ngIf = "top_selling.fourth_row.new"
+                  >
+                    New
+                  </div>
+
+                  <!-- Image -->
+                  <img src={{top_selling.fourth_row.img_url}} alt={{top_selling.fourth_row.title}} class="card-img-top">
+
+                </div>
+
+              </div>
+              <div class="col-7 col-md-4 offset-n5 offset-md-n1 shadow-sm p-3 mb-5 bg-white">
+
+                <!-- Heading -->
+                <h4 class="mb-0">
+                  {{top_selling.fourth_row.title}}
+                </h4>
+
+                <!-- Link -->
+                <a class="btn btn-link home-btn-link px-0 text-body" href={{top_selling.fourth_row.link}}>
+                  <strong>Shop Now</strong> <i class="fas fa-angle-right ml-2"></i>
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- New arrival -->
+
+  <div class="container pb-8 pt-5">
+      <div class="row">
+        <div class="col-12">
+
+          <!-- Heading -->
+          <h2 class="mb-7 text-center border-bottom">New Arrivals</h2>
+
+          <div class="d-flex flex-wrap justify-content-center bg-light">
+              <div class="card mx-3 bg-transparent pt-5" style="width: 18rem;" *ngFor = "let new_item of display_new_arrivals">
+                  <div class="badge badge-dark  card-badge new-arrival-badge">
+                    {{new_item.price}}
+                  </div>
+
+                  <a href={{new_item.link}}>
+                    <img src={{new_item.img_url}} class="card-img-top" alt={{new_item.title}}>
+                  </a>
+                  <div class="card-body px-0 shadow-sm p-3 mb-5 bg-white border-top mt-1">
+                      <div class="mr-auto">
+                          <!-- Heading -->
+                          <div class="d-flex">
+                              <div class="mr-auto">
+                                  <div class="font-weight-bold">
+                                      <label class="text-body">{{new_item.title}}</label>
+                                  </div>
+          
+                                  <!-- Text -->
+                                  <div class="font-size-sm">
+                                      <label class="text-muted">{{new_item.type}}</label>
+                                  </div>
+
+                              </div>
+                          </div>
+                        </div>
+                  </div>
+              </div>
+          </div>
+          <!-- Button -->
+          <nav class="d-flex justify-content-center justify-content-md-end" *ngIf = "new_arrivals.length > 6">
+            <ul class="pagination pagination-sm text-gray-400">
+              <li class="page-item">
+                <span class="page-link page-link-arrow cursor" (click) = "change_page('prev')">
+                  <i class="fa fa-caret-left"></i>
+                </span>
+              </li>
+              <li [ngClass] = "new_arrival_class(i)" *ngFor = "let num of new_arrival_length; let i = index" >
+                <span class="page-link cursor" (click) = "change_page_number(i)">{{i + 1}}</span>
+              </li>
+              <li class="page-item">
+                <span class="page-link page-link-arrow cursor" (click) = "change_page('next')" >
+                  <i class="fa fa-caret-right"></i>
+                </span>
+              </li>
+            </ul>
+          </nav>
+          <div class="text-center mt-2">
             <a class="btn btn-dark" href="shop.html">
               Shop Now <i class="fas fa-angle-right ml-2"></i>
             </a>
+          </div>
 
         </div>
+      </div>
     </div>
 </div>
 
-<div class="container text-center mt-10">
-  <h2 class="border-bottom">Top Selling</h2>
-</div>
-
-<!-- Top selling -->
-<div class="section py-10">
-    <div class="container">
-      <!-- first row  -->
-      <div class="row">
-        <div [ngClass] = "top_1.class_name" *ngFor = "let top_1 of top_selling.first_row">
-          <div class="row align-items-center">
-            <div class="col-8 col-lg-6" >
-
-              <!-- Card -->
-              <div class="card ">
-
-                <!-- Price -->
-                <div [ngClass]="price_class(top_1)">{{top_1.price}}</div>
-
-                <div class="badge badge-primary card-badge card-badge-left text-uppercase" *ngIf = "top_1.sale">
-                  Sale
-                </div>
-
-                <div class="badge badge-dark card-badge card-badge-left text-uppercase" *ngIf = "top_1.new">
-                  New
-                </div>
-                <!-- Image -->
-                <img src={{top_1.img_url}} alt="{{top_1.title}}" class="card-img-top" />
-
-              </div>
-
-            </div>
-            <div class="col-7 col-lg-6 offset-n3 offset-lg-n1 bg-white shadow-sm p-3 mb-5">
-
-              <!-- Heading -->
-              <h4 class="mb-2">
-                {{top_1.title}}
-              </h4>
-
-              <!-- link -->
-              <a class="btn btn-link home-btn-link px-0 text-body" href={{top_1.link}}>
-                Shop Now <i class="fas fa-angle-right ml-2"></i>
-              </a>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- second row  -->
-      <div class="row justify-content-center pt-12">
-        <div class="col-12 col-md-10">
-          <div class="row align-items-center">
-            <div class="col-10 col-md-8">
-
-              <!-- Card -->
-              <div class="card">
-
-                <!-- Price -->
-                <div [ngClass]="price_class(top_selling.second_row)">
-                  {{top_selling.second_row.price}}
-                </div>
-
-                <!-- Badge -->
-                <div 
-                  class="badge badge-primary card-badge card-badge-left text-uppercase" 
-                  *ngIf = "top_selling.second_row.sale"
-                >
-                  Sale
-                </div>
-
-                <div 
-                  class="badge badge-dark card-badge card-badge-left text-uppercase" 
-                  *ngIf = "top_selling.second_row.new"
-                >
-                  New
-                </div>
-
-                <!-- Image -->
-                <img src={{top_selling.second_row.img_url}} alt={{top_selling.second_row.title}} class="card-img-top">
-
-              </div>
-
-            </div>
-            <div class="col-7 col-md-4 offset-n5 offset-md-n1 shadow-sm p-3 mb-5 bg-white">
-
-              <!-- Heading -->
-              <h4 class="mb-0">
-                {{top_selling.second_row.title}}
-              </h4>
-
-              <!-- Link -->
-              <a class="btn btn-link home-btn-link px-0 text-body" href={{top_selling.second_row.link}}>
-                Shop Now <i class="fas fa-angle-right ml-2"></i>
-              </a>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- third row  -->
-      <div class="row pt-12">
-        <div [ngClass] = "top_3.class_name" *ngFor = "let top_3 of top_selling.third_row">
-          <div class="row align-items-center">
-            <div class="col-8 col-lg-6">
-
-              <!-- Card -->
-              <div class="card">
-
-                <!-- Price -->
-                <div [ngClass] = "price_class(top_3)">{{top_3.price}}</div>
-
-                <div 
-                  class="badge badge-primary card-badge card-badge-left text-uppercase" 
-                  *ngIf = "top_3.sale"
-                >
-                  Sale
-                </div>
-
-                <div 
-                  class="badge badge-dark card-badge card-badge-left text-uppercase" 
-                  *ngIf = "top_3.new"
-                >
-                  New
-                </div>
-
-                <!-- Image-->
-                <img src={{top_3.img_url}} alt={{top_3.title}} class="card-img-top">
-
-              </div>
-
-            </div>
-            <div class="col-7 col-lg-6 offset-n3 offset-lg-n1 mt-10 shadow-sm p-3 mb-5 bg-white">
-
-              <!-- Heading -->
-              <h4 class="mb-0">
-                {{top_3.title}}
-              </h4>
-
-              <!-- Link -->
-              <a class="btn btn-link home-btn-link px-0 text-body" href={{top_3.link}}>
-                Shop Now <i class="fas fa-angle-right ml-2"></i>
-              </a>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- fourth row -->
-      <div class="row justify-content-center pt-12">
-        <div class="col-12 col-md-10">
-          <div class="row align-items-center">
-            <div class="col-10 col-md-8">
-
-              <!-- Card -->
-              <div class="card">
-
-                <!-- Price -->
-                <div [ngClass] = "price_class(top_selling.fourth_row)">{{top_selling.fourth_row.price}}</div>
-
-                <div 
-                  class="badge badge-primary card-badge card-badge-left text-uppercase" 
-                  *ngIf = "top_selling.fourth_row.sale"
-                >
-                  Sale
-                </div>
-
-                <div 
-                  class="badge badge-dark card-badge card-badge-left text-uppercase" 
-                  *ngIf = "top_selling.fourth_row.new"
-                >
-                  New
-                </div>
-
-                <!-- Image -->
-                <img src={{top_selling.fourth_row.img_url}} alt={{top_selling.fourth_row.title}} class="card-img-top">
-
-              </div>
-
-            </div>
-            <div class="col-7 col-md-4 offset-n5 offset-md-n1 shadow-sm p-3 mb-5 bg-white">
-
-              <!-- Heading -->
-              <h4 class="mb-0">
-                {{top_selling.fourth_row.title}}
-              </h4>
-
-              <!-- Link -->
-              <a class="btn btn-link home-btn-link px-0 text-body" href={{top_selling.fourth_row.link}}>
-                <strong>Shop Now</strong> <i class="fas fa-angle-right ml-2"></i>
-              </a>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-<!-- New arrival -->
-
-<div class="container pb-8 pt-5">
-    <div class="row">
-      <div class="col-12">
-
-        <!-- Heading -->
-        <h2 class="mb-7 text-center border-bottom">New Arrivals</h2>
-
-        <div class="d-flex flex-wrap justify-content-center bg-light">
-            <div class="card mx-3 bg-transparent pt-5" style="width: 18rem;" *ngFor = "let new_item of display_new_arrivals">
-                <div class="badge badge-dark  card-badge new-arrival-badge">
-                  {{new_item.price}}
-                </div>
-
-                <a href={{new_item.link}}>
-                  <img src={{new_item.img_url}} class="card-img-top" alt={{new_item.title}}>
-                </a>
-                <div class="card-body px-0 shadow-sm p-3 mb-5 bg-white border-top mt-1">
-                    <div class="mr-auto">
-                        <!-- Heading -->
-                        <div class="d-flex">
-                            <div class="mr-auto">
-                                <div class="font-weight-bold">
-                                    <label class="text-body">{{new_item.title}}</label>
-                                </div>
-        
-                                <!-- Text -->
-                                <div class="font-size-sm">
-                                    <label class="text-muted">{{new_item.type}}</label>
-                                </div>
-
-                            </div>
-                        </div>
-                      </div>
-                </div>
-            </div>
-        </div>
-        <!-- Button -->
-        <nav class="d-flex justify-content-center justify-content-md-end" *ngIf = "new_arrivals.length > 6">
-          <ul class="pagination pagination-sm text-gray-400">
-            <li class="page-item">
-              <span class="page-link page-link-arrow" (click) = "change_page('prev')">
-                <i class="fa fa-caret-left"></i>
-              </span>
-            </li>
-            <li [ngClass] = "new_arrival_class(i)" *ngFor = "let num of new_arrival_length; let i = index" >
-              <a class="page-link" href="#">{{i + 1}}</a>
-            </li>
-            <li class="page-item">
-              <span class="page-link page-link-arrow" (click) = "change_page('next')" >
-                <i class="fa fa-caret-right"></i>
-              </span>
-            </li>
-          </ul>
-        </nav>
-        <div class="text-center mt-2">
-          <a class="btn btn-dark" href="shop.html">
-            Shop Now <i class="fas fa-angle-right ml-2"></i>
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </div>

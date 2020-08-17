@@ -72,6 +72,12 @@ export class HomeComponent implements OnInit {
     this.slice_new_arrivals()
   }
 
+  change_page_number(i):void {
+    this.start_index = (i * 6)
+    this.end_index = ((i + 1) * 6)
+    this.slice_new_arrivals()
+  }
+
   new_arrival_class(current_index){
     let c_i = Math.floor(current_index)
     let t_i = Math.floor(this.start_index / 6)
@@ -79,10 +85,8 @@ export class HomeComponent implements OnInit {
   }
 
   price_class (item) {
-    return {
-      'btn btn-white btn-sm card-price card-price-left': true, 
-      'text-primary': item.sale
-    }
+    let class_name = item.sale ? ' text-primary' : ''
+    return 'btn btn-white btn-sm card-price card-price-left' + class_name
   }
 
 }
