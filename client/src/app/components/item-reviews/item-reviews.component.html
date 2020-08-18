@@ -20,7 +20,7 @@
             </div>
 
             <div class="d-flex justify-content-end">
-                <button class="btn btn-sm btn-outline-dark collapsed" data-toggle="collapse" href="#reviewForm" aria-expanded="false">
+                <button class="btn btn-sm btn-outline-dark collapsed" data-toggle="collapse" href="#reviewForm" aria-expanded="false" (click) = "resetScore()">
                   Write Review
                 </button>
             </div>
@@ -45,27 +45,12 @@
                         <!-- Rating form -->
                         <div class="rating-form">
 
-                        <!-- Input -->
-                        <input class="rating-input" type="range" min="1" max="5" value="5">
-
                         <!-- Rating -->
-                        <div class="rating h5 text-dark" data-value="5">
-                            <div class="rating-item">
-                                <i class="fas fa-star"></i>
+                            <div class="rating h5 text-dark" data-value="5">
+                                <div class = "cursor" *ngFor = "let s of review_star; let i = index" (click) = "setScore(i)">
+                                    <i [ngClass]="rateClass(score, i)"></i>
+                                </div>
                             </div>
-                            <div class="rating-item">
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div class="rating-item">
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div class="rating-item">
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div class="rating-item">
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
 
                         </div>
 

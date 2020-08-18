@@ -13,20 +13,28 @@ export class ItemReviewsComponent implements OnInit {
   ]
 
   total_review: number 
+  score: number = 5
 
   constructor() { }
 
   ngOnInit(): void {
-    this.total_review = this.getTotalReview()
-    console.log(this.total_review)
+    this.getTotalReview()
+  }
+
+  resetScore(){
+    this.score = 5
+  }
+
+  setScore(index){
+    this.score = index + 1 <= this.score ? index : index + 1
   }
 
   rateClass(rate , index){
-    return index < rate ? "fas fa-star" : "far fa-star"
+    return (index + 1) <= rate ? "fas fa-star" : "far fa-star"
   }
 
   getTotalReview(){
-    return Math.ceil(this.reviews.reduce( (sum,value) => sum + value.rate , 0) / this.reviews.length) 
+    this.total_review = Math.floor(this.reviews.reduce( (sum,value) => sum + value.rate , 0) / this.reviews.length) 
   }
 
 }
