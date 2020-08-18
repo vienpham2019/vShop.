@@ -55,7 +55,7 @@
                                 <ul class="d-flex flex-wrap">
                                     <li 
                                         *ngFor = "let size of sizes , let i = index"
-                                        [ngClass] = "price_class(size.selected)"
+                                        [ngClass] = "size_class(size.selected)"
                                         (click) = "select_size(size , i)"
                                     >
                                         {{size.value}}

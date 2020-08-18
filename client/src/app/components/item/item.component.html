@@ -89,27 +89,22 @@
             </div>
 
             <!-- Form -->
-            <div>
+            <form [formGroup] = "itemForm">
               <div class="form-group">
 
                 <!-- Label -->
                 <p class="mb-5">
-                  Color: <strong id="colorCaption">Red</strong>
+                  Color: <strong id="colorCaption">{{itemForm.value.color}}</strong>
                 </p>
 
                 <!-- Radio -->
+                
                 <div class="mb-8 ml-n1">
-                  <div class="custom-control custom-control-inline custom-control-img">
-                    <input type="radio" class="custom-control-input" id="imgRadioOne" name="imgRadio" data-toggle="form-caption" data-target="#colorCaption" value="Red" checked="">
-                    <label class="custom-control-label" for="imgRadioOne">
-                      <span class="embed-responsive embed-responsive-1by1 bg-cover" style="background-image: url(https://kickz.akamaized.net/se/media/images/p/1200/nike-FREE_RN_GS-UNIVERSITY_RED_BLACK_WHITE-1.jpg);"></span>
-                    </label>
-                  </div>
-                  <div class="custom-control custom-control-inline custom-control-img">
-                    <input type="radio" class="custom-control-input" id="imgRadioTwo" name="imgRadio" data-toggle="form-caption" data-target="#colorCaption" value="Pink">
-                    <label class="custom-control-label" for="imgRadioTwo">
-                      <span class="embed-responsive embed-responsive-1by1 bg-cover" style="background-image: url(https://www.theedge-sports.com/images/nike-mens-free-rn-p14577-167358_image.jpg);"></span>
-                    </label>
+                  <div class="col-12 col-lg-auto">
+                    <!-- Quantity -->
+                    <select class="custom-select mb-2 w-50" formControlName = "color">
+                        <option value={{color}} *ngFor = "let color of colors">{{color}}</option> 
+                    </select>
                   </div>
                 </div>
 
@@ -118,67 +113,20 @@
 
                 <!-- Label -->
                 <p class="mb-5">
-                  Size: <strong><span id="sizeCaption">7.5</span> US</strong>
+                  Size: <strong><span id="sizeCaption">{{itemForm.value.size}}</span> US</strong>
                 </p>
 
                 <!-- Radio -->
                 <div class="mb-2">
-                  <div class="custom-control custom-control-inline custom-control-size mb-2">
-                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioOne" value="6" data-toggle="form-caption" data-target="#sizeCaption">
-                    <label class="custom-control-label" for="sizeRadioOne">6</label>
-                  </div>
-                  <div class="custom-control custom-control-inline custom-control-size mb-2">
-                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioTwo" value="6.5" data-toggle="form-caption" data-target="#sizeCaption" disabled="">
-                    <label class="custom-control-label" for="sizeRadioTwo">6.5</label>
-                  </div>
-                  <div class="custom-control custom-control-inline custom-control-size mb-2">
-                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioThree" value="7" data-toggle="form-caption" data-target="#sizeCaption">
-                    <label class="custom-control-label" for="sizeRadioThree">7</label>
-                  </div>
-                  <div class="custom-control custom-control-inline custom-control-size mb-2">
-                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioFour" value="7.5" data-toggle="form-caption" data-target="#sizeCaption" checked="">
-                    <label class="custom-control-label" for="sizeRadioFour">7.5</label>
-                  </div>
-                  <div class="custom-control custom-control-inline custom-control-size mb-2">
-                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioFive" value="8" data-toggle="form-caption" data-target="#sizeCaption">
-                    <label class="custom-control-label" for="sizeRadioFive">8</label>
-                  </div>
-                  <div class="custom-control custom-control-inline custom-control-size mb-2">
-                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioSix" value="8.5" data-toggle="form-caption" data-target="#sizeCaption">
-                    <label class="custom-control-label" for="sizeRadioSix">8.5</label>
-                  </div>
-                  <div class="custom-control custom-control-inline custom-control-size mb-2">
-                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioSeven" value="9" data-toggle="form-caption" data-target="#sizeCaption" disabled="">
-                    <label class="custom-control-label" for="sizeRadioSeven">9</label>
-                  </div>
-                  <div class="custom-control custom-control-inline custom-control-size mb-2">
-                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioEight" value="9.5" data-toggle="form-caption" data-target="#sizeCaption" disabled="">
-                    <label class="custom-control-label" for="sizeRadioEight">9.5</label>
-                  </div>
-                  <div class="custom-control custom-control-inline custom-control-size mb-2">
-                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioNine" value="10" data-toggle="form-caption" data-target="#sizeCaption">
-                    <label class="custom-control-label" for="sizeRadioNine">10</label>
-                  </div>
-                  <div class="custom-control custom-control-inline custom-control-size mb-2">
-                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioTen" value="10.5" data-toggle="form-caption" data-target="#sizeCaption">
-                    <label class="custom-control-label" for="sizeRadioTen">10.5</label>
-                  </div>
-                  <div class="custom-control custom-control-inline custom-control-size mb-2">
-                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioEleven" value="11" data-toggle="form-caption" data-target="#sizeCaption">
-                    <label class="custom-control-label" for="sizeRadioEleven">11</label>
-                  </div>
-                  <div class="custom-control custom-control-inline custom-control-size mb-2">
-                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioTwelve" value="12" data-toggle="form-caption" data-target="#sizeCaption">
-                    <label class="custom-control-label" for="sizeRadioTwelve">12</label>
-                  </div>
-                  <div class="custom-control custom-control-inline custom-control-size mb-2">
-                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioThirteen" value="13" data-toggle="form-caption" data-target="#sizeCaption">
-                    <label class="custom-control-label" for="sizeRadioThirteen">13</label>
-                  </div>
-                  <div class="custom-control custom-control-inline custom-control-size mb-2">
-                    <input type="radio" class="custom-control-input" name="sizeRadio" id="sizeRadioFourteen" value="14" data-toggle="form-caption" data-target="#sizeCaption">
-                    <label class="custom-control-label" for="sizeRadioFourteen">14</label>
-                  </div>
+                    <ul class="d-flex flex-wrap">
+                      <li 
+                          *ngFor = "let size of sizes , let i = index"
+                          [ngClass] = "size_class(size)"
+                          (click) = "setSize(size , i)"
+                      >
+                          {{size.value}}
+                      </li>
+                    </ul>
                 </div>
 
                 <!-- Size chart -->
@@ -188,14 +136,9 @@
 
                 <div class="form-row mb-7">
                   <div class="col-12 col-lg-auto">
-
                     <!-- Quantity -->
-                    <select class="custom-select mb-2">
-                      <option value="1" selected="">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
+                    <select class="custom-select mb-2" formControlName = "amount">
+                      <option value={{amount}} *ngFor = "let amount of amounts">{{amount}}</option>
                     </select>
 
                   </div>
@@ -224,7 +167,7 @@
                 </p>
 
               </div>
-            </div>
+            </form>
 
           </div>
         </div>
@@ -442,9 +385,9 @@
                 </div>
 
                 <div class="d-flex justify-content-end">
-                    <a class="btn btn-sm btn-dark collapsed" data-toggle="collapse" href="#reviewForm" aria-expanded="false">
-                        Write Review
-                    </a>
+                    <button class="btn btn-sm btn-outline-dark collapsed" data-toggle="collapse" href="#reviewForm" aria-expanded="false">
+                      Write Review
+                    </button>
                 </div>
 
 

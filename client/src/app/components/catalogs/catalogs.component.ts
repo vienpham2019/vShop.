@@ -45,7 +45,7 @@ export class CatalogsComponent implements OnInit {
     }
   }
 
-  price_class(selected){
+  size_class(selected){
     let default_class = "list-group-item m-2 p-4 text-center border cursor"
     return `${default_class} ${selected ? " border-success" : ""}`
   }
