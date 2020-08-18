@@ -17,6 +17,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { LoginRegisterComponent } from './components/login-register/login-register.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ItemReviewsComponent } from './components/item-reviews/item-reviews.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     UserProfileComponent,
     LoginRegisterComponent,
     ContactComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ItemReviewsComponent
   ],
   imports: [
     BrowserModule,
