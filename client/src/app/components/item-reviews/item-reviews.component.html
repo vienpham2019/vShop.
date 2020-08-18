@@ -9,25 +9,13 @@
 
                 <!-- Rating -->
                 <div class="rating text-dark h6 mb-4 mb-md-0" data-value="4">
-                    <div class="rating-item">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="rating-item">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="rating-item">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="rating-item">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="rating-item">
-                        <i class="fas fa-star"></i>
+                    <div *ngFor = "let s of review_star; let i = index">
+                        <i [ngClass]="rateClass(total_review, i) "></i>
                     </div>
                 </div>
 
                 <!-- Count -->
-                <strong class="font-size-sm ml-2">Reviews (3)</strong>
+                <strong class="font-size-sm ml-2">Reviews ( {{reviews.length}} )</strong>
 
             </div>
 
@@ -132,10 +120,10 @@
             </div>
 
             <!-- Reviews -->
-            <div class="mt-8">
+            <div class="mt-8" *ngFor = "let review_content of reviews">
 
                 <!-- Child review -->
-                <div class="review">
+                <div class="review shadow-sm p-3 mb-5 bg-light">
                     <div class="review-body">
 
                         <!-- Content -->
@@ -144,7 +132,7 @@
 
                                 <!-- Avatar -->
                                 <div class="avatar avatar-xxl mb-6 mb-md-0">
-                                    <span class="avatar-title rounded-circle">
+                                    <span class="avatar-title rounded-circle bg-white">
                                         <i class="fa fa-user"></i>
                                     </span>
                                 </div>
@@ -157,21 +145,9 @@
                                     <div class="col-12">
 
                                         <!-- Rating -->
-                                        <div class="rating font-size-sm text-dark" data-value="4">
-                                            <div class="rating-item">
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <div class="rating-item">
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <div class="rating-item">
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <div class="rating-item">
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <div class="rating-item">
-                                                <i class="fas fa-star"></i>
+                                        <div class="rating font-size-sm text-dark">
+                                            <div *ngFor = "let s of review_star; let i = index">
+                                                <i [ngClass]="rateClass(review_content.rate, i) "></i>
                                             </div>
                                         </div>
 
@@ -180,7 +156,8 @@
 
                                         <!-- Time -->
                                         <span class="font-size-xs text-muted">
-                                        William Stokes, <time datetime="2019-07-14">14 Jul 2019</time>
+                                            {{review_content.name}}, 
+                                            <time datetime={{review_content.date}}>{{review_content.date}}</time>
                                         </span>
 
                                     </div>
@@ -188,36 +165,13 @@
 
                                 <!-- Title -->
                                 <p class="mb-2 font-size-lg font-weight-bold">
-                                Very good
+                                    {{review_content.review_title}}
                                 </p>
 
                                 <!-- Text -->
                                 <p class="text-gray-500">
-                                    Made face lights yielding forth created for image behold blessed seas.
+                                    {{review_content.review}}
                                 </p>
-
-                                <!-- Footer -->
-                                <div class="row align-items-center">
-                                    <div class="col-auto d-none d-lg-block">
-
-                                        <!-- Text -->
-                                        <p class="mb-0 font-size-sm">Was this review helpful?</p>
-
-                                    </div>
-                                    <div class="col-auto mr-auto">
-
-                                        <!-- Rate -->
-                                        <div class="rate">
-                                        <a class="rate-item" data-toggle="vote" data-count="7" href="#" role="button">
-                                            <i class="fe fe-thumbs-up"></i>
-                                        </a>
-                                        <a class="rate-item" data-toggle="vote" data-count="0" href="#" role="button">
-                                            <i class="fe fe-thumbs-down"></i>
-                                        </a>
-                                        </div>
-
-                                    </div>
-                                </div>
 
                             </div>
                         </div>
