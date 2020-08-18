@@ -20,7 +20,7 @@
             </div>
 
             <div class="d-flex justify-content-end">
-                <button class="btn btn-sm btn-outline-dark collapsed" data-toggle="collapse" href="#reviewForm" aria-expanded="false" (click) = "resetScore()">
+                <button class="btn btn-sm btn-outline-dark collapsed" data-toggle="collapse" href="#reviewForm" aria-expanded="false" (click) = "resetForm()">
                   Write Review
                 </button>
             </div>
@@ -30,77 +30,113 @@
             <div class="collapse mb-5" id="reviewForm">
 
             <!-- Divider -->
-            <hr class="my-8">
+                <hr class="my-8">
 
-            <!-- Form -->
-            <div>
-                <div class="row">
-                    <div class="col-12 mb-6 text-center">
+                <!-- Form -->
+                <form [formGroup] = "new_review" (ngSubmit) = "onSubmit()">
+                    <div class="row">
+                        <div class="col-12 mb-6 text-center">
 
-                        <!-- Text -->
-                        <p class="mb-1 font-size-xs">
-                            Score:
-                        </p>
+                            <!-- Text -->
+                            <p class="mb-1 font-size-xs">
+                                Score:
+                            </p>
 
-                        <!-- Rating form -->
-                        <div class="rating-form">
+                            <!-- Rating form -->
+                            <div class="rating-form">
 
-                        <!-- Rating -->
-                            <div class="rating h5 text-dark" data-value="5">
-                                <div class = "cursor" *ngFor = "let s of review_star; let i = index" (click) = "setScore(i)">
-                                    <i [ngClass]="rateClass(score, i)"></i>
+                            <!-- Rating -->
+                                <div class="rating h5 text-dark" data-value="5">
+                                    <div class = "cursor" *ngFor = "let s of review_star; let i = index" (click) = "setScore(i)">
+                                        <i [ngClass]="rateClass(score, i)"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-md-6">
+
+                            <!-- Name -->
+                            <div class="form-group">
+                                <label class="sr-only" for="reviewName">Your Name:</label>
+                                <input 
+                                    class="form-control form-control-sm" 
+                                    type="text" 
+                                    placeholder="Your Name *" 
+                                    formControlName = "name"
+                                    [ngClass] = "classes('name')"
+                                >
+                                <small class="text-danger ml-2" *ngIf= "displayError('name')">Name is required</small>
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-md-6">
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label class="sr-only" for="reviewEmail">Your Email:</label>
+                                <input 
+                                    class="form-control form-control-sm" 
+                                    type="email" 
+                                    placeholder="Your Email *" 
+                                    formControlName = "email"
+                                    [ngClass] = "classes('email')"
+                                >
+                                <div class="ml-2" *ngIf = "displayError('email')">
+                                    <ng-template [ngIf] = "formControl('email').errors?.required" [ngIfElse] = "elseBlock">
+                                        <small class="text-danger">Email is required</small>
+                                    </ng-template>
+
+                                    <ng-template #elseBlock>
+                                        <small class="text-danger">Invalid email</small>
+                                    </ng-template>
                                 </div>
                             </div>
 
                         </div>
+                        <div class="col-12">
 
-                    </div>
-                    <div class="col-12 col-md-6">
+                            <!-- Name -->
+                            <div class="form-group">
+                                <label class="sr-only" for="reviewTitle">Review Title:</label>
+                                <input 
+                                    class="form-control form-control-sm" 
+                                    type="text" 
+                                    placeholder="Review Title *" 
+                                    formControlName = "review_title"
+                                    [ngClass] = "classes('review_title')"
+                                >
+                                <small class="text-danger ml-2" *ngIf = "displayError('review_title')">Review title is required</small>
+                            </div>
 
-                        <!-- Name -->
-                        <div class="form-group">
-                            <label class="sr-only" for="reviewName">Your Name:</label>
-                            <input class="form-control form-control-sm" id="reviewName" type="text" placeholder="Your Name *" required="">
                         </div>
+                        <div class="col-12">
 
-                    </div>
-                    <div class="col-12 col-md-6">
+                            <!-- Name -->
+                            <div class="form-group">
+                                <label class="sr-only" for="reviewText">Review:</label>
+                                <textarea 
+                                    class="form-control form-control-sm" 
+                                    rows="5" 
+                                    placeholder="Review *" 
+                                    formControlName = "review"
+                                    [ngClass] = "classes('review')"
+                                ></textarea>
+                                <small class="text-danger ml-2" *ngIf = "displayError('review')">Review is required</small>
+                            </div>
 
-                        <!-- Email -->
-                        <div class="form-group">
-                            <label class="sr-only" for="reviewEmail">Your Email:</label>
-                            <input class="form-control form-control-sm" id="reviewEmail" type="email" placeholder="Your Email *" required="">
                         </div>
+                        <div class="col-12 text-center">
 
-                    </div>
-                    <div class="col-12">
+                            <!-- Button -->
+                            <button class="btn btn-outline-dark w-100" type="submit">
+                                Post Review
+                            </button>
 
-                        <!-- Name -->
-                        <div class="form-group">
-                            <label class="sr-only" for="reviewTitle">Review Title:</label>
-                            <input class="form-control form-control-sm" id="reviewTitle" type="text" placeholder="Review Title *" required="">
                         </div>
-
                     </div>
-                    <div class="col-12">
-
-                        <!-- Name -->
-                        <div class="form-group">
-                        <label class="sr-only" for="reviewText">Review:</label>
-                        <textarea class="form-control form-control-sm" id="reviewText" rows="5" placeholder="Review *" required=""></textarea>
-                        </div>
-
-                    </div>
-                    <div class="col-12 text-center">
-
-                        <!-- Button -->
-                        <button class="btn btn-outline-dark w-100" type="submit">
-                            Post Review
-                        </button>
-
-                    </div>
-                </div>
-            </div>
+                </form>
 
             </div>
 
