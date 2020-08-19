@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder , Validators , FormGroup } from '@angular/forms' 
+import { FormBuilder , Validators , FormGroup } from '@angular/forms'
+import { PaginationService } from '../../services/pagination.service' 
 
 @Component({
   selector: 'app-item-reviews',
@@ -7,10 +8,19 @@ import { FormBuilder , Validators , FormGroup } from '@angular/forms'
   styleUrls: ['./item-reviews.component.css']
 })
 export class ItemReviewsComponent implements OnInit {
-  constructor(private _fb: FormBuilder ) { }
+  constructor(private _fb: FormBuilder , private _pagination_s: PaginationService) { }
   review_star: any[] = new Array(5).fill(0)
   reviews: any = [
     {name: "William Stokes" , date: "14 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 4},
+    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
+    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
+    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
+    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
+    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
+    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
+    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
+    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
+    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
     {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3}
   ]
 
@@ -21,8 +31,16 @@ export class ItemReviewsComponent implements OnInit {
 
   submit_invalid: boolean = false
 
+  start_index: number = 0 
+  display_review_amount: number = 10
+  end_index: number = this.display_review_amount
+
+  display_reviews: any[] 
+  reviews_length: any[] = new Array(Math.ceil(this.reviews.length / this.display_review_amount)).fill(0)
+
   ngOnInit(): void {
     this.getTotalReview()
+    this.slice_reviews()
     this.new_review = this._fb.group({
       rate: [''],
       date: [''],
@@ -88,6 +106,36 @@ export class ItemReviewsComponent implements OnInit {
       this.resetForm()
       this.getTotalReview()
     }
+  }
+
+  slice_reviews(){
+    this.display_reviews = this._pagination_s.slice_arrays(this.reviews , this.start_index , this.end_index)
+  }
+
+  change_page(value):void{
+
+    let { start_index , end_index } = this._pagination_s.change_page(value , this.start_index , this.end_index , this.reviews , this.display_review_amount)
+
+    this.start_index = start_index 
+    this.end_index = end_index
+
+    this.slice_reviews()
+  }
+
+  change_page_number(i):void {
+    let {start_index , end_index} = this._pagination_s.change_page_number(i , this.start_index , this.end_index , this.display_review_amount)
+
+    this.start_index = start_index 
+    this.end_index = end_index
+    this.slice_reviews()
+  }
+
+  pagination_class(current_index){
+    return this._pagination_s.pagination_class(current_index , this.start_index , this.display_review_amount)
+  }
+
+  displayPagination(){
+    return this.reviews.length > this.display_review_amount
   }
 
 }

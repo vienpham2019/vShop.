@@ -1,0 +1,17 @@
+.review-contents{
+    max-height: 700px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+}
+
+.review-contents::-webkit-scrollbar {
+    background: transparent; 
+    width: 10px;
+}
+/* Optional: show position indicator in red */
+.review-contents::-webkit-scrollbar-thumb {
+    background: #afafaf;
+}

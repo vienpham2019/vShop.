@@ -156,90 +156,86 @@
             </div>
 
             <!-- Reviews -->
-            <div class="mt-8" *ngFor = "let review_content of reviews">
+            <div class="review-contents mt-8 p-2">
+                <div *ngFor = "let review_content of display_reviews">
 
-                <!-- Child review -->
-                <div class="review shadow-sm p-3 mb-5 bg-light">
-                    <div class="review-body">
-
-                        <!-- Content -->
-                        <div class="row">
-                            <div class="col-12 col-md-auto">
-
-                                <!-- Avatar -->
-                                <div class="avatar avatar-xxl mb-6 mb-md-0">
-                                    <span class="avatar-title rounded-circle bg-white">
-                                        <i class="fa fa-user"></i>
-                                    </span>
-                                </div>
-
-                            </div>
-                            <div class="col-12 col-md">
-
-                                <!-- Header -->
-                                <div class="row mb-6">
-                                    <div class="col-12">
-
-                                        <!-- Rating -->
-                                        <div class="rating font-size-sm text-dark">
-                                            <div *ngFor = "let s of review_star; let i = index">
-                                                <i [ngClass]="rateClass(review_content.rate, i) "></i>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-12">
-
-                                        <!-- Time -->
-                                        <span class="font-size-xs text-muted">
-                                            {{review_content.name | titlecase}}, 
-                                            <time datetime={{review_content.date}}>{{review_content.date}}</time>
+                    <!-- Child review -->
+                    <div class="review shadow-sm p-3 mb-5 bg-light">
+                        <div class="review-body">
+    
+                            <!-- Content -->
+                            <div class="row">
+                                <div class="col-12 col-md-auto">
+    
+                                    <!-- Avatar -->
+                                    <div class="avatar avatar-xxl mb-6 mb-md-0">
+                                        <span class="avatar-title rounded-circle bg-white">
+                                            <i class="fa fa-user"></i>
                                         </span>
-
                                     </div>
+    
                                 </div>
-
-                                <!-- Title -->
-                                <p class="mb-2 font-size-lg font-weight-bold">
-                                    {{review_content.review_title}}
-                                </p>
-
-                                <!-- Text -->
-                                <p class="text-gray-500">
-                                    {{review_content.review}}
-                                </p>
-
+                                <div class="col-12 col-md">
+    
+                                    <!-- Header -->
+                                    <div class="row mb-6">
+                                        <div class="col-12">
+    
+                                            <!-- Rating -->
+                                            <div class="rating font-size-sm text-dark">
+                                                <div *ngFor = "let s of review_star; let i = index">
+                                                    <i [ngClass]="rateClass(review_content.rate, i) "></i>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+                                        <div class="col-12">
+    
+                                            <!-- Time -->
+                                            <span class="font-size-xs text-muted">
+                                                {{review_content.name | titlecase}}, 
+                                                <time datetime={{review_content.date}}>{{review_content.date}}</time>
+                                            </span>
+    
+                                        </div>
+                                    </div>
+    
+                                    <!-- Title -->
+                                    <p class="mb-2 font-size-lg font-weight-bold">
+                                        {{review_content.review_title}}
+                                    </p>
+    
+                                    <!-- Text -->
+                                    <p class="text-gray-500">
+                                        {{review_content.review}}
+                                    </p>
+    
+                                </div>
                             </div>
+    
                         </div>
-
                     </div>
+    
                 </div>
-
             </div>
 
             </div>
 
             <!-- Pagination -->
-            <nav class="d-flex mx-auto mt-9">
+            <nav class="d-flex mx-auto mt-9" *ngIf = "displayPagination()">
                 <ul class="pagination pagination-sm text-gray-400">
                     <li class="page-item">
-                        <a class="page-link page-link-arrow" href="#">
+                        <label class="page-link page-link-arrow cursor" (click) = "change_page('prev')">
                             <i class="fa fa-caret-left"></i>
-                        </a>
+                        </label>
                     </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
+                    <li [ngClass] = "pagination_class(i)" *ngFor = "let p of reviews_length ; let i = index">
+                        <label class="page-link cursor" (click) = "change_page_number(i)">{{i + 1}}</label>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link page-link-arrow" href="#">
+                        <label class="page-link page-link-arrow cursor" (click) = "change_page('next')">
                             <i class="fa fa-caret-right"></i>
-                        </a>
+                        </label>
                     </li>
                 </ul>
             </nav>
