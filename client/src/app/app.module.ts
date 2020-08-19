@@ -19,6 +19,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ItemReviewsComponent } from './components/item-reviews/item-reviews.component';
 
+import { PaginationService } from './services/pagination.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,9 @@ import { ItemReviewsComponent } from './components/item-reviews/item-reviews.com
     AppRoutingModule,
     ReactiveFormsModule, 
   ],
-  providers: [],
+  providers: [
+    PaginationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

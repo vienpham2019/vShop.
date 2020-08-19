@@ -107,7 +107,14 @@
                                     formControlName = "review_title"
                                     [ngClass] = "classes('review_title')"
                                 >
-                                <small class="text-danger ml-2" *ngIf = "displayError('review_title')">Review title is required</small>
+                                <div *ngIf = "displayError('review_title')">
+                                    <ng-template [ngIf] = "formControl('review_title').errors?.required" [ngIfElse] = "elseBlock">
+                                        <small class="text-danger ml-2" >Review title is required</small>
+                                    </ng-template>
+                                    <ng-template #elseBlock>
+                                        <small class="text-danger ml-2">Title is too short minimum is 4 characters</small>
+                                    </ng-template>
+                                </div>
                             </div>
 
                         </div>
@@ -123,7 +130,15 @@
                                     formControlName = "review"
                                     [ngClass] = "classes('review')"
                                 ></textarea>
-                                <small class="text-danger ml-2" *ngIf = "displayError('review')">Review is required</small>
+
+                                <div *ngIf = "displayError('review')">
+                                    <ng-template [ngIf] = "formControl('review').errors?.required" [ngIfElse] = "elseBlock">
+                                        <small class="text-danger ml-2">Review is required</small>
+                                    </ng-template>
+                                    <ng-template #elseBlock>
+                                        <small class="text-danger ml-2">Reivew is too short minimum is 10 characters</small>
+                                    </ng-template>
+                                </div>
                             </div>
 
                         </div>
@@ -177,7 +192,7 @@
 
                                         <!-- Time -->
                                         <span class="font-size-xs text-muted">
-                                            {{review_content.name}}, 
+                                            {{review_content.name | titlecase}}, 
                                             <time datetime={{review_content.date}}>{{review_content.date}}</time>
                                         </span>
 

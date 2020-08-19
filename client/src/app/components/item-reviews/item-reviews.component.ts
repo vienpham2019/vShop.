@@ -28,8 +28,8 @@ export class ItemReviewsComponent implements OnInit {
       date: [''],
       name: ['', Validators.required], 
       email: ['', [Validators.required , Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
-      review_title: ['', Validators.required],
-      review: ['', Validators.required]
+      review_title: ['', [Validators.required , Validators.minLength(4)]],
+      review: ['', [Validators.required , Validators.minLength(10)]]
     })
   }
 

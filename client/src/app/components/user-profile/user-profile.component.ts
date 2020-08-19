@@ -11,6 +11,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private _fb: FormBuilder) { }
 
   ngOnInit(): void {
+    window.scrollTo(0,0)
   }
 
 }

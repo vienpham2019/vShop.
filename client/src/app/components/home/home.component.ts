@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PaginationService } from '../../services/pagination.service'
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-home',
@@ -44,44 +46,40 @@ export class HomeComponent implements OnInit {
   display_new_arrivals: any[]
   start_index: number = 0 
   end_index: number = 6
+  new_arrival_display_amount: number = 6
 
-  new_arrival_length: any[] = new Array(Math.ceil(this.new_arrivals.length / 6)).fill(0)
-  constructor() { }
+  new_arrival_length: any[] = new Array(Math.ceil(this.new_arrivals.length / this.new_arrival_display_amount)).fill(0)
+  constructor(private pagination_s: PaginationService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0,0)
     this.slice_new_arrivals()
   }
 
   slice_new_arrivals(){
-    this.display_new_arrivals = this.new_arrivals.slice(this.start_index, this.end_index)
+    this.display_new_arrivals = this.pagination_s.slice_arrays(this.new_arrivals , this.start_index , this.end_index)
   }
 
   change_page(value):void{
-    if(value === 'next'){
-      if(this.start_index + 6 < this.new_arrivals.length){
-        this.start_index += 6 
-        this.end_index += 6 
-      }
-    }else{
-      if(this.start_index - 6 >= 0){
-        this.start_index -= 6
-        this.end_index -= 6
-      }
-    }
+
+    let { start_index , end_index } = this.pagination_s.change_page(value , this.start_index , this.end_index , this.new_arrivals , this.new_arrival_display_amount)
+
+    this.start_index = start_index 
+    this.end_index = end_index
 
     this.slice_new_arrivals()
   }
 
   change_page_number(i):void {
-    this.start_index = (i * 6)
-    this.end_index = ((i + 1) * 6)
+    let {start_index , end_index} = this.pagination_s.change_page_number(i , this.start_index , this.end_index , this.new_arrival_display_amount)
+
+    this.start_index = start_index 
+    this.end_index = end_index
     this.slice_new_arrivals()
   }
 
   new_arrival_class(current_index){
-    let c_i = Math.floor(current_index)
-    let t_i = Math.floor(this.start_index / 6)
-    return c_i === t_i ? "page-item active" : "page-item"
+    return this.pagination_s.pagination_class(current_index , this.start_index , this.new_arrival_display_amount)
   }
 
   price_class (item) {

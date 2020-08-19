@@ -29,6 +29,7 @@ export class ItemComponent implements OnInit {
   constructor(private _fb: FormBuilder) { }
 
   ngOnInit(): void {
+    window.scrollTo(0,0)
     this.itemForm = this._fb.group({
       color: ["Red"],
       size: ["6"],
