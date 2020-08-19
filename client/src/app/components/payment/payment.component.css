@@ -26,3 +26,16 @@
 .checkout-items::-webkit-scrollbar-thumb {
     background: #afafaf;
 }
+
+.link-item::after{
+    display:block;
+    content: '';
+    background: #000;
+    width: 0;
+    border-bottom: solid 1px #4596ff;  
+    transition: width .3s ease-in-out; 
+}
+
+.link-item:hover::after{
+    width: 100%;
+}

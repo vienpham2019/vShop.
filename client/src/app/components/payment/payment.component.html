@@ -30,7 +30,8 @@
 
         <!-- Subheading -->
         <p class="mb-10">
-          Already have an account? <a class="font-weight-bold text-reset" href="#!">Click here to login</a>
+          Already have an account? 
+          <label class="font-weight-bold text-reset cursor link-item" data-toggle="tab" data-toggle="modal" data-target="#loginModal">Click here to login</label>
         </p>
 
       </div>
@@ -39,8 +40,7 @@
       <div class="col-12 col-md-7">
 
         <!-- Form -->
-        <div>
-
+        <form [formGroup] = "payment_form">
           <!-- Heading -->
           <h6 class="mb-7">Billing Details</h6>
 
@@ -50,8 +50,17 @@
 
               <!-- First Name -->
               <div class="form-group">
-                <label for="checkoutBillingFirstName">First Name *</label>
-                <input class="form-control form-control-sm" id="checkoutBillingFirstName" type="text" placeholder="First Name" required="">
+                <label for="checkoutBillingFirstName">
+                  First Name <small class="text-danger">*</small>
+                </label>
+                <input 
+                  class="form-control form-control-sm" 
+                  type="text" 
+                  placeholder="First Name" 
+                  formControlName = "first_name"
+                  [ngClass] = "classes('first_name')"
+                >
+                <small class="text-danger ml-2" *ngIf = "displayError('first_name')">First name is required</small>
               </div>
 
             </div>
@@ -59,17 +68,41 @@
 
               <!-- Last Name -->
               <div class="form-group">
-                <label for="checkoutBillingLastName">Last Name *</label>
-                <input class="form-control form-control-sm" id="checkoutBillingLastName" type="text" placeholder="Last Name" required="">
+                <label for="checkoutBillingLastName">
+                  Last Name <small class="text-danger">*</small>
+                </label>
+                <input 
+                  class="form-control form-control-sm" 
+                  type="text" 
+                  placeholder="Last Name"
+                  formControlName = "last_name" 
+                  [ngClass] = "classes('last_name')"
+                >
               </div>
+              <small class="text-danger ml-2" *ngIf = "displayError('last_name')">Last name is required</small>
 
             </div>
             <div class="col-12">
 
               <!-- Email -->
               <div class="form-group">
-                <label for="checkoutBillingEmail">Email *</label>
-                <input class="form-control form-control-sm" id="checkoutBillingEmail" type="email" placeholder="Email" required="">
+                <label for="checkoutBillingEmail">
+                  Email <small class="text-danger">*</small></label>
+                <input 
+                  class="form-control form-control-sm" 
+                  type="email" 
+                  placeholder="Email"
+                  formControlName = "email" 
+                  [ngClass] = "classes('email')"
+                >
+                <div *ngIf = "displayError('email')">
+                  <ng-template [ngIf] = "formControl('email').errors?.required" [ngIfElse] = "elseBlock">
+                    <small class="text-danger ml-2">Email is required</small>
+                  </ng-template>
+                  <ng-template #elseBlock>
+                    <small class="text-danger ml-2">Invalid Email</small>
+                  </ng-template>
+                </div>
               </div>
 
             </div>
@@ -77,8 +110,15 @@
 
               <!-- Company Name -->
               <div class="form-group">
-                <label for="checkoutBillingCompany">Company name *</label>
-                <input class="form-control form-control-sm" id="checkoutBillingCompany" type="text" placeholder="Company name (optional)">
+                <label for="checkoutBillingCompany">
+                  Company name
+                </label>
+                <input 
+                  class="form-control form-control-sm" 
+                  type="text" 
+                  placeholder="Company name (optional)"
+                  formControlName = "company_name"
+                >
               </div>
 
             </div>
@@ -86,8 +126,17 @@
 
               <!-- Country -->
               <div class="form-group">
-                <label for="checkoutBillingCountry">Country *</label>
-                <input class="form-control form-control-sm" id="checkoutBillingCountry" type="text" placeholder="Country" required="">
+                <label for="checkoutBillingCountry">
+                  Country <small class="text-danger">*</small>
+                </label>
+                <input 
+                  class="form-control form-control-sm" 
+                  type="text" 
+                  placeholder="Country" 
+                  formControlName = "country"
+                  [ngClass] = "classes('country')"
+                >
+                <small class="text-danger ml-2" *ngIf = "displayError('country')">Country is required</small>
               </div>
 
             </div>
@@ -95,8 +144,17 @@
 
               <!-- Address Line 1 -->
               <div class="form-group">
-                <label for="checkoutBillingAddress">Address Line 1 *</label>
-                <input class="form-control form-control-sm" id="checkoutBillingAddress" type="text" placeholder="Address Line 1" required="">
+                <label for="checkoutBillingAddress">
+                  Address Line 1 <small class="text-danger">*</small>
+                </label>
+                <input 
+                  class="form-control form-control-sm" 
+                  type="text" 
+                  placeholder="Address Line 1" 
+                  formControlName = "address1"
+                  [ngClass] = "classes('address1')"
+                >
+                <small class="text-danger ml-2" *ngIf = "displayError('address1')">Address is required</small>
               </div>
 
             </div>
@@ -104,8 +162,14 @@
 
               <!-- Address Line 2 -->
               <div class="form-group">
-                <label for="checkoutBillingAddressTwo">Address Line 2</label>
-                <input class="form-control form-control-sm" id="checkoutBillingAddressTwo" type="text" placeholder="Address Line 2 (optional)">
+                <label for="checkoutBillingAddressTwo">
+                  Address Line 2
+                </label>
+                <input 
+                  class="form-control form-control-sm" 
+                  type="text" 
+                  placeholder="Address Line 2 (optional)"
+                >
               </div>
 
             </div>
@@ -113,8 +177,17 @@
 
               <!-- Town / City -->
               <div class="form-group">
-                <label for="checkoutBillingTown">Town / City *</label>
-                <input class="form-control form-control-sm" id="checkoutBillingTown" type="text" placeholder="Town / City" required="">
+                <label for="checkoutBillingTown">
+                  Town / City <small class="text-danger">*</small>
+                </label>
+                <input 
+                  class="form-control form-control-sm" 
+                  type="text" 
+                  placeholder="Town / City"
+                  formControlName = "town_city" 
+                  [ngClass] = "classes('town_city')"
+                >
+                <small class="text-danger ml-2" *ngIf="displayError('town_city')">Town / City is required</small>
               </div>
 
             </div>
@@ -122,8 +195,17 @@
 
               <!-- ZIP / Postcode -->
               <div class="form-group">
-                <label for="checkoutBillingZIP">ZIP / Postcode *</label>
-                <input class="form-control form-control-sm" id="checkoutBillingZIP" type="text" placeholder="ZIP / Postcode" required="">
+                <label for="checkoutBillingZIP">
+                  ZIP / Postcode <small class="text-danger">*</small>
+                </label>
+                <input 
+                  class="form-control form-control-sm" 
+                  type="text" 
+                  placeholder="ZIP / Postcode" 
+                  formControlName = "zip"
+                  [ngClass] = "classes('zip')"
+                >
+                <small class="text-danger ml-2" *ngIf = "displayError('zip')">Zip / Postcode is required</small>
               </div>
 
             </div>
@@ -131,8 +213,24 @@
 
               <!-- Mobile Phone -->
               <div class="form-group mb-0">
-                <label for="checkoutBillingPhone">Mobile Phone *</label>
-                <input class="form-control form-control-sm" id="checkoutBillingPhone" type="tel" placeholder="Mobile Phone" required="">
+                <label for="checkoutBillingPhone">
+                  Mobile Phone <small class="text-danger">*</small>
+                </label>
+                <input 
+                  class="form-control form-control-sm" 
+                  type="tel" 
+                  placeholder="Mobile Phone"
+                  formControlName = "mobile_phone"
+                  [ngClass] = "classes('mobile_phone')"
+                >
+                <div *ngIf = "displayError('mobile_phone')">
+                  <ng-template [ngIf] = "formControl('mobile_phone').errors?.required" [ngIfElse] = "elseBlock">
+                    <small class="text-danger ml-2">Mobile phone is required</small>
+                  </ng-template>
+                  <ng-template #elseBlock>
+                    <small class="text-danger ml-2">Invalid mobile phone</small>
+                  </ng-template>
+                </div>
               </div>
 
             </div>
@@ -145,83 +243,51 @@
           <div class="table-responsive mb-6">
             <table class="table table-bordered table-sm table-hover mb-0">
               <tbody>
-                <tr>
+                <tr *ngFor = "let shipping of shipping_details ; let i = index">
                   <td>
                     <div class="custom-control custom-radio">
-                      <input class="custom-control-input" id="checkoutShippingStandard" name="shipping" type="radio">
-                      <label class="custom-control-label text-body text-nowrap" for="checkoutShippingStandard">
-                        Standard Shipping
+                      <input class="custom-control-input" type="radio" name="shipping" id={{shipping.type}} (click) = "select_shipping(i)">
+                      <label class="custom-control-label text-body text-nowrap" for={{shipping.type}}>
+                        {{shipping.type}}
                       </label>
                     </div>
                   </td>
-                  <td>Delivery in 5 - 7 working days</td>
-                  <td>$8.00</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="custom-control custom-radio">
-                      <input class="custom-control-input" id="checkoutShippingExpress" name="shipping" type="radio">
-                      <label class="custom-control-label text-body text-nowrap" for="checkoutShippingExpress">
-                        Express Shipping
-                      </label>
-                    </div>
-                  </td>
-                  <td>Delivery in 3 - 5 working days</td>
-                  <td>$12.00</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="custom-control custom-radio">
-                      <input class="custom-control-input" id="checkoutShippingShort" name="shipping" type="radio">
-                      <label class="custom-control-label text-body text-nowrap" for="checkoutShippingShort">
-                        1 - 2 Shipping
-                      </label>
-                    </div>
-                  </td>
-                  <td>Delivery in 1 - 2 working days</td>
-                  <td>$18.00</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="custom-control custom-radio">
-                      <input class="custom-control-input" id="checkoutShippingFree" name="shipping" type="radio">
-                      <label class="custom-control-label text-body text-nowrap" for="checkoutShippingFree">
-                        Free Shipping
-                      </label>
-                    </div>
-                  </td>
-                  <td>Living won't the He one every subdue
-                    meat replenish face was you morning
-                    firmament darkness.</td>
-                  <td>$0.00</td>
+                  <td>{{shipping.detail}}</td>
+                  <td>${{shipping.price}}.00</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           <!-- Notes -->
-          <textarea class="form-control form-control-sm mb-9 mb-md-0 font-size-xs" rows="5" placeholder="Order Notes (optional)"></textarea>
+          <textarea 
+            class="form-control form-control-sm mb-9 mb-md-0 font-size-xs" 
+            rows="5" 
+            placeholder="Order Notes (optional)"
+            formControlName = "order_notes"
+          ></textarea>
 
-        </div>
+        </form>
 
       </div>
-      <div class="col-12 col-md-5 col-lg-4 offset-lg-1">
+
+      <div class="col-12 col-md-5 col-lg-4 offset-lg-1 ">
 
         <!-- Heading -->
-        <h6 class="mb-7">Order Items (3)</h6>
+        <h6 class="mb-7">Order Items ({{shopping_items.length}})</h6>
 
         <!-- Divider -->
         <hr class="my-7">
 
         <!-- List group -->
-        <ul class="list-group list-group-lg list-group-flush-y list-group-flush-x mb-7 checkout-items">
-          <li class="list-group-item">
+        <ul class="list-group list-group-lg list-group-flush-y list-group-flush-x mb-7 p-2 checkout-items">
+          <li class="list-group-item ml-2" *ngFor = "let item of shopping_items">
             <div class="row align-items-center">
               <div class="col-4">
 
                 <!-- Image -->
                 <a href="product.html">
-                  <img src="https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png" alt="..." class="img-fluid">
+                  <img src={{item.img}} alt={{item.title}} class="img-fluid">
                 </a>
 
               </div>
@@ -229,138 +295,18 @@
 
                 <!-- Title -->
                 <p class="mb-4 font-size-sm font-weight-bold">
-                  <a class="text-body" href="product.html">Cotton floral print Dress</a> <br>
-                  <span class="text-muted">$40.00</span>
+                  <a class="text-body" href="product.html">{{item.title}}</a> <br>
+                  <span class="text-muted">${{item.price | number:"1.2"}}</span>
                 </p>
 
                 <!-- Text -->
                 <div class="font-size-sm text-muted">
-                  Size: M <br>
-                  Color: Red <br>
+                  Size: {{item.size}} <br>
+                  Color: {{item.color}} <br>
                 </div>
 
                 <div class="font-size-sm text-muted">
-                    Amount: <input type="number" class="w-auto ml-1 border" min="1" max="5" value="1">
-                </div>
-
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row align-items-center">
-              <div class="col-4">
-
-                <!-- Image -->
-                <a href="product.html">
-                  <img src="https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png" alt="..." class="img-fluid">
-                </a>
-
-              </div>
-              <div class="col">
-
-                <!-- Title -->
-                <p class="mb-4 font-size-sm font-weight-bold">
-                  <a class="text-body" href="product.html">Suede cross body Bag</a> <br>
-                  <span class="text-muted">$49.00</span>
-                </p>
-
-                <!-- Text -->
-                <div class="font-size-sm text-muted">
-                  Color: Brown
-                </div>
-
-                <div class="font-size-sm text-muted">
-                    Amount: <input type="number" class="w-auto ml-1 border" min="1" max="5" value="1">
-                </div>
-
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row align-items-center">
-              <div class="col-4">
-
-                <!-- Image -->
-                <a href="product.html">
-                  <img src="https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png" alt="..." class="img-fluid">
-                </a>
-
-              </div>
-              <div class="col">
-
-                <!-- Title -->
-                <p class="mb-4 font-size-sm font-weight-bold">
-                  <a class="text-body" href="product.html">Suede cross body Bag</a> <br>
-                  <span class="text-muted">$49.00</span>
-                </p>
-
-                <!-- Text -->
-                <div class="font-size-sm text-muted">
-                  Color: Brown
-                </div>
-
-                <div class="font-size-sm text-muted">
-                    Amount: <input type="number" class="w-auto ml-1 border" min="1" max="5" value="1">
-                </div>
-
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row align-items-center">
-              <div class="col-4">
-
-                <!-- Image -->
-                <a href="product.html">
-                  <img src="https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png" alt="..." class="img-fluid">
-                </a>
-
-              </div>
-              <div class="col">
-
-                <!-- Title -->
-                <p class="mb-4 font-size-sm font-weight-bold">
-                  <a class="text-body" href="product.html">Suede cross body Bag</a> <br>
-                  <span class="text-muted">$49.00</span>
-                </p>
-
-                <!-- Text -->
-                <div class="font-size-sm text-muted">
-                  Color: Brown
-                </div>
-
-                <div class="font-size-sm text-muted">
-                    Amount: <input type="number" class="w-auto ml-1 border" min="1" max="5" value="1">
-                </div>
-
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row align-items-center">
-              <div class="col-4">
-
-                <!-- Image -->
-                <a href="product.html">
-                  <img src="https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png" alt="..." class="img-fluid">
-                </a>
-
-              </div>
-              <div class="col">
-
-                <!-- Title -->
-                <p class="mb-4 font-size-sm font-weight-bold">
-                  <a class="text-body" href="product.html">Suede cross body Bag</a> <br>
-                  <span class="text-muted">$49.00</span>
-                </p>
-
-                <!-- Text -->
-                <div class="font-size-sm text-muted">
-                  Color: Brown
-                </div>
-
-                <div class="font-size-sm text-muted">
-                    Amount: <input type="number" class="w-auto ml-1 border" min="1" max="5" value="1">
+                  Amount: {{item.amount}}
                 </div>
 
               </div>
@@ -373,16 +319,16 @@
           <div class="card-body">
             <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
               <li class="list-group-item d-flex">
-                <span>Subtotal</span> <span class="ml-auto font-size-sm">$89.00</span>
+                <span>Subtotal</span> <span class="ml-auto font-size-sm">${{subtotal | number:'1.2'}}</span>
               </li>
               <li class="list-group-item d-flex">
-                <span>Tax</span> <span class="ml-auto font-size-sm">$00.00</span>
+                <span>Tax</span> <span class="ml-auto font-size-sm">${{tax | number:'1.2'}}</span>
               </li>
               <li class="list-group-item d-flex">
-                <span>Shipping</span> <span class="ml-auto font-size-sm">$8.00</span>
+                <span>Shipping</span> <span class="ml-auto font-size-sm">${{payment_form.value.shipping_details.price}}.00</span>
               </li>
               <li class="list-group-item d-flex font-size-lg font-weight-bold">
-                <span>Total</span> <span class="ml-auto">$97.00</span>
+                <span>Total</span> <span class="ml-auto">${{total | number:'1.2'}}</span>
               </li>
             </ul>
           </div>
