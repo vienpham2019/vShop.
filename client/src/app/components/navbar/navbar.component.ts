@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShoppingItemService } from '../../services/shopping-item/shopping-item.service'
 
 @Component({
   selector: 'app-navbar',
@@ -17,9 +18,13 @@ export class NavbarComponent implements OnInit {
       "Kids": ["Clothing" , "Shoes" , "Accessories" , "Sunglasses" , "Denim", "Boots"]
     }
   }
-  constructor() { }
+
+  shopping_item: number
+  constructor(private shopping_item_s: ShoppingItemService) { }
 
   ngOnInit(): void {
+    this.shopping_item = this.shopping_item_s.getShoppingItem().length 
+    console.log('new')
   }
 
 }

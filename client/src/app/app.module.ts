@@ -20,6 +20,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ItemReviewsComponent } from './components/item-reviews/item-reviews.component';
 
 import { PaginationService } from './services/pagination/pagination.service'
+import { ShoppingItemService } from './services/shopping-item/shopping-item.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import { PaginationService } from './services/pagination/pagination.service'
     ReactiveFormsModule, 
   ],
   providers: [
-    PaginationService
+    PaginationService,
+    ShoppingItemService
   ],
   bootstrap: [AppComponent]
 })

@@ -140,8 +140,12 @@
           </li>
           <li class="nav-item ml-lg-n4">
             <span class="nav-link cursor" data-toggle="modal" data-target="#modalShoppingCart">
-              <span data-cart-items="4">
-                <i class="fas fa-shopping-cart"></i>
+              <span data-cart-items= {{shopping_item}}>
+                <i class="fas fa-shopping-cart"></i> 
+                <span 
+                  class='badge badge-warning' 
+                  id='lblCartCount' 
+                  *ngIf = "shopping_item"> {{shopping_item}} </span>
               </span>
             </span>
           </li>

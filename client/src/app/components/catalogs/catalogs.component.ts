@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShoppingItemService } from '../../services/shopping-item/shopping-item.service'
 
 @Component({
   selector: 'app-catalogs',
@@ -25,7 +26,7 @@ export class CatalogsComponent implements OnInit {
 
   filter_details: any = []
 
-  constructor() { }
+  constructor(private shopping_item_s: ShoppingItemService) { }
 
   ngOnInit(): void {
     window.scrollTo(0,0)
@@ -66,6 +67,10 @@ export class CatalogsComponent implements OnInit {
       this.filter_details = this.filter_details.filter(d => d.title !== 'price')
     }
     this.filter_details.push({value: price , title: "price"})
+  }
+
+  addToShoppingCart(){
+    this.shopping_item_s.addToShoppingItem({new: "new"})
   }
 
 }
