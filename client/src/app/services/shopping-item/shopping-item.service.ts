@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class ShoppingItemService {
 
   constructor() { }
-  shopping_items: any[] = []
+  shopping_items: any[] = [{}, {}]
 
   getShoppingItem(){
     return this.shopping_items

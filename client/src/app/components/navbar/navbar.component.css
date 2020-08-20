@@ -19,15 +19,16 @@
     border-radius: 9px;
   }
   
-  .label-warning[href],
-  .badge-warning[href] {
-    background-color: #c67605;
-  }
-  #lblCartCount {
-      font-size: 12px;
-      background: #71aaff;
-      color: #fff;
-      padding: 0 5px;
-      vertical-align: top;
-      margin-left: -10px; 
-  }
+.label-warning[href],
+.badge-warning[href] {
+background-color: #c67605;
+}
+
+#lblCartCount {
+    font-size: 10px;
+    background: #f54a44;
+    color: #fff;
+    padding: 1px 5px;
+    vertical-align: top;
+    margin-left: -6px; 
+}
