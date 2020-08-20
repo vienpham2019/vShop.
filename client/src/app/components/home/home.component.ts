@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PaginationService } from '../../services/pagination.service'
+import { PaginationService } from '../../services/pagination/pagination.service'
 import { stringify } from '@angular/compiler/src/util';
 
 @Component({

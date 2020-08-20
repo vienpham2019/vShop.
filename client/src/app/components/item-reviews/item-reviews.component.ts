@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder , Validators , FormGroup } from '@angular/forms'
-import { PaginationService } from '../../services/pagination.service' 
+import { PaginationService } from '../../services/pagination/pagination.service' 
 
 @Component({
   selector: 'app-item-reviews',
