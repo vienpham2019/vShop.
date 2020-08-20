@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 export class PaginationService {
 
   constructor() { }
-
   slice_arrays( arrays , start_index , end_index){
     return arrays.slice(start_index, end_index)
   }

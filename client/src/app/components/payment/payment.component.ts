@@ -21,19 +21,19 @@ export class PaymentComponent implements OnInit {
 
   shopping_items: any[] = [
     {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://assets.adidas.com/images/h_320,f_auto,q_auto:sensitive,fl_lossy/449c838942da409f8ba9a97f00d3cffe_9366/Runfalcon_Shoes_Black_F36199_01_standard.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 2 , img: "https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 3 , img: "https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "" , color: "Red" , amount: 1 , img: "https://www.shopjessicabuurman.com/image/cache/catalog/2020/clothing/47325/1-buy-women-sakix-asymmetric-hem-long-sleeves-top-black-800x800.png"},
+    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
+    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
+    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 3 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
+    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
+    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
+    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
+    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
+    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
+    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
+    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
+    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
+    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
+    {title: "Cotton floral print Dress" , price: 40.00 , size: "" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
   ]
 
   payment_form: FormGroup
