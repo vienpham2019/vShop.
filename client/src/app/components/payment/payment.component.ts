@@ -41,6 +41,8 @@ export class PaymentComponent implements OnInit {
   total: number
   subtotal: number
   tax: number
+  amounts: any[] = Array.from(Array(5) , (_, i) => i + 1)
+  payment_complete: boolean = false 
 
   ngOnInit(): void {
     window.scrollTo(0,0)
@@ -53,6 +55,7 @@ export class PaymentComponent implements OnInit {
       address1: ['' , Validators.required],
       address2: [''] , 
       town_city: ['' , Validators.required],
+      state: ['' , Validators.required],
       zip: ['', Validators.required],
       mobile_phone: ['' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]],
       shipping_details: this._fb.group({
@@ -104,7 +107,9 @@ export class PaymentComponent implements OnInit {
   checkout() {
     this.submit_invalid = this.payment_form.status === "INVALID"
     if(!this.submit_invalid){
-      this.router.navigate(['/'])
+      // this.router.navigate(['/'])
+      this.payment_complete = true
+      this.shopping_items = []
     }
   }
 
@@ -135,6 +140,11 @@ export class PaymentComponent implements OnInit {
         )
       }
     })
+  }
+
+  changeAmount(e , index):void {
+    this.shopping_items[index].amount = Math.floor(e.target.value)
+    this.getTotal()
   }
 
 }
