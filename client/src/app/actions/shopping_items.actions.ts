@@ -3,11 +3,18 @@ import { ShoppingItem } from './../models/shopping_item.model'
 
 export const add_item = '[Shopping Item Component] Add Item' 
 export const remove_item = '[Shopping Item Component] Remove Item'
+export const change_item = '[Shopping Item Component] Change Item'
 
 export class AddItem implements Action {
 	readonly type = add_item
 	
 	constructor(public item: ShoppingItem) {} 
-} 
+}
 
-export type Actions = AddItem
+export class ChangeItem implements Action {
+	readonly type = change_item
+	
+	constructor(public item: ShoppingItem , public index: number) {} 
+}
+
+export type Actions = AddItem | ChangeItem

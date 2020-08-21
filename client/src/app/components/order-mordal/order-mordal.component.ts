@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ShoppingItem } from '../../models/shopping_item.model'
+import { Store , select } from '@ngrx/store'
+import * as ShoppingItemActions from '../../actions/shopping_items.actions'
 
 @Component({
   selector: 'app-order-mordal',
@@ -7,14 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderMordalComponent implements OnInit {
 
-  constructor() { }
-
   amounts: any[] = Array.from(Array(5) , (_,i) => i + 1 )
   subtotal: number 
-  shopping_items: any[] = [
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-  ]
+  shopping_items: ShoppingItem[]
+
+  constructor(
+    private store: Store<{shopping_items: ShoppingItem[]}>
+  ) {
+    store.pipe(select('shopping_items')).subscribe(values => {
+      this.shopping_items = values
+      this.getSubtotal()
+    })
+  }
 
   ngOnInit(): void {
     this.getSubtotal()
@@ -26,12 +33,13 @@ export class OrderMordalComponent implements OnInit {
 
   removeItem(index){
     this.shopping_items.splice(index , 1)
-    this.getSubtotal()
+    // this.getSubtotal()
   }
 
   changeAmount(e , index):void {
-    this.shopping_items[index].amount = Math.floor(e.target.value)
-    this.getSubtotal()
+    let {title, price , size , color , img} = this.shopping_items[index]
+    let amount = Math.floor(e.target.value)
+    this.store.dispatch(new ShoppingItemActions.ChangeItem({title, price , size , color , amount , img} , index))
   }
 
 }
