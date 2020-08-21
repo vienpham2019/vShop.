@@ -19,6 +19,9 @@ export function shoppingItemReducer(state = initState , action: ShoppingItemActi
             state = [...c_state]
             return state
 
+        case ShoppingItemActions.reset_item: 
+            return []
+
         default:
             return state
     }

@@ -107,7 +107,7 @@ export class PaymentComponent implements OnInit {
     this.submit_invalid = this.payment_form.status === "INVALID"
     if(!this.submit_invalid){
       this.payment_complete = true
-      this.shopping_items = []
+      this.store.dispatch(new ShoppingItemActions.ResetItem())
     }
   }
 

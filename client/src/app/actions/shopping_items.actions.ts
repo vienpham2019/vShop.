@@ -4,6 +4,7 @@ import { ShoppingItem } from './../models/shopping_item.model'
 export const add_item = '[Shopping Item Component] Add Item' 
 export const remove_item = '[Shopping Item Component] Remove Item'
 export const change_item = '[Shopping Item Component] Change Item'
+export const reset_item = '[Shopping Item Component] Reset Item'
 
 export class AddItem implements Action {
 	readonly type = add_item
@@ -23,4 +24,10 @@ export class ChangeItem implements Action {
 	constructor(public item: ShoppingItem , public index: number) {} 
 }
 
-export type Actions = AddItem | RemoveItem | ChangeItem 
+export class ResetItem implements Action {
+	readonly type = reset_item
+	
+	constructor() {} 
+}
+
+export type Actions = AddItem | RemoveItem | ChangeItem | ResetItem
