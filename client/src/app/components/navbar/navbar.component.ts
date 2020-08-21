@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingItemService } from '../../services/shopping-item/shopping-item.service'
 
+import { ShoppingItem } from '../../models/shopping_item.model'
+import { Observable } from 'rxjs'
+import { select , Store } from '@ngrx/store'
+import { AddItem } from '../../actions/shopping_items.actions'
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -19,12 +24,17 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  shopping_item: number
-  constructor(private shopping_item_s: ShoppingItemService) { }
+  shopping_items: number 
+  constructor(
+    private shopping_item_s: ShoppingItemService, 
+    private store: Store<{shopping_items: ShoppingItem[]}> 
+  ) {
+    store.pipe(select('shopping_items')).subscribe(values => {
+      this.shopping_items = values.length
+    })
+   }
 
   ngOnInit(): void {
-    this.shopping_item = this.shopping_item_s.getShoppingItem().length 
-    console.log('new')
   }
 
 }

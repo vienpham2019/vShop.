@@ -2,13 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder , Validators , FormGroup } from '@angular/forms'
 import { PaginationService } from '../../services/pagination/pagination.service' 
 
+import { Store } from '@ngrx/store'
+import { ShoppingItem } from '../../models/shopping_item.model'
+import * as ShoppingItemActions from '../../actions/shopping_items.actions'
+
 @Component({
   selector: 'app-item-reviews',
   templateUrl: './item-reviews.component.html',
   styleUrls: ['./item-reviews.component.css']
 })
 export class ItemReviewsComponent implements OnInit {
-  constructor(private _fb: FormBuilder , private _pagination_s: PaginationService) { }
+  constructor(
+    private _fb: FormBuilder , 
+    private _pagination_s: PaginationService,
+    private store: Store<{shopping_items: ShoppingItem[]}>
+  ) { }
   review_star: any[] = new Array(5).fill(0)
   reviews: any = [
     {name: "William Stokes" , date: "14 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 4},

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PaginationService } from '../../services/pagination/pagination.service'
-import { stringify } from '@angular/compiler/src/util';
+
+import { Store } from '@ngrx/store'
+import { ShoppingItem } from '../../models/shopping_item.model'
+import * as ShoppingItemActions from '../../actions/shopping_items.actions'
 
 @Component({
   selector: 'app-home',
@@ -23,7 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   new_arrivals: any = [
-    {title: 'Acymmetric Cotton Top' , price: '$39.99' , new: false , sale: true, link: "#" , img_url: 'https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg' , type: 'top'},
+    {title: 'Acymmetric Cotton Top' , price: '$89.99' , new: false , sale: true, link: "#" , img_url: 'https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg' , type: 'top'},
     {title: 'Adidas Runfalcon' , price: '$89.99' , new: false , sale: true, link: "#" , img_url: 'https://assets.adidas.com/images/h_320,f_auto,q_auto:sensitive,fl_lossy/449c838942da409f8ba9a97f00d3cffe_9366/Runfalcon_Shoes_Black_F36199_01_standard.jpg' , type: 'shoes'},
     {title: 'Greggo Flat' , price: '$850.00' , new: false , sale: true, link: "#" , img_url: 'https://images.us.christianlouboutin.com/media/catalog/product/cache/1/thumbnail/1200x/602f0fa2c1f0d1ba5e241f914e856ff9/1/1/5/0/christianlouboutin-greggo-1150377_BK01_4_1200x1200_1572437058.jpg' , type: 'shoes'},
     {title: 'Land Baby Bag' , price: '$28.99' , new: false , sale: true, link: "#" , img_url: 'https://images-na.ssl-images-amazon.com/images/I/91wid0n8V6L._SL1500_.jpg' , type: 'bagpack'},
@@ -49,7 +52,12 @@ export class HomeComponent implements OnInit {
   new_arrival_display_amount: number = 6
 
   new_arrival_length: any[] = new Array(Math.ceil(this.new_arrivals.length / this.new_arrival_display_amount)).fill(0)
-  constructor(private pagination_s: PaginationService) { }
+
+  shopping_item: ShoppingItem = {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"}
+  constructor(
+    private pagination_s: PaginationService ,
+    private store: Store<{shopping_items: ShoppingItem[]}>
+  ) { }
 
   ngOnInit(): void {
     window.scrollTo(0,0)
@@ -85,6 +93,10 @@ export class HomeComponent implements OnInit {
   price_class (item) {
     let class_name = item.sale ? ' text-primary' : ''
     return 'btn btn-white btn-sm card-price card-price-left' + class_name
+  }
+
+  addToShoppingCart(){
+    this.store.dispatch(new ShoppingItemActions.AddItem(this.shopping_item))
   }
 
 }

@@ -21,6 +21,9 @@ import { ItemReviewsComponent } from './components/item-reviews/item-reviews.com
 
 import { PaginationService } from './services/pagination/pagination.service'
 import { ShoppingItemService } from './services/shopping-item/shopping-item.service'
+
+import { StoreModule } from '@ngrx/store'
+import { shoppingItemReducer } from './reducers/shopping_items.reducer'
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +46,9 @@ import { ShoppingItemService } from './services/shopping-item/shopping-item.serv
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule, 
+    StoreModule.forRoot({
+      shopping_items: shoppingItemReducer
+    })
   ],
   providers: [
     PaginationService,
