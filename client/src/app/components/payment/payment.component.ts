@@ -3,6 +3,10 @@ import { FormBuilder , Validators , FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
 import Swal from 'sweetalert2';
 
+import { Store , select } from '@ngrx/store'
+import { ShoppingItem } from '../../models/shopping_item.model'
+import * as ShoppingItemActions from '../../actions/shopping_items.actions'
+
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -10,7 +14,16 @@ import Swal from 'sweetalert2';
 })
 export class PaymentComponent implements OnInit {
 
-  constructor(private _fb: FormBuilder , private router: Router) { }
+  constructor(
+    private _fb: FormBuilder , 
+    private router: Router , 
+    private store: Store<{shopping_items: ShoppingItem[]}> 
+  ) {
+    store.pipe(select('shopping_items')).subscribe(values => {
+      this.shopping_items = values
+      this.getTotal()
+    })
+   }
 
   shipping_details: any[] = [
     {type: "Free Shipping" , detail: "Delivery in 8 - 10 working days" , price: 0},
@@ -19,22 +32,7 @@ export class PaymentComponent implements OnInit {
     {type: "1 - 2 Shipping" , detail: "Delivery in 1 - 2 working days" , price: 18}
   ]
 
-  shopping_items: any[] = [
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://assets.adidas.com/images/h_320,f_auto,q_auto:sensitive,fl_lossy/449c838942da409f8ba9a97f00d3cffe_9366/Runfalcon_Shoes_Black_F36199_01_standard.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 3 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-    {title: "Cotton floral print Dress" , price: 40.00 , size: "" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"},
-  ]
+  shopping_items: ShoppingItem[]
 
   payment_form: FormGroup
   submit_invalid: boolean = false 
@@ -43,6 +41,7 @@ export class PaymentComponent implements OnInit {
   tax: number
   amounts: any[] = Array.from(Array(5) , (_, i) => i + 1)
   payment_complete: boolean = false 
+  shipping_price: number = 0 
 
   ngOnInit(): void {
     window.scrollTo(0,0)
@@ -67,11 +66,11 @@ export class PaymentComponent implements OnInit {
     })
 
     this.select_shipping(0)
-    this.getTotal()
   }
 
   select_shipping(index){
     let {type , detail , price} = this.shipping_details[index]
+    this.shipping_price = price
     this.payment_form.patchValue({
       shipping_details: {
         type, detail, price
@@ -101,13 +100,12 @@ export class PaymentComponent implements OnInit {
   getTotal():void {
     this.subtotal = this.shopping_items.reduce( (sum,item) => sum + (item.price * item.amount) , 0)
     this.tax = this.subtotal * (8.25 / 100)
-    this.total = this.subtotal + this.tax + this.payment_form.value.shipping_details.price
+    this.total = this.subtotal + this.tax + this.shipping_price
   }
 
   checkout() {
     this.submit_invalid = this.payment_form.status === "INVALID"
     if(!this.submit_invalid){
-      // this.router.navigate(['/'])
       this.payment_complete = true
       this.shopping_items = []
     }
@@ -131,8 +129,7 @@ export class PaymentComponent implements OnInit {
       confirmButtonText: 'Yes, remove it!',
     }).then((result) => {
       if (result.value) {
-        this.shopping_items.splice(index , 1)
-        this.getTotal()
+        this.store.dispatch(new ShoppingItemActions.RemoveItem(index))
         Swal.fire(
           'Remove!',
           `' ${item.title} ' has been remove form your shopping cart.`,
@@ -142,9 +139,12 @@ export class PaymentComponent implements OnInit {
     })
   }
 
-  changeAmount(e , index):void {
-    this.shopping_items[index].amount = Math.floor(e.target.value)
-    this.getTotal()
+  changeAmount(item: ShoppingItem, index: number , type: string ):void {
+    let {title, price , size , color , amount, img} = item
+    amount += type === 'plus' ? 1 : -1
+    if(amount < 6 && amount > 0){
+      this.store.dispatch(new ShoppingItemActions.ChangeItem({title, price , size , color , amount , img} , index))
+    }
   }
 
 }

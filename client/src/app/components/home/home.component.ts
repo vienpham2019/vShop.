@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
 
   new_arrival_length: any[] = new Array(Math.ceil(this.new_arrivals.length / this.new_arrival_display_amount)).fill(0)
 
-  shopping_item: ShoppingItem = {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 1 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"}
+  shopping_item: ShoppingItem = {title: "Cotton floral print Dress" , price: 40.00 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg"}
   constructor(
     private pagination_s: PaginationService ,
     private store: Store<{shopping_items: ShoppingItem[]}>

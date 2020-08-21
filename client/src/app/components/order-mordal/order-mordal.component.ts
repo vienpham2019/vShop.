@@ -32,14 +32,15 @@ export class OrderMordalComponent implements OnInit {
   }
 
   removeItem(index){
-    this.shopping_items.splice(index , 1)
-    // this.getSubtotal()
+    this.store.dispatch(new ShoppingItemActions.RemoveItem(index))
   }
 
-  changeAmount(e , index):void {
-    let {title, price , size , color , img} = this.shopping_items[index]
-    let amount = Math.floor(e.target.value)
-    this.store.dispatch(new ShoppingItemActions.ChangeItem({title, price , size , color , amount , img} , index))
+  changeAmount(item , index: number , type):void {
+    let {title, price , size , color , amount, img} = item
+    amount += type === 'plus' ? 1 : -1
+    if(amount < 6 && amount > 0){
+      this.store.dispatch(new ShoppingItemActions.ChangeItem({title, price , size , color , amount , img} , index))
+    }
   }
 
 }

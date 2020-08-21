@@ -332,9 +332,9 @@
                   </div>
                   <div class="col">
 
-                    <select class="custom-select custom-select-xxs w-auto" (change) = "changeAmount($event , i)">
-                      <option *ngFor = "let amount of amounts" value={{amount}}>{{amount}}</option>
-                    </select>
+                    <i class="fas fa-minus m-2 cursor" (click) = "changeAmount(item,i,'minus')"></i>
+                    <span>{{item.amount}}</span>
+                    <i class="fas fa-plus m-2 cursor" (click) = "changeAmount(item,i,'plus')"></i>
     
                   </div>
                 </div>

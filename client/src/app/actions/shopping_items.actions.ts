@@ -11,10 +11,16 @@ export class AddItem implements Action {
 	constructor(public item: ShoppingItem) {} 
 }
 
+export class RemoveItem implements Action {
+	readonly type = remove_item
+	
+	constructor(public index: number) {} 
+}
+
 export class ChangeItem implements Action {
 	readonly type = change_item
 	
 	constructor(public item: ShoppingItem , public index: number) {} 
 }
 
-export type Actions = AddItem | ChangeItem
+export type Actions = AddItem | RemoveItem | ChangeItem 

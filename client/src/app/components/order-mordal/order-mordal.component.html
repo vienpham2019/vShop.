@@ -33,11 +33,9 @@
 
                 <!--Footer -->
                 <div class="d-flex align-items-center">
-
-                  <!-- Select -->
-                  <select class="custom-select custom-select-xxs w-auto" (change) = "changeAmount($event , i)">
-                    <option *ngFor = "let amount of amounts" value={{amount}}>{{amount}}</option>
-                  </select>
+                  <i class="fas fa-minus m-2 cursor" (click) = "changeAmount(item,i,'minus')"></i>
+                  <span>{{item.amount}}</span>
+                  <i class="fas fa-plus m-2 cursor" (click) = "changeAmount(item,i,'plus')"></i>
 
                   <!-- Remove -->
                   <span class="font-size-xs text-danger ml-auto cursor" (click) = "removeItem(i)">
