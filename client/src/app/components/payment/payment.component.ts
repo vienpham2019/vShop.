@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder , Validators , FormGroup } from '@angular/forms'
+import { ShoppingItemService } from '../../services/shopping-item/shopping-item.service'
 import { Router } from '@angular/router'
 import Swal from 'sweetalert2';
 
 import { Store , select } from '@ngrx/store'
 import { ShoppingItem } from '../../models/shopping_item.model'
 import * as ShoppingItemActions from '../../actions/shopping_items.actions'
+import * as UserActions from '../../actions/user.actions'
 
 @Component({
   selector: 'app-payment',
@@ -17,6 +19,7 @@ export class PaymentComponent implements OnInit {
   constructor(
     private _fb: FormBuilder , 
     private router: Router , 
+    private shopping_item_s: ShoppingItemService, 
     private store: Store<{shopping_items: ShoppingItem[]}> 
   ) {
     store.pipe(select('shopping_items')).subscribe(values => {
@@ -46,23 +49,24 @@ export class PaymentComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0,0)
     this.payment_form = this._fb.group({
-      first_name: ["", Validators.required],
-      last_name: ['', Validators.required],
-      email: ['' , [Validators.required , Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
+      first_name: ['vien', Validators.required],
+      last_name: ['pham', Validators.required],
+      email: ['vienpham2019@gmial.com' , [Validators.required , Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
       company_name: [''],
-      country: ['' , Validators.required],
-      address1: ['' , Validators.required],
+      country: ['USA' , Validators.required],
+      address1: ['new' , Validators.required],
       address2: [''] , 
-      city: ['' , Validators.required],
-      state: ['' , Validators.required],
-      zip: ['', Validators.required],
-      phone: ['' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]],
+      city: ['conroe' , Validators.required],
+      state: ['Tx' , Validators.required],
+      zip: ['77301', Validators.required],
+      phone: ['5022960606' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]],
       shipping_details: this._fb.group({
         type: [''],
         detail: [''],
         price: ['']
       }),
-      order_notes: ['']
+      order_notes: [''],
+      total: ['']
     })
 
     this.select_shipping(0)
@@ -104,9 +108,22 @@ export class PaymentComponent implements OnInit {
   }
 
   checkout() {
+    this.payment_form.patchValue({
+      total: this.total
+    })
     this.submit_invalid = this.payment_form.status === "INVALID"
     if(!this.submit_invalid){
       this.payment_complete = true
+      let order_date = this.shopping_item_s.currentDate()
+      let {first_name, last_name , address1 , address2 , city , state, zip , country , phone , order_notes } = this.payment_form.value 
+      let { type , detail } = this.payment_form.value.shipping_details
+      let shipping_feed = this.shipping_price
+      let {total , subtotal , tax , shopping_items } = this
+      let shipping_method = `${type} (${detail})`
+      let shipping_address = {first_name, last_name , address1 , address2 , city , state, zip , country , phone }
+      this.store.dispatch(new UserActions.AddOrder({
+        order_id: '123', order_date , subtotal , tax , shipping_feed , total , shipping_address , shipping_method , order_notes , shopping_items 
+      }))
       this.store.dispatch(new ShoppingItemActions.ResetItem())
     }
   }

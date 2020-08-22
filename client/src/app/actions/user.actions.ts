@@ -1,9 +1,11 @@
 import { Action } from '@ngrx/store'
 import { ShippingDetail } from './../models/shipping_detail.model'
-
+import { OrderDetail } from './../models/order_detail.model'
+ 
 export const add_shipping = '[User Profile Component] Add Shipping' 
 export const add_edit_shipping = '[User Profile Component] Add Edit Shipping' 
 export const edit_shipping = '[User Profile Component] Edit Shipping'
+export const add_order = '[Payment Component] Add Order'
 
 export class AddShipping implements Action {
 	readonly type = add_shipping
@@ -22,4 +24,9 @@ export class EditShipping implements Action {
     constructor(public shipping: ShippingDetail ){}
 }
 
-export type Actions = AddShipping | AddEditShipping | EditShipping 
+export class AddOrder implements Action { 
+	readonly type = add_order 
+	constructor (public order: OrderDetail){}
+}
+
+export type Actions = AddShipping | AddEditShipping | EditShipping | AddOrder

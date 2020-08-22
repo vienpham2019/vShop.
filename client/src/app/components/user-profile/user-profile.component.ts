@@ -15,6 +15,8 @@ export class UserProfileComponent implements OnInit {
   widhlist: boolean  
   order: boolean 
 
+  navTitle: any[]
+
   ngOnInit(): void {
     window.scrollTo(0,0)
     this.setContent()
@@ -25,6 +27,12 @@ export class UserProfileComponent implements OnInit {
     this.personal_info = 'Personal Info' === this.selectContentValue
     this.widhlist = 'Widhlist' === this.selectContentValue 
     this.order = 'Orders' === this.selectContentValue
+    this.navTitle = [
+      {value: "Orders" , active: this.order} , 
+      {value: "Widhlist" , active: this.widhlist }, 
+      {value: "Personal Info" , active: this.personal_info},
+      {value: "Addresses", active: this.address}
+    ]
   }
 
   selectContent(value):void{

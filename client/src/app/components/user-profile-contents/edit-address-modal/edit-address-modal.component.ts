@@ -43,10 +43,6 @@ export class EditAddressModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // resetForm(): void{
-  //   this.editAddressForm.reset()
-  // }
-
   setUpForm(){
     if(this.edit_shipping_detail){
       let {first_name , last_name , country , address1, address2 , city , state , zip , phone} = this.edit_shipping_detail
@@ -64,7 +60,11 @@ export class EditAddressModalComponent implements OnInit {
   checkout() {
     this.submit_invalid = this.editAddressForm.status === "INVALID"
     if(!this.submit_invalid){
-      this.store.dispatch(new UserActions.EditShipping(this.editAddressForm.value))
+      if(this.edit_shipping_detail){
+        this.store.dispatch(new UserActions.EditShipping(this.editAddressForm.value))
+      }else{
+        this.store.dispatch(new UserActions.AddShipping(this.editAddressForm.value))
+      }
       document.getElementById('editUserAddressCloseBtn').click()
     }
   }

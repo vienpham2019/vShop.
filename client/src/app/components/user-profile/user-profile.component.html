@@ -32,17 +32,13 @@
         <!-- Nav -->
         <nav class="mb-10 mb-md-0">
           <div class="list-group list-group-sm list-group-strong list-group-flush-x">
-            <span class="list-group-item list-group-item-action dropright-toggle active cursor" (click) = "selectContent('Orders')">
-              Orders
-            </span>
-            <span class="list-group-item list-group-item-action dropright-toggle cursor" (click) = "selectContent('Widhlist')">
-              Widhlist
-            </span>
-            <span class="list-group-item list-group-item-action dropright-toggle cursor" (click) = "selectContent('Personal Info')">
-              Personal Info
-            </span>
-            <span class="list-group-item list-group-item-action dropright-toggle cursor" (click) = "selectContent('Addresses')">
-              Addresses
+            <span 
+              *ngFor = "let title of navTitle"
+              class="list-group-item list-group-item-action dropright-toggle cursor" 
+              [class.active] = "title.active"
+              (click) = "selectContent(title.value)"
+            >
+              {{title.value}}
             </span>
             <span class="list-group-item list-group-item-action dropright-toggle cursor">
               Logout
