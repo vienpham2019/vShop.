@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-lg-6" *ngFor = "let shipping of shipping_details">
 
       <!-- Card -->
       <div class="card card-lg bg-light mb-8">
@@ -7,64 +7,25 @@
 
           <!-- Heading -->
           <h6 class="mb-6">
-            Shipping Address
+            Shipping Detail 
           </h6>
 
           <!-- Text -->
-          <p class="text-muted mb-0">
-            User name: Daniel Robinson <br>
-            Address: 3997 Raccoon Run <br>
-            State: Kingston <br>
-            Zipcode: 45644 <br>
-            Country: United States <br>
-            Phone number: 6146389574
+          <p class="mb-0">
+            User name: {{shipping.first_name}} {{shipping.last_name}} <br>
+            Address: {{shipping.address}} <br>
+            City: {{shipping.city}} <br>
+            State: {{shipping.state}} <br>
+            Zipcode: {{shipping.zip}} <br>
+            Country: {{shipping.country}} <br>
+            Phone number: {{shipping.phone}} <br>
           </p>
 
           <!-- Action -->
           <div class="card-action card-action-right">
 
             <!-- Button -->
-            <button class="btn btn-xs btn-circle btn-white-primary" data-toggle="modal" data-target="#editUserAddress">
-              <i class="fa fa-pen"></i>
-            </button>
-
-            <!-- Button -->
-            <button class="btn btn-xs btn-circle btn-white-primary" >
-              <i class="fas fa-times"></i>
-            </button>
-
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-    <div class="col-12 col-lg-6">
-
-      <!-- Card -->
-      <div class="card card-lg bg-light mb-8">
-        <div class="card-body">
-
-          <!-- Heading -->
-          <h6 class="mb-6">
-            Shipping Address
-          </h6>
-
-          <!-- Text -->
-          <p class="text-muted mb-0">
-            User name: Daniel Robinson <br>
-            Address: 3997 Raccoon Run <br>
-            State: Kingston <br>
-            Zipcode: 45644 <br>
-            Country: United States <br>
-            Phone number: 6146389574
-          </p>
-
-          <!-- Action -->
-          <div class="card-action card-action-right">
-
-            <!-- Button -->
-            <button class="btn btn-xs btn-circle btn-white-primary" data-toggle="modal" data-target="#editUserAddress">
+            <button class="btn btn-xs btn-circle btn-white-primary ml-2" data-toggle="modal" data-target="#editUserAddress">
               <i class="fa fa-pen"></i>
             </button>
 
@@ -83,11 +44,11 @@
     <div class="col-12">
 
       <!-- Button -->
-      <button class="btn btn-block btn-lg btn-outline-border"  data-toggle="modal" data-target="#editUserAddress">
+      <button class="btn btn-block btn-lg btn-outline-border"  data-toggle="modal" data-target="#editUserAddress" (click) = "editForm('')">
         Add Address <i class="fas fa-plus ml-3"></i>
       </button>
 
     </div>
 </div>
 
-<app-edit-address-modal ></app-edit-address-modal>
+<app-edit-address-modal></app-edit-address-modal>

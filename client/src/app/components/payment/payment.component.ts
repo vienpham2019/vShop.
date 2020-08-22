@@ -53,10 +53,10 @@ export class PaymentComponent implements OnInit {
       country: ['' , Validators.required],
       address1: ['' , Validators.required],
       address2: [''] , 
-      town_city: ['' , Validators.required],
+      city: ['' , Validators.required],
       state: ['' , Validators.required],
       zip: ['', Validators.required],
-      mobile_phone: ['' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]],
+      phone: ['' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]],
       shipping_details: this._fb.group({
         type: [''],
         detail: [''],

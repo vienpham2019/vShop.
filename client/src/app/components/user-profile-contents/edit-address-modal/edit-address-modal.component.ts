@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder , Validators , FormGroup } from '@angular/forms'
 
 @Component({
@@ -7,36 +7,52 @@ import { FormBuilder , Validators , FormGroup } from '@angular/forms'
   styleUrls: ['./edit-address-modal.component.css']
 })
 export class EditAddressModalComponent implements OnInit {
+  @Input() form_detail: any
 
+  @Output() update_add_shipping = new EventEmitter()
   constructor(
     private _fb: FormBuilder 
   ) { }
 
   editAddressForm: FormGroup
   submit_invalid: boolean = false 
+  form_title: string = "Add Shipping"
 
   ngOnInit(): void {
     this.editAddressForm = this._fb.group({
       first_name: ["", Validators.required],
       last_name: ['', Validators.required],
-      email: ['' , [Validators.required , Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
       company_name: [''],
       country: ['' , Validators.required],
       address1: ['' , Validators.required],
       address2: [''] , 
-      town_city: ['' , Validators.required],
+      city: ['' , Validators.required],
       state: ['' , Validators.required],
       zip: ['', Validators.required],
-      mobile_phone: ['' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]]
+      phone: ['' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]]
     })
+
+    this.setUpForm()
+  }
+
+  setUpForm(){
+    let {first_name , last_name , country , address1, address2 , city , state , zip , phone} = this.form_detail
+    if(!!this.form_detail){
+      this.form_title = "Edit Shipping"
+      this.editAddressForm.patchValue(
+        {first_name , last_name , country , address1, address2 , city , state , zip , phone}
+      )
+    }else{
+      this.editAddressForm.reset()
+      this.form_title = "Add Shipping"
+    }
   }
 
   checkout() {
     this.submit_invalid = this.editAddressForm.status === "INVALID"
-    // if(!this.submit_invalid){
-    //   this.payment_complete = true
-    //   this.store.dispatch(new ShoppingItemActions.ResetItem())
-    // }
+    if(!this.submit_invalid){
+      this.update_add_shipping.emit(this.editAddressForm.value)
+    }
   }
 
   displayError(controlName){
