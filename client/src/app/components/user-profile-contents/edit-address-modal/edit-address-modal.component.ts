@@ -1,5 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder , Validators , FormGroup } from '@angular/forms'
+import { Store , select } from '@ngrx/store'
+import * as UserActions from '../../../actions/user.actions'
+import { ShippingDetail } from '../../../models/shipping_detail.model'
+import { User } from '../../../models/user.model'
+
 
 @Component({
   selector: 'app-edit-address-modal',
@@ -9,48 +14,59 @@ import { FormBuilder , Validators , FormGroup } from '@angular/forms'
 export class EditAddressModalComponent implements OnInit {
 
   constructor(
-    private _fb: FormBuilder 
-  ) { }
+    private _fb: FormBuilder ,
+    private store: Store<{user: User}> 
+  ) {
+    store.pipe(select('user')).subscribe(value => {
+      this.edit_shipping_detail = value.edit_shipping_detail
+      this.setUpForm()
+    })
+   }
 
-  editAddressForm: FormGroup
+  editAddressForm: FormGroup = this._fb.group({
+    first_name: ["", Validators.required],
+    last_name: ['', Validators.required],
+    company_name: [''],
+    country: ['' , Validators.required],
+    address1: ['' , Validators.required],
+    address2: [''] , 
+    city: ['' , Validators.required],
+    state: ['' , Validators.required],
+    zip: ['', Validators.required],
+    phone: ['' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]]
+  })
+
   submit_invalid: boolean = false 
+  edit_shipping_detail: ShippingDetail
   form_title: string = "Add Shipping"
 
   ngOnInit(): void {
-    this.editAddressForm = this._fb.group({
-      first_name: ["", Validators.required],
-      last_name: ['', Validators.required],
-      company_name: [''],
-      country: ['' , Validators.required],
-      address1: ['' , Validators.required],
-      address2: [''] , 
-      city: ['' , Validators.required],
-      state: ['' , Validators.required],
-      zip: ['', Validators.required],
-      phone: ['' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]]
-    })
-
-    // this.setUpForm()
   }
 
-  // setUpForm(){
-  //   let {first_name , last_name , country , address1, address2 , city , state , zip , phone} = this.form_detail
-  //   if(!!this.form_detail){
-  //     this.form_title = "Edit Shipping"
-  //     this.editAddressForm.patchValue(
-  //       {first_name , last_name , country , address1, address2 , city , state , zip , phone}
-  //     )
-  //   }else{
-  //     this.editAddressForm.reset()
-  //     this.form_title = "Add Shipping"
-  //   }
+  // resetForm(): void{
+  //   this.editAddressForm.reset()
   // }
+
+  setUpForm(){
+    if(this.edit_shipping_detail){
+      let {first_name , last_name , country , address1, address2 , city , state , zip , phone} = this.edit_shipping_detail
+      this.form_title = "Edit Shipping"
+      this.editAddressForm.patchValue(
+        {first_name , last_name , country , address1, address2 , city , state , zip , phone}
+      )
+    }else{
+      this.editAddressForm.reset()
+      this.submit_invalid = false 
+      this.form_title = "Add Shipping"
+    }
+  }
 
   checkout() {
     this.submit_invalid = this.editAddressForm.status === "INVALID"
-    // if(!this.submit_invalid){
-    //   this.update_add_shipping.emit(this.editAddressForm.value)
-    // }
+    if(!this.submit_invalid){
+      this.store.dispatch(new UserActions.EditShipping(this.editAddressForm.value))
+      document.getElementById('editUserAddressCloseBtn').click()
+    }
   }
 
   displayError(controlName){

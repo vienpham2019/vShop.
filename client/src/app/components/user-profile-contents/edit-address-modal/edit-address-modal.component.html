@@ -4,14 +4,14 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title mx-auto">{{form_title}}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" id="editUserAddressCloseBtn" data-dismiss="modal" aria-label="Close" >
             <span aria-hidden="true"><i class="fas fa-times"></i></span>
           </button>
         </div>
         <div class="modal-body">
             <div class="col-12 col-md-9 col-lg-8 offset-lg-1 mx-auto">
                 <!-- Form -->
-                <form [formGroup] = "editAddressForm" (ngSubmit) = "checkout()">
+                <form [formGroup] = "editAddressForm">
                     <!-- Heading -->
                     <h6 class="mb-7">Billing Details</h6>
           
@@ -200,9 +200,10 @@
           
                       </div>
                     </div>
-                    <button class="btn btn-dark w-100" type="submit">
-                        Submit
+                    <button class="btn btn-dark w-100" (click) = "checkout()">
+                      Submit
                     </button>
+
                   </form>
     
               </div>

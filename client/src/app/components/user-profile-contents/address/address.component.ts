@@ -17,11 +17,13 @@ export class AddressComponent implements OnInit {
     store.pipe(select('user')).subscribe(value => this.shipping_details = value.shipping_details)
   }
 
-  form_detail: ShippingDetail 
-
   shipping_details: ShippingDetail[]
 
   ngOnInit(): void {
+  }
+
+  editShipping(index: number | null = null , shipping: ShippingDetail | null = null ):void {
+    this.store.dispatch(new UserActions.AddEditShipping(index , shipping))
   }
 
 
