@@ -24,7 +24,9 @@ import { ShoppingItemService } from './services/shopping-item/shopping-item.serv
 
 import { StoreModule } from '@ngrx/store'
 import { shoppingItemReducer } from './reducers/shopping_items.reducer';
-import { OrderComponent } from './components/user-profiles-content/order/order.component'
+
+import { OrderComponent } from './components/user-profile-contents/order/order.component';
+import { WidhlistComponent } from './components/user-profile-contents/widhlist/widhlist.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,8 @@ import { OrderComponent } from './components/user-profiles-content/order/order.c
     ContactComponent,
     PageNotFoundComponent,
     ItemReviewsComponent,
-    OrderComponent
+    OrderComponent,
+    WidhlistComponent
   ],
   imports: [
     BrowserModule,
