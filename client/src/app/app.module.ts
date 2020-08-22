@@ -23,7 +23,8 @@ import { PaginationService } from './services/pagination/pagination.service'
 import { ShoppingItemService } from './services/shopping-item/shopping-item.service'
 
 import { StoreModule } from '@ngrx/store'
-import { shoppingItemReducer } from './reducers/shopping_items.reducer'
+import { shoppingItemReducer } from './reducers/shopping_items.reducer';
+import { OrderComponent } from './components/user-profiles-content/order/order.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import { shoppingItemReducer } from './reducers/shopping_items.reducer'
     LoginRegisterComponent,
     ContactComponent,
     PageNotFoundComponent,
-    ItemReviewsComponent
+    ItemReviewsComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
