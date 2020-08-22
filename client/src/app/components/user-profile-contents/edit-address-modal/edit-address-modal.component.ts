@@ -7,9 +7,7 @@ import { FormBuilder , Validators , FormGroup } from '@angular/forms'
   styleUrls: ['./edit-address-modal.component.css']
 })
 export class EditAddressModalComponent implements OnInit {
-  @Input() form_detail: any
 
-  @Output() update_add_shipping = new EventEmitter()
   constructor(
     private _fb: FormBuilder 
   ) { }
@@ -32,27 +30,27 @@ export class EditAddressModalComponent implements OnInit {
       phone: ['' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]]
     })
 
-    this.setUpForm()
+    // this.setUpForm()
   }
 
-  setUpForm(){
-    let {first_name , last_name , country , address1, address2 , city , state , zip , phone} = this.form_detail
-    if(!!this.form_detail){
-      this.form_title = "Edit Shipping"
-      this.editAddressForm.patchValue(
-        {first_name , last_name , country , address1, address2 , city , state , zip , phone}
-      )
-    }else{
-      this.editAddressForm.reset()
-      this.form_title = "Add Shipping"
-    }
-  }
+  // setUpForm(){
+  //   let {first_name , last_name , country , address1, address2 , city , state , zip , phone} = this.form_detail
+  //   if(!!this.form_detail){
+  //     this.form_title = "Edit Shipping"
+  //     this.editAddressForm.patchValue(
+  //       {first_name , last_name , country , address1, address2 , city , state , zip , phone}
+  //     )
+  //   }else{
+  //     this.editAddressForm.reset()
+  //     this.form_title = "Add Shipping"
+  //   }
+  // }
 
   checkout() {
     this.submit_invalid = this.editAddressForm.status === "INVALID"
-    if(!this.submit_invalid){
-      this.update_add_shipping.emit(this.editAddressForm.value)
-    }
+    // if(!this.submit_invalid){
+    //   this.update_add_shipping.emit(this.editAddressForm.value)
+    // }
   }
 
   displayError(controlName){

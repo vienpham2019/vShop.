@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store , select } from '@ngrx/store';
+import * as UserActions from '../../../actions/user.actions'
+import { ShippingDetail } from '../../../models/shipping_detail.model'
+import { User } from '../../../models/user.model'
 
 @Component({
   selector: 'app-address',
@@ -7,20 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddressComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private store: Store<{user: User}> 
+  ) { 
+    store.pipe(select('user')).subscribe(value => this.shipping_details = value.shipping_details)
+  }
 
-  form_detail: any 
+  form_detail: ShippingDetail 
 
-  shipping_details: any[] = [
-    {first_name: 'Daniel' , last_name: 'Robinson' , address: '3997 Raccoon Run',city: 'New', state: 'Kingston', zip: '45644', country: 'United States', phone: '6146389574' },
-    {first_name: 'Daniel' , last_name: 'Robinsonsasa' , address: '3997 Raccoon Run',city: 'New', state: 'Kingston', zip: '45644', country: 'United States', phone: '6146389574' }
-  ]
+  shipping_details: ShippingDetail[]
 
   ngOnInit(): void {
   }
 
-  editForm(shipping: any | null ){
-    this.form_detail = shipping 
-  }
 
 }
