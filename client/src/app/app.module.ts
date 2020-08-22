@@ -26,7 +26,10 @@ import { StoreModule } from '@ngrx/store'
 import { shoppingItemReducer } from './reducers/shopping_items.reducer';
 
 import { OrderComponent } from './components/user-profile-contents/order/order.component';
-import { WidhlistComponent } from './components/user-profile-contents/widhlist/widhlist.component'
+import { WidhlistComponent } from './components/user-profile-contents/widhlist/widhlist.component';
+import { PersonalInfoComponent } from './components/user-profile-contents/personal-info/personal-info.component';
+import { AddressComponent } from './components/user-profile-contents/address/address.component';
+import { EditAddressModalComponent } from './components/user-profile-contents/edit-address-modal/edit-address-modal.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +48,10 @@ import { WidhlistComponent } from './components/user-profile-contents/widhlist/w
     PageNotFoundComponent,
     ItemReviewsComponent,
     OrderComponent,
-    WidhlistComponent
+    WidhlistComponent,
+    PersonalInfoComponent,
+    AddressComponent,
+    EditAddressModalComponent
   ],
   imports: [
     BrowserModule,

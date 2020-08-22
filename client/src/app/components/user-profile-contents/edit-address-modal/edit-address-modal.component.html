@@ -1,0 +1,236 @@
+
+<div class="modal fade" id="editUserAddress" tabindex="-1" aria-labelledby="editUserAddressLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title mx-auto">Add Address</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="col-12 col-md-9 col-lg-8 offset-lg-1 mx-auto">
+                <!-- Form -->
+                <form [formGroup] = "editAddressForm" (ngSubmit) = "checkout()">
+                    <!-- Heading -->
+                    <h6 class="mb-7">Billing Details</h6>
+          
+                    <!-- Billing details -->
+                    <div class="row mb-9">
+                      <div class="col-12 col-md-6">
+          
+                        <!-- First Name -->
+                        <div class="form-group">
+                          <label for="checkoutBillingFirstName">
+                            First Name <small class="text-danger">*</small>
+                          </label>
+                          <input 
+                            class="form-control form-control-sm" 
+                            type="text" 
+                            placeholder="First Name" 
+                            formControlName = "first_name"
+                            [ngClass] = "classes('first_name')"
+                          >
+                          <small class="text-danger ml-2" *ngIf = "displayError('first_name')">First name is required</small>
+                        </div>
+          
+                      </div>
+                      <div class="col-12 col-md-6">
+          
+                        <!-- Last Name -->
+                        <div class="form-group">
+                          <label for="checkoutBillingLastName">
+                            Last Name <small class="text-danger">*</small>
+                          </label>
+                          <input 
+                            class="form-control form-control-sm" 
+                            type="text" 
+                            placeholder="Last Name"
+                            formControlName = "last_name" 
+                            [ngClass] = "classes('last_name')"
+                          >
+                        </div>
+                        <small class="text-danger ml-2" *ngIf = "displayError('last_name')">Last name is required</small>
+          
+                      </div>
+                      <div class="col-12">
+          
+                        <!-- Email -->
+                        <div class="form-group">
+                          <label for="checkoutBillingEmail">
+                            Email <small class="text-danger">*</small></label>
+                          <input 
+                            class="form-control form-control-sm" 
+                            type="email" 
+                            placeholder="Email"
+                            formControlName = "email" 
+                            [ngClass] = "classes('email')"
+                          >
+                          <div *ngIf = "displayError('email')">
+                            <ng-template [ngIf] = "formControl('email').errors?.required" [ngIfElse] = "elseBlock">
+                              <small class="text-danger ml-2">Email is required</small>
+                            </ng-template>
+                            <ng-template #elseBlock>
+                              <small class="text-danger ml-2">Invalid Email</small>
+                            </ng-template>
+                          </div>
+                        </div>
+          
+                      </div>
+                      <div class="col-12">
+          
+                        <!-- Company Name -->
+                        <div class="form-group">
+                          <label for="checkoutBillingCompany">
+                            Company name
+                          </label>
+                          <input 
+                            class="form-control form-control-sm" 
+                            type="text" 
+                            placeholder="Company name (optional)"
+                            formControlName = "company_name"
+                          >
+                        </div>
+          
+                      </div>
+                      <div class="col-12">
+          
+                        <!-- Country -->
+                        <div class="form-group">
+                          <label for="checkoutBillingCountry">
+                            Country <small class="text-danger">*</small>
+                          </label>
+                          <input 
+                            class="form-control form-control-sm" 
+                            type="text" 
+                            placeholder="Country" 
+                            formControlName = "country"
+                            [ngClass] = "classes('country')"
+                          >
+                          <small class="text-danger ml-2" *ngIf = "displayError('country')">Country is required</small>
+                        </div>
+          
+                      </div>
+                      <div class="col-12">
+          
+                        <!-- Address Line 1 -->
+                        <div class="form-group">
+                          <label for="checkoutBillingAddress">
+                            Address Line 1 <small class="text-danger">*</small>
+                          </label>
+                          <input 
+                            class="form-control form-control-sm" 
+                            type="text" 
+                            placeholder="Address Line 1" 
+                            formControlName = "address1"
+                            [ngClass] = "classes('address1')"
+                          >
+                          <small class="text-danger ml-2" *ngIf = "displayError('address1')">Address is required</small>
+                        </div>
+          
+                      </div>
+                      <div class="col-12">
+          
+                        <!-- Address Line 2 -->
+                        <div class="form-group">
+                          <label for="checkoutBillingAddressTwo">
+                            Address Line 2
+                          </label>
+                          <input 
+                            class="form-control form-control-sm" 
+                            type="text" 
+                            placeholder="Address Line 2 (optional)"
+                          >
+                        </div>
+          
+                      </div>
+                      <div class="col-12 col-md-4">
+          
+                        <!-- Town / City -->
+                        <div class="form-group">
+                          <label for="checkoutBillingTown">
+                            City <small class="text-danger">*</small>
+                          </label>
+                          <input 
+                            class="form-control form-control-sm" 
+                            type="text" 
+                            placeholder="City"
+                            formControlName = "town_city" 
+                            [ngClass] = "classes('town_city')"
+                          >
+                          <small class="text-danger ml-2" *ngIf="displayError('town_city')">City is required</small>
+                        </div>
+          
+                      </div>
+                      <div class="col-12 col-md-4">
+          
+                        <!-- State -->
+                        <div class="form-group">
+                          <label for="checkoutBillingTown">
+                            State <small class="text-danger">*</small>
+                          </label>
+                          <input 
+                            class="form-control form-control-sm" 
+                            type="text" 
+                            placeholder="State"
+                            formControlName = "state" 
+                            [ngClass] = "classes('state')"
+                          >
+                          <small class="text-danger ml-2" *ngIf="displayError('state')">State is required</small>
+                        </div>
+          
+                      </div>
+                      <div class="col-12 col-md-4">
+          
+                        <!-- ZIP / Postcode -->
+                        <div class="form-group">
+                          <label for="checkoutBillingZIP">
+                            Zip <small class="text-danger">*</small>
+                          </label>
+                          <input 
+                            class="form-control form-control-sm" 
+                            type="text" 
+                            placeholder="Zip" 
+                            formControlName = "zip"
+                            [ngClass] = "classes('zip')"
+                          >
+                          <small class="text-danger ml-2" *ngIf = "displayError('zip')">Zip is required</small>
+                        </div>
+          
+                      </div>
+                      <div class="col-12">
+          
+                        <!-- Mobile Phone -->
+                        <div class="form-group mb-0">
+                          <label for="checkoutBillingPhone">
+                            Mobile Phone <small class="text-danger">*</small>
+                          </label>
+                          <input 
+                            class="form-control form-control-sm" 
+                            type="tel" 
+                            placeholder="Mobile Phone"
+                            formControlName = "mobile_phone"
+                            [ngClass] = "classes('mobile_phone')"
+                          >
+                          <div *ngIf = "displayError('mobile_phone')">
+                            <ng-template [ngIf] = "formControl('mobile_phone').errors?.required" [ngIfElse] = "elseBlock">
+                              <small class="text-danger ml-2">Mobile phone is required</small>
+                            </ng-template>
+                            <ng-template #elseBlock>
+                              <small class="text-danger ml-2">Invalid mobile phone</small>
+                            </ng-template>
+                          </div>
+                        </div>
+          
+                      </div>
+                    </div>
+                    <button class="btn btn-dark w-100" type="submit">
+                        Add Address
+                    </button>
+                  </form>
+    
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
