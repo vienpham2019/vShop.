@@ -52,7 +52,7 @@ export function UserReducer(state = initState , action: UserActions.Actions) {
 
         case UserActions.update_user_info: 
             return {...state, user_info: action.user_info}
-            
+
         default:
             return state
     }

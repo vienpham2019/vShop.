@@ -8,7 +8,7 @@
             <div class="col-12 col-md text-md-center">
 
                 <!-- Rating -->
-                <div class="rating text-dark h6 mb-4 mb-md-0" data-value="4">
+                <div class="rating text-dark h6 mb-4 mb-md-0">
                     <div *ngFor = "let s of review_star; let i = index">
                         <i [ngClass]="rateClass(total_review, i) "></i>
                     </div>
@@ -156,7 +156,7 @@
             </div>
 
             <!-- Reviews -->
-            <div class="review-contents mt-8 p-2">
+            <div class="review-contents mt-8 p-2" *ngIf = "display_reviews.length ; else elseBlock">
                 <div *ngFor = "let review_content of display_reviews">
 
                     <!-- Child review -->
@@ -218,6 +218,12 @@
     
                 </div>
             </div>
+
+            <ng-template #elseBlock>
+                <div class="container bg-light my-3 py-10">
+                    <h3 class="text-center">There are no customer reviews yet.</h3>
+                </div>
+            </ng-template>
 
             </div>
 

@@ -253,12 +253,12 @@
                   </div>
 
                   <div class="card-img">
-                    <button class="btn btn-xs btn-block btn-dark card-btn">
+                    <button class="btn btn-xs btn-block btn-dark card-btn" [routerLink] = "['/item']">
                       <i class="far fa-eye mr-2 mb-1"></i> Quick View
                     </button>
                     <img [src]="new_item.img" class="card-img-top" [alt]="new_item.title">
                   </div> 
-                  
+
                   <div class="card-body px-0 shadow-sm p-3 mb-5 bg-white border-top mt-1">
                       <div class="mr-auto">
                           <!-- Heading -->
@@ -271,7 +271,6 @@
                                   <!-- Text -->
                                   <div class="font-size-sm">
                                       <label class="text-muted">{{new_item.category}}</label>
-                                      <button class="btn btn-dark" (click) = "addToShoppingCart(new_item)">Add to shopping cart</button>
                                   </div>
 
                               </div>

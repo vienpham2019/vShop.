@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder , Validators , FormGroup } from '@angular/forms'
 import { PaginationService } from '../../services/pagination/pagination.service' 
 
-import { Store } from '@ngrx/store'
-import { ShoppingItem } from '../../models/shopping_item.model'
-import * as ShoppingItemActions from '../../actions/shopping_items.actions'
+import { Store , select } from '@ngrx/store'
+import { CatalogItemInit } from '../../models/catalog_item_init.model'
+import { CatalogItemReview } from '../../models/catalog_item_review.model'
+import * as CatalogItemActions from '../../actions/catalogItem.action'
 
 @Component({
   selector: 'app-item-reviews',
@@ -15,22 +16,16 @@ export class ItemReviewsComponent implements OnInit {
   constructor(
     private _fb: FormBuilder , 
     private _pagination_s: PaginationService,
-    private store: Store<{shopping_items: ShoppingItem[]}>
-  ) { }
+    private store: Store<{catalog_item: CatalogItemInit}>
+  ) { 
+    store.pipe(select('catalog_item')).subscribe(value => {
+      this.reviews = value.display_catalog_item.reviews
+      this.getTotalReview()
+      this.slice_reviews()
+    })
+  }
   review_star: any[] = new Array(5).fill(0)
-  reviews: any = [
-    {name: "William Stokes" , date: "14 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 4},
-    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
-    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
-    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
-    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
-    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
-    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
-    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
-    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
-    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3},
-    {name: "Vien Pham" , date: "12 Jul 2019", review_title: "Very good", review: "Made face lights yielding forth created for image behold blessed seas." , rate: 3}
-  ]
+  reviews: CatalogItemReview[] = []
 
   new_review: FormGroup
 
@@ -47,8 +42,6 @@ export class ItemReviewsComponent implements OnInit {
   reviews_length: any[] = new Array(Math.ceil(this.reviews.length / this.display_review_amount)).fill(0)
 
   ngOnInit(): void {
-    this.getTotalReview()
-    this.slice_reviews()
     this.new_review = this._fb.group({
       rate: [''],
       date: [''],
@@ -110,9 +103,8 @@ export class ItemReviewsComponent implements OnInit {
       let date = this.currentDate()
       let rate = this.score
       let {name , review_title , review} = this.new_review.value
-      this.reviews.unshift({date, rate , name , review_title , review})
+      this.store.dispatch(new CatalogItemActions.AddReview({date, rate , name , review_title , review}))
       this.resetForm()
-      this.getTotalReview()
     }
   }
 

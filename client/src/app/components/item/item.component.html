@@ -1,4 +1,4 @@
-<nav class="py-5">
+<nav class="py-5" *ngIf = "item">
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -12,7 +12,7 @@
               <a class="text-gray-400" href="shop.html">Women's Shoes</a>
             </li>
             <li class="breadcrumb-item active">
-              Leather Sneakers
+              {{item.title}}
             </li>
           </ol>
 
@@ -21,7 +21,7 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container" *ngIf = "item">
     <div class="row">
       <div class="col-12">
         <div class="row">
@@ -30,12 +30,16 @@
                 <div class="card">
 
                 <!-- Badge -->
-                    <div class="badge badge-primary card-badge text-uppercase">
+                    <div class="badge badge-primary card-badge text-uppercase" *ngIf = "item.sale">
                         Sale
                     </div>
 
+                    <div class="badge badge-dark card-badge text-uppercase" *ngIf = "item.new">
+                      New
+                    </div>
+
                     <div class="col-md-11">
-                        <img src="https://images-na.ssl-images-amazon.com/images/I/91M97kPA%2BUL._AC_SX679._SX._UX._SY._UY_.jpg" alt="..." class="card-img shadow-sm p-3 mb-5 bg-white rounded">
+                        <img [src]="item.img" [alt]="item.title" class="img-fluid">
                     </div>
 
                 </div>
@@ -47,44 +51,37 @@
               <div class="col">
 
                 <!-- Preheading -->
-                <a class="text-muted" href="shop.html">Sneakers</a>
+                <span class="text-muted">{{item.category}}</span>
 
               </div>
               <div class="col-auto">
 
                 <!-- Rating -->
-                <div class="rating font-size-xs text-dark" data-value="4">
-                  <div class="rating-item">
-                    <i class="fas fa-star"></i>
-                  </div>
-                  <div class="rating-item">
-                    <i class="fas fa-star"></i>
-                  </div>
-                  <div class="rating-item">
-                    <i class="fas fa-star"></i>
-                  </div>
-                  <div class="rating-item">
-                    <i class="fas fa-star"></i>
-                  </div>
-                  <div class="rating-item">
-                    <i class="fas fa-star"></i>
+                <div class="rating text-dark h6 mb-4 mb-md-0">
+                  <div *ngFor = "let s of review_star; let i = index">
+                      <i [ngClass]="rateClass(i) "></i>
                   </div>
                 </div>
 
-                <a class="font-size-sm text-reset ml-2" href="#reviews">
-                  Reviews (6)
-                </a>
+                <span class="font-size-sm text-reset ml-2">
+                  Reviews ({{item.reviews.length}})
+                </span>
 
               </div>
             </div>
 
             <!-- Heading -->
-            <h3 class="mb-2">Leather Sneakers</h3>
+            <h3 class="mb-2">{{item.title}}</h3>
 
             <!-- Price -->
             <div class="mb-7">
-              <span class="font-size-lg font-weight-bold text-gray-350 text-decoration-line-through">$115.00</span>
-              <span class="ml-1 font-size-h5 font-weight-bolder text-primary">$85.00</span>
+              <ng-template [ngIf] = "item.sale" [ngIfElse] = "elseBlock">
+                  <span class="font-size-lg font-weight-bold text-gray-350 text-decoration-line-through">${{item.price | number: '1.2'}}</span>
+                  <span class="ml-1 font-size-h5 font-weight-bolder text-primary">${{item.sale_price | number: '1.2'}}</span>
+              </ng-template>
+              <ng-template #elseBlock>
+                <span class="text-muted">${{item.price | number: '1.2'}}</span>
+              </ng-template>
               <span class="font-size-sm ml-1">(In Stock)</span>
             </div>
 
@@ -103,7 +100,7 @@
                   <div class="col-12 col-lg-auto">
                     <!-- Quantity -->
                     <select class="custom-select mb-2 w-50" formControlName = "color">
-                        <option value={{color}} *ngFor = "let color of colors">{{color}}</option> 
+                        <option value={{color}} *ngFor = "let color of item.colors">{{color}}</option> 
                     </select>
                   </div>
                 </div>
