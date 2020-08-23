@@ -4,6 +4,7 @@ import { OrderDetail } from '../../../models/order_detail.model'
 import { User } from '../../../models/user.model'
 import * as UserActions from '../../../actions/user.actions'
 import Swal from 'sweetalert2';
+import { PaginationService } from '../../../services/pagination/pagination.service'
 
 @Component({
   selector: 'app-order',
@@ -13,11 +14,23 @@ import Swal from 'sweetalert2';
 export class OrderComponent implements OnInit {
 
   constructor(
-    private store: Store<{user: User}> 
+    private store: Store<{user: User}> ,
+    private pagination_s: PaginationService
   ) { 
-    store.pipe(select('user')).subscribe(value => this.order_details = value.order_details)
+    store.pipe(select('user')).subscribe(value => {
+      this.order_details = value.order_details
+      this.order_details_length = new Array(Math.ceil(this.order_details.length / this.order_details_display_amount)).fill(0)
+      this.slice_order_detail()
+    })
   }
-  order_details: OrderDetail[]
+  order_details: OrderDetail[] = []
+
+  display_order_details: OrderDetail[]
+  start_index: number = 0 
+  end_index: number = 4
+  order_details_display_amount: number = 4
+
+  order_details_length: number[] = []
 
   ngOnInit(): void {
   }
@@ -45,6 +58,32 @@ export class OrderComponent implements OnInit {
         )
       }
     })
+  }
+
+  slice_order_detail(){
+    this.display_order_details = this.pagination_s.slice_arrays(this.order_details , this.start_index , this.end_index)
+  }
+
+  change_page(value):void{
+
+    let { start_index , end_index } = this.pagination_s.change_page(value , this.start_index , this.end_index , this.order_details , this.order_details_display_amount)
+
+    this.start_index = start_index 
+    this.end_index = end_index
+
+    this.slice_order_detail()
+  }
+
+  change_page_number(i):void {
+    let {start_index , end_index} = this.pagination_s.change_page_number(i , this.start_index , this.end_index , this.order_details_display_amount)
+
+    this.start_index = start_index 
+    this.end_index = end_index
+    this.slice_order_detail()
+  }
+
+  pagination_class(current_index){
+    return this.pagination_s.pagination_class(current_index , this.start_index , this.order_details_display_amount)
   }
 
 }

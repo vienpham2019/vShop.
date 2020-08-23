@@ -1,5 +1,5 @@
 <div *ngIf = "order_details.length ; else elseBlock">
-  <div class="card card-lg mb-5 border" *ngFor = "let order of order_details ; let i = index">
+  <div class="card card-lg mb-5 border" *ngFor = "let order of display_order_details ; let i = index">
     <div class="card-body pb-0" >
 
       <!-- Info -->
@@ -111,38 +111,23 @@
   </div>
 
   <!-- Pagination -->
-  <nav class="d-flex justify-content-center justify-content-md-end mt-10">
+   <nav class="d-flex justify-content-center justify-content-md-end" *ngIf = "order_details.length > order_details_display_amount">
     <ul class="pagination pagination-sm text-gray-400">
       <li class="page-item">
-        <a class="page-link page-link-arrow" href="#">
+        <span class="page-link page-link-arrow cursor" (click) = "change_page('prev')">
           <i class="fa fa-caret-left"></i>
-        </a>
+        </span>
       </li>
-      <li class="page-item active">
-        <a class="page-link" href="#">1</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">2</a>
+      <li [ngClass] = "pagination_class(i)" *ngFor = "let num of order_details_length; let i = index" >
+        <span class="page-link cursor" (click) = "change_page_number(i)">{{i + 1}}</span>
       </li>
       <li class="page-item">
-        <a class="page-link" href="#">3</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">4</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">5</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">6</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link page-link-arrow" href="#">
+        <span class="page-link page-link-arrow cursor" (click) = "change_page('next')" >
           <i class="fa fa-caret-right"></i>
-        </a>
+        </span>
       </li>
     </ul>
-  </nav>
+  </nav> 
 </div>
 
 <ng-template #elseBlock>
