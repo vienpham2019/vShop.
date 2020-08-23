@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms'
+import { ActivatedRoute , ParamMap } from '@angular/router'
 
 @Component({
   selector: 'app-user-profile',
@@ -8,7 +9,7 @@ import { FormBuilder } from '@angular/forms'
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(private _fb: FormBuilder , private _route: ActivatedRoute ) { }
   selectContentValue: string = "Orders"
   address: boolean 
   personal_info: boolean
@@ -19,7 +20,11 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0,0)
-    this.setContent()
+    this._route.paramMap.subscribe((params: ParamMap) => {
+      let title = params.get('title')
+      this.selectContentValue = title ? title : "Orders"
+      this.setContent()
+    })
   }
 
   setContent(){

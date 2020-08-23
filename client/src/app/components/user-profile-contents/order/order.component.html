@@ -1,5 +1,5 @@
 <div *ngIf = "order_details.length ; else elseBlock">
-  <div class="card card-lg mb-5 border" *ngFor = "let order of order_details">
+  <div class="card card-lg mb-5 border" *ngFor = "let order of order_details ; let i = index">
     <div class="card-body pb-0" >
 
       <!-- Info -->
@@ -87,11 +87,19 @@
         </div>
         <div class="col-12 col-lg-6">
           <div class="form-row">
-            <div class="col">
+            <div class="col-6">
 
               <!-- Button -->
               <button class="btn btn-sm btn-block btn-outline-dark" data-toggle="modal" data-target="#orderDetailModal" (click) = "displayOrderDetail(order)">
                 Order Details
+              </button>
+
+            </div>
+            <div class="col-6">
+
+              <!-- Button -->
+              <button class="btn btn-sm btn-block btn-danger" (click) = "removeOrder(i)">
+                Delete Order <i class="fas fa-trash ml-2"></i>
               </button>
 
             </div>

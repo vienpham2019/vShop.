@@ -32,6 +32,10 @@ export function UserReducer(state = initState , action: UserActions.Actions) {
         case UserActions.add_order: 
             return {...state, order_details: [action.order , ...state.order_details]}
 
+        case UserActions.remove_order: 
+            console.log(action.index)
+            return {...state, order_details: state.order_details.filter((_,i) => i !== action.index)}
+
         case UserActions.select_display_order_details: 
             return {...state , display_order_detail: action.order}
 

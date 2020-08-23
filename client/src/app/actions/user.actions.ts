@@ -1,12 +1,15 @@
 import { Action } from '@ngrx/store'
 import { ShippingDetail } from './../models/shipping_detail.model'
 import { OrderDetail } from './../models/order_detail.model'
+import { ShoppingItem } from '../models/shopping_item.model'
  
 export const add_shipping = '[User Profile Component] Add Shipping' 
 export const add_edit_shipping = '[User Profile Component] Add Edit Shipping' 
 export const edit_shipping = '[User Profile Component] Edit Shipping'
 export const add_order = '[Payment Component] Add Order'
+export const remove_order = '[Payment Component] Remove Order'
 export const select_display_order_details = '[User Profile Order Component] Display Order Detail'
+export const add_widhlist = '[User Profile Component] Add Widhlist'
 
 export class AddShipping implements Action {
 	readonly type = add_shipping
@@ -30,9 +33,19 @@ export class AddOrder implements Action {
 	constructor (public order: OrderDetail){}
 }
 
+export class RemoveOrder implements Action { 
+	readonly type = remove_order 
+	constructor (public index: number){}
+}
+
 export class DisplayOrderDetail implements Action{
 	readonly type = select_display_order_details 
 	constructor (public order: OrderDetail){}
 }
 
-export type Actions = AddShipping | AddEditShipping | EditShipping | AddOrder | DisplayOrderDetail
+export class AddWidhlist implements Action {
+	readonly type = add_widhlist
+	constructor (public item: ShoppingItem){}
+}
+
+export type Actions = AddShipping | AddEditShipping | EditShipping | AddOrder | RemoveOrder | DisplayOrderDetail | AddWidhlist
