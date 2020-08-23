@@ -1,124 +1,150 @@
+<div *ngIf = "order_details.length ; else elseBlock">
+  <div class="card card-lg mb-5 border" *ngFor = "let order of order_details">
+    <div class="card-body pb-0" >
 
-<div class="card card-lg mb-5 border" *ngFor = "let order of order_dertails">
-  <div class="card-body pb-0" >
+      <!-- Info -->
+      <div class="card card-sm">
+        <div class="card-body bg-light">
+          <div class="row">
+            <div class="col-6 col-lg-3">
 
-    <!-- Info -->
-    <div class="card card-sm">
-      <div class="card-body bg-light">
-        <div class="row">
-          <div class="col-6 col-lg-3">
+              <!-- Heading -->
+              <h6 class="heading-xxxs text-muted">Order No:</h6>
 
-            <!-- Heading -->
-            <h6 class="heading-xxxs text-muted">Order No:</h6>
+              <!-- Text -->
+              <p class="mb-lg-0 font-size-sm font-weight-bold">
+                {{order.order_id | slice:0:8}}...
+              </p>
 
-            <!-- Text -->
-            <p class="mb-lg-0 font-size-sm font-weight-bold">
-              {{order.order_id}}
-            </p>
+            </div>
+            <div class="col-6 col-lg-3">
 
+              <!-- Heading -->
+              <h6 class="heading-xxxs text-muted">Order date:</h6>
+
+              <!-- Text -->
+              <p class="mb-lg-0 font-size-sm font-weight-bold">
+                <time datetime="2019-10-01">
+                  {{order.order_date}}
+                </time>
+              </p>
+
+            </div>
+            <div class="col-6 col-lg-3">
+
+              <!-- Heading -->
+              <h6 class="heading-xxxs text-muted">Shipping date:</h6>
+
+              <!-- Text -->
+              <p class="mb-lg-0 font-size-sm font-weight-bold">
+                <time datetime="2019-10-01">
+                  {{order.shipping_date[0]}} - <br>{{order.shipping_date[1]}}
+                </time>
+              </p>
+
+            </div>
+            <div class="col-6 col-lg-3">
+
+              <!-- Heading -->
+              <h6 class="heading-xxxs text-muted">Order Total:</h6>
+
+              <!-- Text -->
+              <p class="mb-0 font-size-sm font-weight-bold">
+                ${{order.total | number: '1.2'}}
+              </p>
+
+            </div>
           </div>
-          <div class="col-6 col-lg-3">
+        </div>
+      </div>
 
-            <!-- Heading -->
-            <h6 class="heading-xxxs text-muted">Order date:</h6>
+    </div>
+    <div class="card-footer">
+      <div class="row align-items-center">
+        <div class="col-12 col-lg-6">
+          <div class="form-row mb-4 mb-lg-0">
+            <div class="col-3" *ngFor = "let item of order.shopping_items | slice:0:3 " >
 
-            <!-- Text -->
-            <p class="mb-lg-0 font-size-sm font-weight-bold">
-              <time datetime="2019-10-01">
-                {{order.order_date}}
-              </time>
-            </p>
+              <!-- Image -->
+              <div class="embed-responsive embed-responsive-1by1 bg-cover border" style="background-image: url({{item.img}});">
+              </div>
 
+            </div>
+
+            <div class="col-3" *ngIf = "order.shopping_items.length > 3">
+
+              <!-- Image -->
+              <div class="embed-responsive embed-responsive-1by1 bg-light">
+                <span class="embed-responsive-item embed-responsive-item-text text-reset">
+                  <div class="font-size-xxs font-weight-bold">
+                    +{{order.shopping_items.length - 3}} <br> more
+                  </div>
+                </span>
+              </div>
+
+            </div>
           </div>
-          <div class="col-6 col-lg-3">
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="form-row">
+            <div class="col">
 
-            <!-- Heading -->
-            <h6 class="heading-xxxs text-muted">Order Amount:</h6>
+              <!-- Button -->
+              <button class="btn btn-sm btn-block btn-outline-dark" data-toggle="modal" data-target="#orderDetailModal" (click) = "displayOrderDetail(order)">
+                Order Details
+              </button>
 
-            <!-- Text -->
-            <p class="mb-0 font-size-sm font-weight-bold">
-              ${{order.total | number: '1.2'}}
-            </p>
-
+            </div>
           </div>
+
         </div>
       </div>
     </div>
-
   </div>
-  <div class="card-footer">
-    <div class="row align-items-center">
-      <div class="col-12 col-lg-6">
-        <div class="form-row mb-4 mb-lg-0">
-          <div class="col-3" *ngFor = "let item of order.shopping_items | slice:0:3 " >
 
-            <!-- Image -->
-            <div class="embed-responsive embed-responsive-1by1 bg-cover" style="background-image: url({{item.img}});">
-            </div>
-
-          </div>
-
-          <div class="col-3" *ngIf = "order.shopping_items.length > 3">
-
-            <!-- Image -->
-            <div class="embed-responsive embed-responsive-1by1 bg-light">
-              <span class="embed-responsive-item embed-responsive-item-text text-reset">
-                <div class="font-size-xxs font-weight-bold">
-                  +{{order.shopping_items.length - 3}} <br> more
-                </div>
-              </span>
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-lg-6">
-        <div class="form-row">
-          <div class="col">
-
-            <!-- Button -->
-            <a class="btn btn-sm btn-block btn-outline-dark" href="account-order.html">
-              Order Details
-            </a>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
+  <!-- Pagination -->
+  <nav class="d-flex justify-content-center justify-content-md-end mt-10">
+    <ul class="pagination pagination-sm text-gray-400">
+      <li class="page-item">
+        <a class="page-link page-link-arrow" href="#">
+          <i class="fa fa-caret-left"></i>
+        </a>
+      </li>
+      <li class="page-item active">
+        <a class="page-link" href="#">1</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">2</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">3</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">4</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">5</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">6</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link page-link-arrow" href="#">
+          <i class="fa fa-caret-right"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>
 
-<!-- Pagination -->
-<nav class="d-flex justify-content-center justify-content-md-end mt-10">
-  <ul class="pagination pagination-sm text-gray-400">
-    <li class="page-item">
-      <a class="page-link page-link-arrow" href="#">
-        <i class="fa fa-caret-left"></i>
-      </a>
-    </li>
-    <li class="page-item active">
-      <a class="page-link" href="#">1</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#">2</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#">3</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#">4</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#">5</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#">6</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link page-link-arrow" href="#">
-        <i class="fa fa-caret-right"></i>
-      </a>
-    </li>
-  </ul>
-</nav>
+<ng-template #elseBlock>
+  <div class="container text-center text-muted mt-5">
+
+    <h1 style="font-size: 3em"><i class="fas fa-clipboard-list"></i></h1>
+    <h3 class="mb-5"><strong>No Orders</strong></h3>
+    <span>You don't have any order in your history.</span>
+
+  </div>
+</ng-template>
+
+<app-order-detail-mordal></app-order-detail-mordal>

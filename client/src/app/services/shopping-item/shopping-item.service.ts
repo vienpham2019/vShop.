@@ -16,8 +16,7 @@ export class ShoppingItemService {
     this.shopping_items.unshift(item)
   }
 
-  currentDate(){
-    let today = new Date()
+  currentDate(today){
     let months = ["Jan" , "Feb" , "Mar" , "Apr" , "May" , "Jun" , "Jul", "Aug" , "Sep" , "Oct", "Nov" , "Dec"]
     let dd = today.getDate()
     let mm = today.getMonth()

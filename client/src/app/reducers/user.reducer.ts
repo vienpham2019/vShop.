@@ -11,7 +11,8 @@ export const initState: User = {
     ],
     edit_shipping_index: null ,
     edit_shipping_detail: null ,
-    order_details: []
+    order_details: [], 
+    display_order_detail: null 
 }
 
 export function UserReducer(state = initState , action: UserActions.Actions) {
@@ -29,8 +30,10 @@ export function UserReducer(state = initState , action: UserActions.Actions) {
             return {...state, shipping_details: [action.shipping, ...state.shipping_details]}
 
         case UserActions.add_order: 
-            console.log(action.order)
             return {...state, order_details: [action.order , ...state.order_details]}
+
+        case UserActions.select_display_order_details: 
+            return {...state , display_order_detail: action.order}
 
         default:
             return state

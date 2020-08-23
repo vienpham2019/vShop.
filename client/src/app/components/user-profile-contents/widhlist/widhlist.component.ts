@@ -9,6 +9,8 @@ export class WidhlistComponent implements OnInit {
 
   constructor() { }
 
+  wishlist: any[] = []
+  
   ngOnInit(): void {
   }
 

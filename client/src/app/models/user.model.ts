@@ -6,5 +6,6 @@ export interface User {
     shipping_details: ShippingDetail[],
     edit_shipping_index: number | null ,
     edit_shipping_detail: ShippingDetail | null ,
-    order_details: OrderDetail[]
+    order_details: OrderDetail[],
+    display_order_detail: OrderDetail | null 
 }

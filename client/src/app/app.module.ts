@@ -30,7 +30,8 @@ import { OrderComponent } from './components/user-profile-contents/order/order.c
 import { WidhlistComponent } from './components/user-profile-contents/widhlist/widhlist.component';
 import { PersonalInfoComponent } from './components/user-profile-contents/personal-info/personal-info.component';
 import { AddressComponent } from './components/user-profile-contents/address/address.component';
-import { EditAddressModalComponent } from './components/user-profile-contents/edit-address-modal/edit-address-modal.component'
+import { EditAddressModalComponent } from './components/user-profile-contents/edit-address-modal/edit-address-modal.component';
+import { OrderDetailMordalComponent } from './components/user-profile-contents/order-detail-mordal/order-detail-mordal.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +53,8 @@ import { EditAddressModalComponent } from './components/user-profile-contents/ed
     WidhlistComponent,
     PersonalInfoComponent,
     AddressComponent,
-    EditAddressModalComponent
+    EditAddressModalComponent,
+    OrderDetailMordalComponent
   ],
   imports: [
     BrowserModule,

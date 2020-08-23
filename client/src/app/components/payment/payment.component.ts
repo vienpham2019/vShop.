@@ -9,6 +9,8 @@ import { ShoppingItem } from '../../models/shopping_item.model'
 import * as ShoppingItemActions from '../../actions/shopping_items.actions'
 import * as UserActions from '../../actions/user.actions'
 
+import { UUID } from 'angular2-uuid'
+
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -34,6 +36,13 @@ export class PaymentComponent implements OnInit {
     {type: "Express Shipping" , detail: "Delivery in 3 - 5 working days" , price: 12},
     {type: "1 - 2 Shipping" , detail: "Delivery in 1 - 2 working days" , price: 18}
   ]
+
+  shipping_date: any = {
+    "Free Shipping": [8,10],
+    "Standard Shipping": [5,7],
+    "Express Shipping": [3,5],
+    "1 - 2 Shipping": [1,2]
+  }
 
   shopping_items: ShoppingItem[]
 
@@ -65,7 +74,7 @@ export class PaymentComponent implements OnInit {
         detail: [''],
         price: ['']
       }),
-      order_notes: [''],
+      order_notes: ['GUYS GO VOTE FOR Red Velvet  AT THE VMA SO THEY CAN WIN FOR THeir latest  SONG PSYCHO. PLEASE ANY ONE GO DO IT .I REALLY REALLY WANT THEM TO WIN. THAt  SONG DESERVE IT. PLEASE I HOPE PEOPLE SEE THIS'],
       total: ['']
     })
 
@@ -114,15 +123,20 @@ export class PaymentComponent implements OnInit {
     this.submit_invalid = this.payment_form.status === "INVALID"
     if(!this.submit_invalid){
       this.payment_complete = true
-      let order_date = this.shopping_item_s.currentDate()
-      let {first_name, last_name , address1 , address2 , city , state, zip , country , phone , order_notes } = this.payment_form.value 
       let { type , detail } = this.payment_form.value.shipping_details
+      let order_id = UUID.UUID()
+      let order_date = this.shopping_item_s.currentDate(new Date())
+      let shipping_date = [
+        this.shopping_item_s.currentDate(new Date(new Date().setDate(new Date().getDate() + this.shipping_date[type][0]))),
+        this.shopping_item_s.currentDate(new Date(new Date().setDate(new Date().getDate() + this.shipping_date[type][1])))
+      ]
+      let {first_name, last_name , address1 , address2 , city , state, zip , country , phone , order_notes } = this.payment_form.value 
       let shipping_feed = this.shipping_price
       let {total , subtotal , tax , shopping_items } = this
-      let shipping_method = `${type} (${detail})`
+      let shipping_method = [type,detail]
       let shipping_address = {first_name, last_name , address1 , address2 , city , state, zip , country , phone }
       this.store.dispatch(new UserActions.AddOrder({
-        order_id: '123', order_date , subtotal , tax , shipping_feed , total , shipping_address , shipping_method , order_notes , shopping_items 
+        order_id, order_date , shipping_date, subtotal , tax , shipping_feed , total , shipping_address , shipping_method , order_notes , shopping_items 
       }))
       this.store.dispatch(new ShoppingItemActions.ResetItem())
     }
