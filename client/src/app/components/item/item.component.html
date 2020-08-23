@@ -142,7 +142,7 @@
                   <div class="col-12 col-lg">
 
                     <!-- Submit -->
-                    <button type="submit" class="btn btn-block btn-dark mb-2">
+                    <button type="submit" class="btn btn-block btn-dark mb-2" (click) = "addToShoppingCart()">
                       Add to Cart <i class="fas fa-shopping-cart ml-2"></i>
                     </button>
 
@@ -150,8 +150,8 @@
                   <div class="col-12 col-lg-auto">
 
                     <!-- Wishlist -->
-                    <button class="btn btn-outline-dark btn-block mb-2" data-toggle="button">
-                      Wishlist <i class="fas fa-heart ml-2"></i>
+                    <button class="btn btn-outline-dark btn-block mb-2" (click) = "addToWidhlist()">
+                      Wishlist <i class="fas fa-heart ml-2" [class.text-danger] = "in_widhlist"></i>
                     </button>
 
                   </div>

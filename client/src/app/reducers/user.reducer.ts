@@ -13,10 +13,7 @@ export const initState: User = {
     edit_shipping_detail: null ,
     order_details: [], 
     display_order_detail: null,
-    widhlist: [
-        {title: "Cotton floral print Dress" , price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg" , new: true,  sale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'},
-        {title: "Cotton floral print Dress" , price: 60 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg" , new: false,  sale: true, sale_price: 40 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'}
-    ],
+    widhlist: [],
     user_info: {
         first_name: 'Vien', last_name: 'Pham' , email: 'vienpham2019@gmail.com' , gender: 'Male'
     }

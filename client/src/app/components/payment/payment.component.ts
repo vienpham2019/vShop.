@@ -111,7 +111,10 @@ export class PaymentComponent implements OnInit {
   }
 
   getTotal():void {
-    this.subtotal = this.shopping_items.reduce( (sum,item) => sum + (item.price * item.amount) , 0)
+    this.subtotal = this.shopping_items.reduce( (sum,item) => {
+        let price = item.sale ? item.sale_price : item.price
+      return (sum + (price * item.amount) )
+      }, 0)
     this.tax = this.subtotal * (8.25 / 100)
     this.total = this.subtotal + this.tax + this.shipping_price
   }

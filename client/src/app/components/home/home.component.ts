@@ -3,8 +3,6 @@ import { PaginationService } from '../../services/pagination/pagination.service'
 
 import { Store } from '@ngrx/store'
 import { ShoppingItem } from '../../models/shopping_item.model'
-import * as ShoppingItemActions from '../../actions/shopping_items.actions'
-import * as UserActions from '../../actions/user.actions'
 
 @Component({
   selector: 'app-home',
@@ -78,10 +76,6 @@ export class HomeComponent implements OnInit {
   price_class (item) {
     let class_name = item.sale ? ' text-primary' : ''
     return 'btn btn-white btn-sm card-price card-price-left' + class_name
-  }
-
-  addToShoppingCart(shopping_item){
-    this.store.dispatch(new UserActions.AddWidhlist(shopping_item))
   }
 
 }

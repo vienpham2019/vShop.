@@ -316,28 +316,32 @@
 
                 <!-- Title -->
                   <p class="mb-4 font-size-sm font-weight-bold">
-                    <a class="text-body" href="product.html">{{item.title}}</a> <br>
-                    <span class="text-muted">${{item.price | number:"1.2"}}</span>
+                    <span class="text-body">{{item.title}}</span> <br>
+                    <ng-template [ngIf] = "item.sale" [ngIfElse] = "elseBlock">
+                      <span class="font-weight-bold text-muted text-decoration-line-through">${{item.price | number: '1.2'}}</span>
+                      <span class="ml-1 font-size-h6 font-weight-bolder text-primary">${{item.sale_price | number: '1.2'}}</span>
+                    </ng-template>
+                    <ng-template #elseBlock>
+                      <span class="text-muted">${{item.price | number: '1.2'}}</span>
+                    </ng-template>
                   </p>
 
                   <div class="row">
-                    <div class="col">
     
-                    <!-- Text -->
-                    <div class="font-size-sm text-muted">
-                      <label *ngIf = "item.size" class="mb-0">Size: {{item.size}}</label> <br>
-                      Color: {{item.color}} <br>
-                    </div>
+                      <!-- Text -->
+                      <div class="font-size-sm text-muted">
+                        <label *ngIf = "item.size" class="mb-0">Size: {{item.size}}</label> <br>
+                        Color: {{item.color}} <br>
+                      </div>
     
                   </div>
-                  <div class="col">
+                  <div class="row">
 
                     <i class="fas fa-minus m-2 cursor" (click) = "changeAmount(item,i,'minus')"></i>
                     <span>{{item.amount}}</span>
                     <i class="fas fa-plus m-2 cursor" (click) = "changeAmount(item,i,'plus')"></i>
     
                   </div>
-                </div>
 
               </div>
             </div>

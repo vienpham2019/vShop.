@@ -104,6 +104,7 @@ export class ItemReviewsComponent implements OnInit {
       let rate = this.score
       let {name , review_title , review} = this.new_review.value
       this.store.dispatch(new CatalogItemActions.AddReview({date, rate , name , review_title , review}))
+      document.getElementById('write_review_btn').click()
       this.resetForm()
     }
   }

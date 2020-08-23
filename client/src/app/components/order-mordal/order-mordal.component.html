@@ -28,13 +28,19 @@
                 <!-- Title -->
                 <p class="font-size-sm font-weight-bold mb-6">
                   <span class="text-body">{{item.title}}</span> <br>
-                  <span class="text-muted">${{item.price | number: '1.2'}}</span>
+                  <ng-template [ngIf] = "item.sale" [ngIfElse] = "elseBlock">
+                    <span class="font-weight-bold text-muted text-decoration-line-through">${{item.price | number: '1.2'}}</span>
+                    <span class="ml-1 font-size-h6 font-weight-bolder text-primary">${{item.sale_price | number: '1.2'}}</span>
+                  </ng-template>
+                  <ng-template #elseBlock>
+                    <span class="text-muted">${{item.price | number: '1.2'}}</span>
+                  </ng-template>
                 </p>
 
                 <!--Footer -->
                 <div class="d-flex align-items-center">
                   <i class="fas fa-minus m-2 cursor" (click) = "changeAmount(item,i,'minus')"></i>
-                  <span>{{item.amount}}</span>
+                    <span>{{item.amount}}</span>
                   <i class="fas fa-plus m-2 cursor" (click) = "changeAmount(item,i,'plus')"></i>
 
                   <!-- Remove -->
