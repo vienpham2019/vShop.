@@ -16,7 +16,10 @@ export const initState: User = {
     widhlist: [
         {title: "Cotton floral print Dress" , price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg" , new: true,  sale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'},
         {title: "Cotton floral print Dress" , price: 60 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg" , new: false,  sale: true, sale_price: 40 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'}
-    ]
+    ],
+    user_info: {
+        first_name: 'Vien', last_name: 'Pham' , email: 'vienpham2019@gmail.com' , gender: 'Male'
+    }
 }
 
 export function UserReducer(state = initState , action: UserActions.Actions) {
@@ -47,6 +50,9 @@ export function UserReducer(state = initState , action: UserActions.Actions) {
         case UserActions.remove_widhlist: 
             return {...state , widhlist: state.widhlist.filter((_,i) => i !== action.index)}
 
+        case UserActions.update_user_info: 
+            return {...state, user_info: action.user_info}
+            
         default:
             return state
     }

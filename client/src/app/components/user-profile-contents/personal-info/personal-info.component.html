@@ -1,137 +1,124 @@
 
-    <!-- Form -->
-    <div>
-      <div class="row">
-        <div class="col-12 col-md-6">
+<!-- Form -->
+<form [formGroup] = "user_info_form">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <!-- Email -->
+      <div class="form-group">
+        <label>First Name *</label>
+        <input 
+          class="form-control form-control-sm" 
+          [ngClass] = "classes('first_name')"
+          type="text" 
+          placeholder="First Name *" 
+          formControlName = "first_name"
+        >
+        <small class="text-danger" *ngIf = "displayError('first_name')">First name is required</small>
+      </div>
 
-          <!-- Email -->
-          <div class="form-group">
-            <label for="accountFirstName">
-              First Name *
-            </label>
-            <input class="form-control form-control-sm" id="accountFirstName" type="text" placeholder="First Name *" value="Daniel" required="">
-          </div>
+    </div>
+    <div class="col-12 col-md-6">
 
-        </div>
-        <div class="col-12 col-md-6">
+      <!-- Email -->
+      <div class="form-group">
+        <label>Last Name *</label>
+        <input 
+          class="form-control form-control-sm" 
+          [ngClass] = "classes('last_name')"
+          type="text" 
+          placeholder="Last Name *" 
+          formControlName = "last_name">
+        <small class="text-danger" *ngIf = "displayError('last_name')">Last name is required</small>
+      </div>
 
-          <!-- Email -->
-          <div class="form-group">
-            <label for="accountLastName">
-              Last Name *
-            </label>
-            <input class="form-control form-control-sm" id="accountLastName" type="text" placeholder="Last Name *" value="Robinson" required="">
-          </div>
+    </div>
+    <div class="col-12">
 
-        </div>
-        <div class="col-12">
-
-          <!-- Email -->
-          <div class="form-group">
-            <label for="accountEmail">
-              Email Address *
-            </label>
-            <input class="form-control form-control-sm" id="accountEmail" type="email" placeholder="Email Address *" value="user@email.com" required="">
-          </div>
-
-        </div>
-        <div class="col-12 col-md-6">
-
-          <!-- Password -->
-          <div class="form-group">
-            <label for="accountPassword">
-              Current Password *
-            </label>
-            <input class="form-control form-control-sm" id="accountPassword" type="password" placeholder="Current Password *" required="">
-          </div>
-
-        </div>
-        <div class="col-12 col-md-6">
-
-          <!-- Password -->
-          <div class="form-group">
-            <label for="AccountNewPassword">
-              New Password *
-            </label>
-            <input class="form-control form-control-sm" id="AccountNewPassword" type="password" placeholder="New Password *" required="">
-          </div>
-
-        </div>
-        <div class="col-12 col-lg-6">
-
-          <!-- Birthday -->
-          <div class="form-group">
-
-            <!-- Label -->
-            <label>Date of Birth</label>
-
-            <!-- Inputs -->
-            <div class="form-row">
-              <div class="col-auto">
-
-                <!-- Date -->
-                <label class="sr-only" for="accountDate">
-                  Date
-                </label>
-                <select class="custom-select custom-select-sm" id="accountDate">
-                  <option>10</option>
-                  <option>11</option>
-                  <option selected="">12</option>
-                </select>
-
-              </div>
-              <div class="col">
-
-                <!-- Date -->
-                <label class="sr-only" for="accountMonth">
-                  Month
-                </label>
-                <select class="custom-select custom-select-sm" id="accountMonth">
-                  <option>January</option>
-                  <option selected="">February</option>
-                  <option>March</option>
-                </select>
-
-              </div>
-              <div class="col-auto">
-
-                <!-- Date -->
-                <label class="sr-only" for="accountYear">
-                  Year
-                </label>
-                <select class="custom-select custom-select-sm" id="accountYear">
-                  <option>1990</option>
-                  <option selected="">1991</option>
-                  <option>1992</option>
-                </select>
-
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-        <div class="col-12 col-lg-6">
-
-          <!-- Gender -->
-          <div class="form-group mb-8">
-            <label>Gender</label>
-            <div class="btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-sm btn-outline-border active">
-                <input type="radio" name="gender" checked=""> Male
-              </label>
-              <label class="btn btn-sm btn-outline-border">
-                <input type="radio" name="gender"> Female
-              </label>
-            </div>
-          </div>
-
-        </div>
-        <div class="col-12">
-
-          <!-- Button -->
-          <button class="btn btn-dark" type="submit">Save Changes</button>
-
+      <!-- Email -->
+      <div class="form-group">
+        <label for="accountEmail">
+          Email Address *
+        </label>
+        <input 
+          class="form-control form-control-sm"
+          [ngClass] = "classes('email')" 
+          type="email" 
+          placeholder="Email Address *" 
+          formControlName = "email">
+        <div *ngIf = "displayError('email')">
+          <ng-template [ngIf] = "formControl('email').errors?.required" [ngIfElse] = "elseBlock">
+            <small class="text-danger">Email is required</small>
+          </ng-template>
+          <ng-template #elseBlock>
+            <small class="text-danger">Invalid Email</small>
+          </ng-template>
         </div>
       </div>
+
     </div>
+
+    <!-- new password -->
+    <div class="my-2 col-12">
+
+      <!-- Checkbox -->
+      <div class="custom-control custom-checkbox">
+        <input class="custom-control-input" id="checkoutChangePassword" type="checkbox" formControlName = "change_pass">
+        <label class="custom-control-label font-size-sm" data-toggle="collapse" data-target="#checkoutChangePassword" for="checkoutChangePassword" aria-expanded="false">
+          Change Password. 
+        </label>
+      </div>
+
+      <!-- Collapse -->
+      <div class="collapse" id="checkoutChangePassword">
+        <div class="row mt-6">
+          <div class="col-12 col-md-6">
+
+            <!-- Password -->
+            <div class="form-group">
+              <label> New Password *</label>
+              <input 
+                class="form-control form-control-sm" 
+                [ngClass] = "classes('new_password')"
+                type="password" 
+                placeholder="New Password *" 
+                formControlName = "new_password">
+                <div *ngIf = "displayError('new_password')">
+                  <ng-template [ngIf] = "formControl('new_password').errors?.required" [ngIfElse] = "elseBlock">
+                    <small class="text-danger">Password is required</small>
+                  </ng-template>
+                  <ng-template #elseBlock>
+                    <small class="text-danger">Password must have at least 5 characters.</small>
+                  </ng-template>
+                </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-12">
+
+      <!-- Gender -->
+      <div class="form-group mb-8">
+        <label>Gender</label>
+        <div class="btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-sm btn-outline-border" [class.active] = "user_info_form.value.gender === 'Male'">
+            <input type="radio" name="gender" [checked] = "user_info_form.value.gender === 'Male'" (click) = " changeUserGender('Male')"> Male
+          </label>
+          <label class="btn btn-sm btn-outline-border" [class.active] = "user_info_form.value.gender === 'Female'" (click) = "changeUserGender('Female')">
+            <input type="radio" name="gender" [checked] = "user_info_form.value.gender === 'Female'"> Female
+          </label>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-12">
+
+      <!-- Button -->
+      <button class="btn btn-dark" type="submit" (click) = "onSubmit()">Save Changes</button>
+
+    </div>
+  </div>
+</form>
