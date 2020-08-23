@@ -23,7 +23,6 @@ export function UserReducer(state = initState , action: UserActions.Actions) {
         case UserActions.edit_shipping: 
             let shipping_details = [...state.shipping_details]
             shipping_details[state.edit_shipping_index] = action.shipping
-
             return {...action , shipping_details}
         
         case UserActions.add_shipping: 
@@ -33,7 +32,6 @@ export function UserReducer(state = initState , action: UserActions.Actions) {
             return {...state, order_details: [action.order , ...state.order_details]}
 
         case UserActions.remove_order: 
-            console.log(action.index)
             return {...state, order_details: state.order_details.filter((_,i) => i !== action.index)}
 
         case UserActions.select_display_order_details: 

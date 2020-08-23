@@ -171,10 +171,10 @@ export class PaymentComponent implements OnInit {
   }
 
   changeAmount(item: ShoppingItem, index: number , type: string ):void {
-    let {title, price , size , color , amount, img} = item
+    let { amount } = item
     amount += type === 'plus' ? 1 : -1
     if(amount < 6 && amount > 0){
-      this.store.dispatch(new ShoppingItemActions.ChangeItem({title, price , size , color , amount , img} , index))
+      this.store.dispatch(new ShoppingItemActions.ChangeItem({...item , amount} , index))
     }
   }
 
