@@ -12,7 +12,11 @@ export const initState: User = {
     edit_shipping_index: null ,
     edit_shipping_detail: null ,
     order_details: [], 
-    display_order_detail: null 
+    display_order_detail: null,
+    widhlist: [
+        {title: "Cotton floral print Dress" , price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg" , new: true,  sale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'},
+        {title: "Cotton floral print Dress" , price: 60 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg" , new: false,  sale: true, sale_price: 40 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'}
+    ]
 }
 
 export function UserReducer(state = initState , action: UserActions.Actions) {
@@ -36,6 +40,12 @@ export function UserReducer(state = initState , action: UserActions.Actions) {
 
         case UserActions.select_display_order_details: 
             return {...state , display_order_detail: action.order}
+
+        case UserActions.add_widhlist: 
+            return {...state, widhlist: [action.item , ...state.widhlist]}
+
+        case UserActions.remove_widhlist: 
+            return {...state , widhlist: state.widhlist.filter((_,i) => i !== action.index)}
 
         default:
             return state

@@ -35,7 +35,12 @@
                 <div class="card ">
 
                   <!-- Price -->
-                  <div [ngClass]="price_class(top_1)">{{top_1.price}}</div>
+                  <div [ngClass]="price_class(top_1)">
+                    <span *ngIf = "top_1.sale_price ; else elseBlock">{{top_1.sale_price | number:'1.2'}}</span>
+                    <ng-template #elseBlock>
+                      <span>${{top_1.price | number: '1.2'}}</span>
+                    </ng-template>
+                  </div>
 
                   <div class="badge badge-primary card-badge card-badge-left text-uppercase" *ngIf = "top_1.sale">
                     Sale
@@ -78,7 +83,10 @@
 
                   <!-- Price -->
                   <div [ngClass]="price_class(top_selling.second_row)">
-                    {{top_selling.second_row.price}}
+                    <span *ngIf = "top_selling.second_row.sale_price ; else elseBlock">{{top_selling.second_row.sale_price | number:'1.2'}}</span>
+                    <ng-template #elseBlock>
+                      <span>{{top_selling.second_row.price}}</span>
+                    </ng-template>
                   </div>
 
                   <!-- Badge -->
@@ -129,7 +137,12 @@
                 <div class="card">
 
                   <!-- Price -->
-                  <div [ngClass] = "price_class(top_3)">{{top_3.price}}</div>
+                  <div [ngClass]="price_class(top_3)">
+                    <span *ngIf = "top_3.sale_price ; else elseBlock">{{top_3.sale_price | number:'1.2'}}</span>
+                    <ng-template #elseBlock>
+                      <span>${{top_3.price | number:'1.2'}}</span>
+                    </ng-template>
+                  </div>
 
                   <div 
                     class="badge badge-primary card-badge card-badge-left text-uppercase" 
@@ -178,7 +191,12 @@
                 <div class="card">
 
                   <!-- Price -->
-                  <div [ngClass] = "price_class(top_selling.fourth_row)">{{top_selling.fourth_row.price}}</div>
+                  <div [ngClass]="price_class(top_selling.fourth_row)">
+                    <span *ngIf = "top_selling.fourth_row.sale_price ; else elseBlock">{{top_selling.fourth_row.sale_price | number:'1.2'}}</span>
+                    <ng-template #elseBlock>
+                      <span>${{top_selling.fourth_row.price | number:'1.2'}}</span>
+                    </ng-template>
+                  </div>
 
                   <div 
                     class="badge badge-primary card-badge card-badge-left text-uppercase" 
@@ -231,12 +249,16 @@
           <div class="d-flex flex-wrap justify-content-center bg-light">
               <div class="card mx-3 bg-transparent pt-5" style="width: 18rem;" *ngFor = "let new_item of display_new_arrivals">
                   <div class="badge badge-dark  card-badge new-arrival-badge">
-                    {{new_item.price}}
+                    ${{new_item.price | number: '1.2'}}
                   </div>
 
-                  <a href={{new_item.link}}>
-                    <img src={{new_item.img_url}} class="card-img-top" alt={{new_item.title}}>
-                  </a>
+                  <div class="card-img">
+                    <button class="btn btn-xs btn-block btn-dark card-btn">
+                      <i class="far fa-eye mr-2 mb-1"></i> Quick View
+                    </button>
+                    <img [src]="new_item.img" class="card-img-top" [alt]="new_item.title">
+                  </div> 
+                  
                   <div class="card-body px-0 shadow-sm p-3 mb-5 bg-white border-top mt-1">
                       <div class="mr-auto">
                           <!-- Heading -->
@@ -248,8 +270,8 @@
           
                                   <!-- Text -->
                                   <div class="font-size-sm">
-                                      <label class="text-muted">{{new_item.type}}</label>
-                                      <button class="btn btn-dark" (click) = "addToShoppingCart()">Add to shopping cart</button>
+                                      <label class="text-muted">{{new_item.category}}</label>
+                                      <button class="btn btn-dark" (click) = "addToShoppingCart(new_item)">Add to shopping cart</button>
                                   </div>
 
                               </div>

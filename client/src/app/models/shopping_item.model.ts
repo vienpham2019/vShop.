@@ -1,7 +1,8 @@
 export interface ShoppingItem{
     id: string, 
     title: string, 
-    price: number, 
+    price: number,
+    sale_price: number,  
     size: string, 
     new: boolean, 
     sale: boolean,

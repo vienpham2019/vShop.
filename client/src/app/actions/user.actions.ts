@@ -10,6 +10,7 @@ export const add_order = '[Payment Component] Add Order'
 export const remove_order = '[Payment Component] Remove Order'
 export const select_display_order_details = '[User Profile Order Component] Display Order Detail'
 export const add_widhlist = '[User Profile Component] Add Widhlist'
+export const remove_widhlist = '[User Profile Component] Remove Widhlist'
 
 export class AddShipping implements Action {
 	readonly type = add_shipping
@@ -48,4 +49,9 @@ export class AddWidhlist implements Action {
 	constructor (public item: ShoppingItem){}
 }
 
-export type Actions = AddShipping | AddEditShipping | EditShipping | AddOrder | RemoveOrder | DisplayOrderDetail | AddWidhlist
+export class RemoveWidhlist implements Action {
+	readonly type = remove_widhlist
+	constructor (public index: number){}
+}
+
+export type Actions = AddShipping | AddEditShipping | EditShipping | AddOrder | RemoveOrder | DisplayOrderDetail | AddWidhlist | RemoveWidhlist

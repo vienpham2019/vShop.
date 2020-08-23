@@ -9,3 +9,7 @@
 .black_tp_background{
     background-color: rgba(49, 49, 49, 0.4);
 }
+
+.badge {
+    border-radius: 0;
+}

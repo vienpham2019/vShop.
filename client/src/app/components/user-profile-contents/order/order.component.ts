@@ -20,6 +20,7 @@ export class OrderComponent implements OnInit {
     store.pipe(select('user')).subscribe(value => {
       this.order_details = value.order_details
       this.order_details_length = new Array(Math.ceil(this.order_details.length / this.order_details_display_amount)).fill(0)
+      this.checkCurrentPage()
       this.slice_order_detail()
     })
   }
@@ -37,6 +38,15 @@ export class OrderComponent implements OnInit {
 
   displayOrderDetail(order){
     this.store.dispatch(new UserActions.DisplayOrderDetail(order))
+  }
+
+  checkCurrentPage(){
+    let length = Math.ceil(this.order_details.length / this.order_details_display_amount)
+    let end_index_length = Math.ceil(this.end_index / this.order_details_display_amount)
+    if(length < end_index_length){
+      this.end_index -= this.order_details_display_amount
+      this.start_index -= this.order_details_display_amount
+    }
   }
 
   removeOrder(index){

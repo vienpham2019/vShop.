@@ -1,165 +1,47 @@
 
-<div *ngIf = "wishlist.length ; else elseBlock">
+<div *ngIf = "widhlist.length ; else elseBlock">
     <div class="row">
 
         <!-- Item -->
-        <div class="col-6 col-md-4">
+        <div class="col-6 col-md-4" *ngFor = "let item of display_widhlist ; let i = index">
             <div class="card mb-7">
 
                 <!-- Image -->
                 <div class="card-img">
 
-                <!-- Action -->
-                <button class="btn btn-xs btn-circle btn-white-primary card-action card-action-right">
-                    <i class="fe fe-x"></i>
-                </button>
+                    <!-- Action -->
+                    <button class="btn btn-xs btn-circle btn-danger card-action card-action-right" (click) = "removeWidhlist(i)">
+                        <i class="fas fa-times"></i>
+                    </button>
 
-                <!-- Button -->
-                <button class="btn btn-xs btn-block btn-dark card-btn" data-toggle="modal" data-target="#modalProduct">
-                    <i class="fe fe-eye mr-2 mb-1"></i> Quick View
-                </button>
-
-                <!-- Image -->
-                <img class="card-img-top" src="assets/img/products/product-6.jpg" alt="...">
-
-                </div>
-
-                <!-- Body -->
-                <div class="card-body font-weight-bold text-center">
-                    <a class="text-body" href="product.html">Cotton floral print Dress</a> <br>
-                    <span class="text-muted">$40.00</span>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Item -->
-        <div class="col-6 col-md-4">
-            <div class="card mb-7">
-
-                <!-- Image -->
-                <div class="card-img">
-
-                <!-- Action -->
-                <button class="btn btn-xs btn-circle btn-white-primary card-action card-action-right">
-                    <i class="fe fe-x"></i>
-                </button>
-
-                <!-- Badge -->
-                <span class="badge badge-dark card-badge card-badge-left text-uppercase">
-                    Sale
-                </span>
-
-                <!-- Button -->
-                <button class="btn btn-xs btn-block btn-dark card-btn" data-toggle="modal" data-target="#modalProduct">
-                    <i class="fe fe-eye mr-2 mb-1"></i> Quick View
-                </button>
-
-                <!-- Image -->
-                <img class="card-img-top" src="assets/img/products/product-10.jpg" alt="...">
-
-                </div>
-
-                <!-- Body -->
-                <div class="card-body font-weight-bold text-center">
-                    <a class="text-body" href="product.html">Suede cross body Bag</a> <br>
-                    <span>
-                        <span class="font-size-xs text-gray-350 text-decoration-line-through">$85.00</span>
-                        <span class="text-primary">$49.00</span>
+                    <!-- Badge -->
+                    <span class="badge badge-danger card-badge card-badge-left text-uppercase" *ngIf = "item.sale">
+                        Sale
                     </span>
-                </div>
+                    <span class="badge badge-dark card-badge card-badge-left text-uppercase" *ngIf = "item.new">
+                        New
+                    </span>
 
-            </div>
-        </div>
-
-        <!-- Item -->
-        <div class="col-6 col-md-4">
-            <div class="card mb-7">
-
-                <!-- Image -->
-                <div class="card-img">
-
-                <!-- Action -->
-                    <button class="btn btn-xs btn-circle btn-white-primary card-action card-action-right">
-                        <i class="fe fe-x"></i>
+                    <!-- Button -->
+                    <button class="btn btn-xs btn-block btn-dark card-btn">
+                        <i class="far fa-eye mr-2 mb-1"></i> Quick View
                     </button>
 
-                <!-- Button -->
-                    <button class="btn btn-xs btn-block btn-dark card-btn" data-toggle="modal" data-target="#modalProduct">
-                        <i class="fe fe-eye mr-2 mb-1"></i> Quick View
-                    </button>
-
-                <!-- Image -->
-                    <img class="card-img-top" src="assets/img/products/product-32.jpg" alt="...">
+                    <!-- Image -->
+                    <img class="card-img-top border" [src]="item.img" [alt]="item.title">
 
                 </div>
 
                 <!-- Body -->
                 <div class="card-body font-weight-bold text-center">
-                    <a class="text-reset" href="product.html">Cotton leaf print Shirt</a>
-                    <span class="text-muted">$65.00</span>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Item -->
-        <div class="col-6 col-md-4">
-            <div class="card mb-7">
-
-                <!-- Image -->
-                <div class="card-img">
-
-                    <!-- Action -->
-                    <button class="btn btn-xs btn-circle btn-white-primary card-action card-action-right">
-                        <i class="fe fe-x"></i>
-                    </button>
-
-                    <!-- Button -->
-                    <button class="btn btn-xs btn-block btn-dark card-btn" data-toggle="modal" data-target="#modalProduct">
-                        <i class="fe fe-eye mr-2 mb-1"></i> Quick View
-                    </button>
-
-                    <!-- Image -->
-                    <img class="card-img-top" src="assets/img/products/product-7.jpg" alt="...">
-
-                </div>
-
-                <!-- Body -->
-                <div class="card-body font-weight-bold text-center">
-                    <a class="text-body" href="product.html">Leather Sneakers</a> <br>
-                    <a class="text-primary" href="#">Select Options</a>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Item -->
-        <div class="col-6 col-md-4">
-            <div class="card mb-7">
-
-                <!-- Image -->
-                <div class="card-img">
-
-                    <!-- Action -->
-                    <button class="btn btn-xs btn-circle btn-white-primary card-action card-action-right">
-                        <i class="fe fe-x"></i>
-                    </button>
-
-                    <!-- Button -->
-                    <button class="btn btn-xs btn-block btn-dark card-btn" data-toggle="modal" data-target="#modalProduct">
-                        <i class="fe fe-eye mr-2 mb-1"></i> Quick View
-                    </button>
-
-                    <!-- Image -->
-                    <img class="card-img-top" src="assets/img/products/product-11.jpg" alt="...">
-
-                </div>
-
-                    <!-- Body -->
-                <div class="card-body font-weight-bold text-center">
-                    <a class="text-body" href="product.html">Another fine dress</a> <br>
-                    <span class="text-muted">$99.00</span>
+                    <span class="text-body" >{{item.title}}</span> <br>
+                    <span *ngIf = "item.sale_price; else elseBlock">
+                        <span class="font-size-xs text-gray-350 text-decoration-line-through">${{item.price | number: '1.2'}}</span>
+                        <span class="ml-2 text-primary">${{item.sale_price | number: '1.2'}}</span>
+                    </span>
+                    <ng-template #elseBlock>
+                        <span class="text-muted">${{item.price | number: '1.2'}}</span>
+                    </ng-template>
                 </div>
 
             </div>
@@ -168,38 +50,23 @@
     </div>
 
     <!-- Pagination -->
-    <nav class="d-flex justify-content-center justify-content-md-end">
+    <nav class="d-flex justify-content-center justify-content-md-end" *ngIf = "widhlist.length > widhlist_display_amount">
         <ul class="pagination pagination-sm text-gray-400">
-        <li class="page-item">
-            <a class="page-link page-link-arrow" href="#">
-                <i class="fa fa-caret-left"></i>
-            </a>
-        </li>
-        <li class="page-item active">
-            <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">4</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">5</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">6</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link page-link-arrow" href="#">
-            <i class="fa fa-caret-right"></i>
-            </a>
-        </li>
+          <li class="page-item">
+            <span class="page-link page-link-arrow cursor" (click) = "change_page('prev')">
+              <i class="fa fa-caret-left"></i>
+            </span>
+          </li>
+          <li [ngClass] = "pagination_class(i)" *ngFor = "let num of widhlist_length; let i = index" >
+            <span class="page-link cursor" (click) = "change_page_number(i)">{{i + 1}}</span>
+          </li>
+          <li class="page-item">
+            <span class="page-link page-link-arrow cursor" (click) = "change_page('next')" >
+              <i class="fa fa-caret-right"></i>
+            </span>
+          </li>
         </ul>
-    </nav>
+      </nav> 
 </div>
 
 <ng-template #elseBlock>
