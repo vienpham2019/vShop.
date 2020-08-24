@@ -37,6 +37,16 @@
                   </ng-template>
                 </p>
 
+                <div class="row">
+    
+                  <!-- Text -->
+                  <div class="font-size-sm text-muted">
+                    <label *ngIf = "item.size" class="mb-0">Size: {{item.size}}</label> <br>
+                    Color: {{item.color}} <br>
+                  </div>
+
+                </div>
+
                 <!--Footer -->
                 <div class="d-flex align-items-center">
                   <i class="fas fa-minus m-2 cursor" (click) = "changeAmount(item,i,'minus')"></i>

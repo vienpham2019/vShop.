@@ -28,7 +28,10 @@ export class OrderMordalComponent implements OnInit {
   }
 
   getSubtotal():void{
-    this.subtotal = this.shopping_items.reduce( (sum,item) => sum + (item.price * item.amount) , 0)
+    this.subtotal = this.shopping_items.reduce( (sum,item) => {
+      let price = item.sale ? item.sale_price : item.price
+    return (sum + (price * item.amount) )
+    }, 0)
   }
 
   removeItem(index){
