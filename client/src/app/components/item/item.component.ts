@@ -83,10 +83,9 @@ export class ItemComponent implements OnInit {
   }
 
   filterItem(){
-    let {id , title , price , sale_price , sale , img , category , season , brand} = this.item
-    let new_item = this.item.new
+    let {id , title , current_price , sale_price , isSale , isNew, img , category , season , brand} = this.item
     let { size , color , amount } = this.itemForm.value 
-    return {id , title , price , sale_price , size , new: new_item , sale , color , amount: Math.floor(amount) , img , category , season , brand}
+    return {id , title , current_price , sale_price , size , isNew , isSale , color , amount: Math.floor(amount) , img , category , season , brand}
   }
 
   addToShoppingCart(){

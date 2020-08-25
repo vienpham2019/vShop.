@@ -11,23 +11,23 @@ import { ShoppingItem } from '../../models/shopping_item.model'
 })
 export class HomeComponent implements OnInit {
 
-  top_selling: any = {
-    first_row: [
-      {class_name: "col-12 col-md-6" , title: "Floral Cotton midi Dress" , price: 59.00 , sale_price: 0 , new: false , sale: true  , img_url: "https://images.express.com/is/image/expressfashion/0094_07824549_0003?cache=on&wid=361&fmt=jpeg&qlt=75,1&resmode=sharp2&op_usm=1,1,5,0&defaultImage=Photo-Coming-Soon"},
-      {class_name: "col-12 col-md-6 pt-12" , title: "Line basic Trousers" , price: 125.00, new: true , sale: false  , img_url: "https://cm.rlmedia.io/is/image/PoloGSI/s7-1255555_lifestyle?$CMPDP$"},
+  top_selling: any[] = [
+    [
+      {title: "Cotton floral print Dress" , current_price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg" , isNew: true,  isSale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'},
+      {title: "Cotton floral print Dress" , current_price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg" , isNew: true,  isSale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'}
     ], 
-    second_row: {title: 'Leather heel Sandals' , price: 129.99 , sale_price: 89.99 , new: false , sale: true , img_url: 'https://i0.wp.com/post.healthline.com/wp-content/uploads/2019/04/What-to-Do-When-Your-Shoes-Are-Too-Tight_1296x728-header-1024x575.jpg?w=1155&h=1528'} , 
-    third_row: [
-      {class_name: "col-12 col-md-6 order-md-2" , title: "Cotton basic T-Shirt" , price: 50.00 , sale_price: 0, new: false, sale: false  , img_url: "https://choosmeinstyle.com/wp-content/uploads/2019/02/cotton-t-shirts-1261.jpg"},
-      {class_name: "col-12 col-md-6 pt-12 order-md-1" , title: 'Leather square Tote Bag' , price: 35.00 , sale_price: 0 , new: false , sale: false  , img_url: "https://cdn.shopify.com/s/files/1/2523/1254/products/Genuine_Leather_Square_Satchel_Handbags_Purses_16_2ad1e7fb-5464-4eb4-b6ab-59b91c83be9e_500x.jpg?v=1590078909" }
+    {title: "Cotton floral print Dress" , current_price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://static.nike.com/a/images/c_limit,w_400,f_auto/t_product_v1/05e36463-7f7d-4cbd-b246-e7e1a804bffa/image.jpg" , isNew: true,  isSale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'}, 
+    [
+      {title: "Cotton floral print Dress" , current_price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg" , isNew: true,  isSale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'},
+      {title: "Cotton floral print Dress" , current_price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg" , isNew: true,  isSale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'}
     ],
-    fourth_row: {title: 'Acymmetric Cotton Top' , price: 39.99 , new: false , sale: true , img_url: 'https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg'}
-  }
+      {title: "Cotton floral print Dress" , current_price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg" , isNew: true,  isSale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'}
+  ]
 
   new_arrivals: ShoppingItem[] = [
-    {title: "Cotton floral print Dress" , price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg" , new: true,  sale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'},
-    {title: "Cotton floral print Dress" , price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://choosmeinstyle.com/wp-content/uploads/2019/02/cotton-t-shirts-1261.jpg" , new: true,  sale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'},
-    {title: "Cotton floral print Dress" , price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://cdn.shopify.com/s/files/1/2523/1254/products/Genuine_Leather_Square_Satchel_Handbags_Purses_16_2ad1e7fb-5464-4eb4-b6ab-59b91c83be9e_500x.jpg?v=1590078909" , new: true,  sale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'}
+    {title: "Cotton floral print Dress" , current_price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://images-na.ssl-images-amazon.com/images/I/61%2BevQdfX%2BL._UL1000_.jpg" , isNew: true,  isSale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'},
+    {title: "Cotton floral print Dress" , current_price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://choosmeinstyle.com/wp-content/uploads/2019/02/cotton-t-shirts-1261.jpg" , isNew: true,  isSale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'},
+    {title: "Cotton floral print Dress" , current_price: 40 , size: "M" , color: "Red" , amount: 2 , img: "https://cdn.shopify.com/s/files/1/2523/1254/products/Genuine_Leather_Square_Satchel_Handbags_Purses_16_2ad1e7fb-5464-4eb4-b6ab-59b91c83be9e_500x.jpg?v=1590078909" , isNew: true,  isSale: false, sale_price: 0 , category: 'dress' , brand: 'nike' , id:'abcd' , season: 'summer'}
   ]
 
   display_new_arrivals: any[]
@@ -44,7 +44,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0,0)
-    this.slice_new_arrivals()
+    this.slice_new_arrivals() 
+    fetch('http://localhost:3000/Men')
+    .then(res => res.json())
+    .then(data => console.log(data.filter(item => item.category.split(' ').indexOf('Shoe') >= 0)))
   }
 
   slice_new_arrivals(){
@@ -74,7 +77,7 @@ export class HomeComponent implements OnInit {
   }
 
   price_class (item) {
-    let class_name = item.sale ? ' text-primary' : ''
+    let class_name = item.isSale ? ' text-primary' : ''
     return 'btn btn-white btn-sm card-price card-price-left' + class_name
   }
 

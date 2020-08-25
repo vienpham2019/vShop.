@@ -30,11 +30,11 @@
                 <div class="card">
 
                 <!-- Badge -->
-                    <div class="badge badge-primary card-badge text-uppercase" *ngIf = "item.sale">
+                    <div class="badge badge-primary card-badge text-uppercase" *ngIf = "item.isSale">
                         Sale
                     </div>
 
-                    <div class="badge badge-dark card-badge text-uppercase" *ngIf = "item.new">
+                    <div class="badge badge-dark card-badge text-uppercase" *ngIf = "item.isNew">
                       New
                     </div>
 
@@ -75,12 +75,12 @@
 
             <!-- Price -->
             <div class="mb-7">
-              <ng-template [ngIf] = "item.sale" [ngIfElse] = "elseBlock">
-                  <span class="font-size-lg font-weight-bold text-gray-350 text-decoration-line-through">${{item.price | number: '1.2'}}</span>
+              <ng-template [ngIf] = "item.isSale" [ngIfElse] = "elseBlock">
+                  <span class="font-size-lg font-weight-bold text-gray-350 text-decoration-line-through">${{item.current_price | number: '1.2'}}</span>
                   <span class="ml-1 font-size-h5 font-weight-bolder text-primary">${{item.sale_price | number: '1.2'}}</span>
               </ng-template>
               <ng-template #elseBlock>
-                <span class="text-muted">${{item.price | number: '1.2'}}</span>
+                <span class="text-muted">${{item.current_price | number: '1.2'}}</span>
               </ng-template>
               <span class="font-size-sm ml-1">(In Stock)</span>
             </div>

@@ -15,10 +15,10 @@
                     </button>
 
                     <!-- Badge -->
-                    <span class="badge badge-danger card-badge card-badge-left text-uppercase" *ngIf = "item.sale">
+                    <span class="badge badge-danger card-badge card-badge-left text-uppercase" *ngIf = "item.isSale">
                         Sale
                     </span>
-                    <span class="badge badge-dark card-badge card-badge-left text-uppercase" *ngIf = "item.new">
+                    <span class="badge badge-dark card-badge card-badge-left text-uppercase" *ngIf = "item.isNew">
                         New
                     </span>
 
@@ -35,12 +35,12 @@
                 <!-- Body -->
                 <div class="card-body font-weight-bold text-center">
                     <span class="text-body" >{{item.title}}</span> <br>
-                    <span *ngIf = "item.sale_price; else elseBlock">
-                        <span class="font-size-xs text-gray-350 text-decoration-line-through">${{item.price | number: '1.2'}}</span>
+                    <span *ngIf = "item.isSale; else elseBlock">
+                        <span class="font-size-xs text-gray-350 text-decoration-line-through">${{item.current_price | number: '1.2'}}</span>
                         <span class="ml-2 text-primary">${{item.sale_price | number: '1.2'}}</span>
                     </span>
                     <ng-template #elseBlock>
-                        <span class="text-muted">${{item.price | number: '1.2'}}</span>
+                        <span class="text-muted">${{item.current_price | number: '1.2'}}</span>
                     </ng-template>
                 </div>
 

@@ -317,12 +317,12 @@
                 <!-- Title -->
                   <p class="mb-4 font-size-sm font-weight-bold">
                     <span class="text-body">{{item.title}}</span> <br>
-                    <ng-template [ngIf] = "item.sale" [ngIfElse] = "elseBlock">
-                      <span class="font-weight-bold text-muted text-decoration-line-through">${{item.price | number: '1.2'}}</span>
+                    <ng-template [ngIf] = "item.isSale" [ngIfElse] = "elseBlock">
+                      <span class="font-weight-bold text-muted text-decoration-line-through">${{item.current_price | number: '1.2'}}</span>
                       <span class="ml-1 font-size-h6 font-weight-bolder text-primary">${{item.sale_price | number: '1.2'}}</span>
                     </ng-template>
                     <ng-template #elseBlock>
-                      <span class="text-muted">${{item.price | number: '1.2'}}</span>
+                      <span class="text-muted">${{item.curent_price | number: '1.2'}}</span>
                     </ng-template>
                   </p>
 
