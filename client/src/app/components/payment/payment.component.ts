@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 
 import { Store , select } from '@ngrx/store'
 import { ShoppingItem } from '../../models/shopping_item.model'
+import { User } from '../../models/user.model'
 import * as ShoppingItemActions from '../../actions/shopping_items.actions'
 import * as UserActions from '../../actions/user.actions'
 
@@ -22,11 +23,22 @@ export class PaymentComponent implements OnInit {
     private _fb: FormBuilder , 
     private router: Router , 
     private shopping_item_s: ShoppingItemService, 
-    private store: Store<{shopping_items: ShoppingItem[]}> 
+    private store: Store<{shopping_items: ShoppingItem[]}> ,
+    private user_store: Store<{user: User}> 
   ) {
     store.pipe(select('shopping_items')).subscribe(values => {
       this.shopping_items = values
       this.getTotal()
+    })
+
+    user_store.pipe(select('user')).subscribe(value => {
+      this.current_user = value.current_user 
+      this.user_addresses = value.shipping_details
+      this.setPaymentForm()
+      if(this.user_addresses[0]){
+        this.getShippingAddress(this.user_addresses[0] , 0)
+      }
+      this.select_shipping(0)
     })
    }
 
@@ -45,6 +57,7 @@ export class PaymentComponent implements OnInit {
   }
 
   shopping_items: ShoppingItem[]
+  current_user: boolean = false 
 
   payment_form: FormGroup
   submit_invalid: boolean = false 
@@ -53,22 +66,27 @@ export class PaymentComponent implements OnInit {
   tax: number
   amounts: any[] = Array.from(Array(5) , (_, i) => i + 1)
   payment_complete: boolean = false 
-  shipping_price: number = 0 
+  shipping_price: number = 0
+  user_addresses: any[] = []
+  selected_address_index: number = -1
 
   ngOnInit(): void {
     window.scrollTo(0,0)
+  }
+
+  setPaymentForm(){
     this.payment_form = this._fb.group({
-      first_name: ['vien', Validators.required],
-      last_name: ['pham', Validators.required],
-      email: ['vienpham2019@gmial.com' , [Validators.required , Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      email: ['' , [Validators.required , Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
       company_name: [''],
-      country: ['USA' , Validators.required],
-      address1: ['new' , Validators.required],
+      country: ['' , Validators.required],
+      address1: ['' , Validators.required],
       address2: [''] , 
-      city: ['conroe' , Validators.required],
-      state: ['Tx' , Validators.required],
-      zip: ['77301', Validators.required],
-      phone: ['5022960606' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]],
+      city: ['' , Validators.required],
+      state: ['' , Validators.required],
+      zip: ['', Validators.required],
+      phone: ['' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]],
       shipping_details: this._fb.group({
         type: [''],
         detail: [''],
@@ -77,8 +95,6 @@ export class PaymentComponent implements OnInit {
       order_notes: ['GUYS GO VOTE FOR Red Velvet  AT THE VMA SO THEY CAN WIN FOR THeir latest  SONG PSYCHO. PLEASE ANY ONE GO DO IT .I REALLY REALLY WANT THEM TO WIN. THAt  SONG DESERVE IT. PLEASE I HOPE PEOPLE SEE THIS'],
       total: ['']
     })
-
-    this.select_shipping(0)
   }
 
   select_shipping(index){
@@ -133,11 +149,11 @@ export class PaymentComponent implements OnInit {
         this.shopping_item_s.currentDate(new Date(new Date().setDate(new Date().getDate() + this.shipping_date[type][0]))),
         this.shopping_item_s.currentDate(new Date(new Date().setDate(new Date().getDate() + this.shipping_date[type][1])))
       ]
-      let {first_name, last_name , address1 , address2 , city , state, zip , country , phone , order_notes } = this.payment_form.value 
+      let {first_name, last_name, email , address1 , address2 , city , state, zip , country , phone , order_notes } = this.payment_form.value 
       let shipping_feed = this.shipping_price
       let {total , subtotal , tax , shopping_items } = this
       let shipping_method = [type,detail]
-      let shipping_address = {first_name, last_name , address1 , address2 , city , state, zip , country , phone }
+      let shipping_address = {first_name, last_name, email, address1 , address2 , city , state, zip , country , phone }
       this.store.dispatch(new UserActions.AddOrder({
         order_id, order_date , shipping_date, subtotal , tax , shipping_feed , total , shipping_address , shipping_method , order_notes , shopping_items 
       }))
@@ -180,5 +196,12 @@ export class PaymentComponent implements OnInit {
       this.store.dispatch(new ShoppingItemActions.ChangeItem({...item , amount} , index))
     }
   }
+
+  getShippingAddress(address , index){
+    let { first_name , last_name , email , company_name , country , address1 , address2, city , state , zip , phone} = address 
+    this.payment_form.patchValue({ first_name , last_name , email , company_name , country , address1 , address2, city , state , zip , phone})
+    console.log(index)
+    this.selected_address_index = index
+  } 
 
 }

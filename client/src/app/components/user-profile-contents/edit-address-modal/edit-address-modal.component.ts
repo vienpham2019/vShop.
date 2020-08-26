@@ -26,6 +26,7 @@ export class EditAddressModalComponent implements OnInit {
   editAddressForm: FormGroup = this._fb.group({
     first_name: ["", Validators.required],
     last_name: ['', Validators.required],
+    email: ['' , [Validators.required , Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
     company_name: [''],
     country: ['' , Validators.required],
     address1: ['' , Validators.required],
@@ -45,10 +46,10 @@ export class EditAddressModalComponent implements OnInit {
 
   setUpForm(){
     if(this.edit_shipping_detail){
-      let {first_name , last_name , country , address1, address2 , city , state , zip , phone} = this.edit_shipping_detail
+      let {first_name , last_name , email, country , address1, address2 , city , state , zip , phone} = this.edit_shipping_detail
       this.form_title = "Edit Shipping"
       this.editAddressForm.patchValue(
-        {first_name , last_name , country , address1, address2 , city , state , zip , phone}
+        {first_name , last_name, email , country , address1, address2 , city , state , zip , phone}
       )
     }else{
       this.editAddressForm.reset()

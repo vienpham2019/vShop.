@@ -3,6 +3,7 @@ import { OrderDetail } from './order_detail.model'
 import { ShoppingItem } from './shopping_item.model'
 import { UserInfo } from './user_info.model'
 export interface User {
+    current_user: boolean, 
     first_name: string, 
     last_name: string, 
     shipping_details: ShippingDetail[],

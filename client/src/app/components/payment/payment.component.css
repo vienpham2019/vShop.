@@ -37,5 +37,5 @@
 }
 
 .link-item:hover::after{
-    width: 100%;
+    width: 50%;
 }

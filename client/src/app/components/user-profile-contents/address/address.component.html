@@ -5,14 +5,13 @@
       <div class="card card-lg bg-light mb-8">
         <div class="card-body">
 
-          <!-- Heading -->
           <h6 class="mb-6">
             Shipping Detail 
           </h6>
 
-          <!-- Text -->
           <p class="mb-0">
             User name: {{shipping.first_name}} {{shipping.last_name}} <br>
+            Email: {{shipping.email}} <br>
             Address: {{shipping.address1}} <br>
             <span *ngIf = "shipping.address2">Address2: {{shipping.address2}} <br></span>
             City: {{shipping.city}} <br>
@@ -22,15 +21,12 @@
             Phone number: {{shipping.phone}} <br>
           </p>
 
-          <!-- Action -->
           <div class="card-action card-action-right">
 
-            <!-- Button -->
             <button class="btn btn-xs btn-circle btn-white-primary ml-2" data-toggle="modal" data-target="#editUserAddress" (click) = "editShipping(i , shipping)">
               <i class="fa fa-pen"></i>
             </button>
 
-            <!-- Button -->
             <button class="btn btn-xs btn-circle btn-white-primary" >
               <i class="fas fa-times"></i>
             </button>
@@ -45,7 +41,7 @@
     <div class="col-12">
 
       <!-- Button -->
-      <button class="btn btn-block btn-lg btn-outline-border"  data-toggle="modal" data-target="#editUserAddress" (click) = "editShipping()">
+      <button class="btn btn-block btn-lg btn-outline-border"  data-toggle="modal" data-target="#editUserAddress" (click) = "editShipping()" *ngIf = "slotAvaliable" >
         Add Address <i class="fas fa-plus ml-3"></i>
       </button>
 

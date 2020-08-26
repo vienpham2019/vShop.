@@ -53,6 +53,29 @@
                         <small class="text-danger ml-2" *ngIf = "displayError('last_name')">Last name is required</small>
           
                       </div>
+
+                      <div class="col-12">
+                        <div class="form-group">
+                          <label for="checkoutBillingEmail">
+                            Email <small class="text-danger">*</small></label>
+                          <input 
+                            class="form-control form-control-sm" 
+                            type="email" 
+                            placeholder="Email"
+                            formControlName = "email" 
+                            [ngClass] = "classes('email')"
+                          >
+                          <div *ngIf = "displayError('email')">
+                            <ng-template [ngIf] = "formControl('email').errors?.required" [ngIfElse] = "elseBlock">
+                              <small class="text-danger ml-2">Email is required</small>
+                            </ng-template>
+                            <ng-template #elseBlock>
+                              <small class="text-danger ml-2">Invalid Email</small>
+                            </ng-template>
+                          </div>
+                        </div>
+                      </div>
+
                       <div class="col-12">
           
                         <!-- Company Name -->

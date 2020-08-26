@@ -14,10 +14,14 @@ export class AddressComponent implements OnInit {
   constructor(
     private store: Store<{user: User}> 
   ) { 
-    store.pipe(select('user')).subscribe(value => this.shipping_details = value.shipping_details)
+    store.pipe(select('user')).subscribe(value => {
+      this.shipping_details = value.shipping_details
+      this.slotAvaliable = this.shipping_details.length < 4
+    })
   }
 
   shipping_details: ShippingDetail[]
+  slotAvaliable: boolean
 
   ngOnInit(): void {
   }

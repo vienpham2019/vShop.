@@ -29,7 +29,7 @@
         <h3 class="mb-4">Checkout</h3>
 
         <!-- Subheading -->
-        <p class="mb-10">
+        <p class="mb-10" *ngIf = "!current_user">
           Already have an account? 
           <label class="font-weight-bold text-reset cursor link-item" data-toggle="tab" data-toggle="modal" data-target="#loginModal">Click here to login</label>
         </p>
@@ -42,10 +42,11 @@
         <!-- Form -->
         <form [formGroup] = "payment_form">
           <!-- Heading -->
-          <h6 class="mb-7">Billing Details</h6>
+          <h6 class="mb-4">Billing Details</h6>
+          <span class="text-monospace cursor ml-2 link-item" data-toggle="modal" data-target="#shippingAdressModal">Select shipping address? </span>
 
           <!-- Billing details -->
-          <div class="row mb-9">
+          <div class="row mb-9 mt-4">
             <div class="col-12 col-md-6">
 
               <!-- First Name -->
@@ -287,6 +288,58 @@
 
         </form>
 
+        <!-- Shipping address modal -->
+        <div class="modal fade" id="shippingAdressModal" tabindex="-1" aria-labelledby="shippingAdressLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="shippingAdressModalLabel">Shipping Address</h5>
+                <button type="button" id="shippingAdressModalClose" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row d-flex justify-content-center" *ngIf = "user_addresses.length; else elseBlock">
+                  <div class="col-6 cursor" *ngFor = "let address of user_addresses ; let i = index" (click) = "getShippingAddress(address , i)">
+                    <div class="card card-lg bg-light mb-8 border" [class.border-success] = "i === selected_address_index">
+                      <div class="card-body">
+              
+                        <!-- Heading -->
+                        <h6 class="mb-6 card-title">
+                          Shipping Address Detail 
+                        </h6>
+              
+                        <!-- Text -->
+                        <p class="mb-0 card-tex">
+                          User name: {{address.first_name}} {{address.last_name}} <br>
+                          Address: {{address.address1}} <br>
+                          <span *ngIf = "address.address2">Address2: {{address.address2}} <br></span>
+                          City: {{address.city}} <br>
+                          State: {{address.state}} <br>
+                          Zipcode: {{address.zip}} <br>
+                          Country: {{address.country}} <br>
+                          Phone number: {{address.phone}} <br>
+                        </p>
+              
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <ng-template #elseBlock>
+                  <div class="container text-center">
+                    <h5>No address specified</h5>
+                    <br>
+                    <button class="btn btn-dark" [routerLink] = "['/user-profile' , {title: 'Addresses'}]" data-dismiss="modal" aria-label="Close">
+                      Add shipping address
+                    </button>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="col-12 col-md-5 col-lg-4 offset-lg-1 ">
@@ -308,7 +361,7 @@
 
                 <!-- Image -->
                 <a href="product.html">
-                  <img src={{item.img}} alt={{item.title}} class="img-fluid">
+                  <img [src]="item.img" [alt]="item.title" class="img-fluid">
                 </a>
 
               </div>
