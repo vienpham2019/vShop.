@@ -42,7 +42,7 @@
                           <!-- Links -->
                           <ul class="list-styled mb-0 font-size-sm shadow-sm p-3 mb-5 bg-white ml-3">
                             <li class="list-styled-item" *ngFor = "let content of catalog.nav_content[catalog_title]">
-                              <a class="list-styled-link" [routerLink] = "['/catalog']" (click) = "getCatalogs(content_title, content)">{{content}}</a>
+                              <a class="list-styled-link text-monospace" [routerLink] = "['/catalog']" (click) = "getCatalogs(catalog_title, content)">{{content}}</a>
                             </li>
                           </ul>
 
@@ -51,55 +51,54 @@
                         <div class="d-none d-md-flex flex-column col-md-3">
 
                           <!-- Card -->
-                          <div class="card mb-7 bg-cover" style="min-height: 150px;">
+                          <div class="card mb-7 bg-cover bg-white" style="min-height: 150px;">
 
                             <!-- Background -->
                             <div class="card-bg">
-                              <div class="card-bg-img bg-cover" style="background-image: url(https://majnooon.com/wp-content/uploads/2019/09/New-Brand-Men-s-Autumn-Long-Sleeve-Shirts-Slim-Fit-Solid-Turn-down-Collar-Tuxedo-Shirt-6.jpg)"></div>
+                              <div class="card-bg-img bg-cover" style="background-image: url(https://static.nike.com/a/images/c_limit,w_400,f_auto/t_product_v1/cc5ab342-de8d-4feb-accd-0e3f83f41e06/image.jpg)"></div>
                             </div>
 
                             <!-- Body -->
-                            <div class="card-body my-auto px-7 white_tp_background">
-                              <a class="stretched-link font-weight-bold text-body" href="./shop.html">
-                                Men's Shirts
+                            <div class="card-body my-auto px-7 black_tp_background">
+                              <a class="stretched-link font-weight-bold text-white text-monospace" [routerLink] = "['/catalog']" (click) = "getCatalogs('Men', 'Shoes')">
+                                Men's Shoes
                               </a>
                             </div>
 
                           </div>
 
                           <!-- Card -->
-                          <div class="card bg-cover" style="min-height: 150px;">
+                          <div class="card bg-cover bg-white" style="min-height: 300px;" >
 
                             <!-- Background -->
                             <div class="card-bg">
-                              <div class="card-bg-img bg-cover" style="background-image: url(https://www.stylewe.com/image_cache/resize/320x1000/image/catalog/product/2018-12-29/SYL0124-1-jpg-1546076070298.jpeg)"></div>
+                              <div class="card-bg-img bg-cover" style="background-image: url(https://static.nike.com/a/images/c_limit,w_400,f_auto/t_product_v1/1ca1d1e0-5a42-40cb-a885-acc6a38884f3/image.jpg)"></div>
                             </div>
 
                             <!-- Body -->
-                            <div class="card-body my-auto px-7 white_tp_background">
-                              <a class="stretched-link font-weight-bold text-body" href="./shop.html">
-                                Floral Dresses
+                            <div class="card-body my-auto px-7 black_tp_background">
+                              <a class="stretched-link font-weight-bold text-white text-monospace" [routerLink] = "['/catalog']" (click) = "getCatalogs('Women', 'Backpacks')">
+                                Backpack
                               </a>
                             </div>
 
                           </div>
 
                         </div>
-                        <div class="d-none d-md-flex flex-column col-md-3">
+                        <div class="d-none d-md-flex flex-column col-md-3 bg-light">
 
                           <!-- Card -->
-                          <div class="card bg-cover" style="min-height: 330px;">
+                          <div class="card bg-cover" style="min-height: 400px;">
 
                             <!-- Background -->
                             <div class="card-bg">
-                              <div class="card-bg-img bg-cover" style="background-image: url(https://www.rankandstyle.com/media/lists/w/womens-fashion-watches_j71BE54.jpg)"></div>
+                              <div class="card-bg-img bg-cover" style="background-image: url(https://static.nike.com/a/images/c_limit,w_400,f_auto/t_product_v1/i1-083c47f9-1797-4743-9b32-390b9456b0bc/image.jpg)"></div>
                             </div>
 
                             <!-- Body -->
-                            <div class="card-body my-auto text-center black_tp_background">
-                              <a class="stretched-link text-white" href="./shop.html">
-                                <h1 class="mb-1 font-weight-bolder text-uppercase">50% off</h1>
-                                <h6>Women’s Watches</h6>
+                            <div class="card-body my-auto text-center black_tp_background ">
+                              <a class="stretched-link text-white text-monospace" [routerLink] = "['/catalog']" (click) = "getCatalogs('Men', 'Jackets')">
+                                <h6>Woven Floral Jacket</h6>
                               </a>
                             </div>
 

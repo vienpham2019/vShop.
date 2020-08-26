@@ -180,7 +180,7 @@
               </div>
           </div>
           <!-- Button -->
-          <nav class="d-flex justify-content-center justify-content-md-end" *ngIf = "new_arrivals.length > 6">
+          <nav class="d-flex justify-content-center justify-content-md-end" *ngIf = "new_arrivals.length > new_arrival_display_amount">
             <ul class="pagination pagination-sm text-gray-400">
               <li class="page-item">
                 <span class="page-link page-link-arrow cursor" (click) = "change_page('prev')">
@@ -197,11 +197,6 @@
               </li>
             </ul>
           </nav>
-          <div class="text-center mt-2">
-            <a class="btn btn-dark" href="shop.html">
-              Shop Now <i class="fas fa-angle-right ml-2"></i>
-            </a>
-          </div>
 
         </div>
       </div>

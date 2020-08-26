@@ -1,358 +1,364 @@
-<nav class="py-5" *ngIf = "item">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-
-          <!-- Breadcrumb -->
-          <ol class="breadcrumb mb-0 font-size-xs text-gray-400">
-            <li class="breadcrumb-item">
-              <a class="text-gray-400" [routerLink] = "['/']">Home</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a class="text-gray-400" href="shop.html">Women's Shoes</a>
-            </li>
-            <li class="breadcrumb-item active">
-              {{item.title}}
-            </li>
-          </ol>
-
-        </div>
-      </div>
-    </div>
-</nav>
-
-<div class="container" *ngIf = "item">
-    <div class="row">
-      <div class="col-12">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <!-- Card -->
-                <div class="card">
-
-                <!-- Badge -->
-                    <div class="badge badge-primary card-badge text-uppercase" *ngIf = "item.isSale">
-                        Sale
-                    </div>
-
-                    <div class="badge badge-dark card-badge text-uppercase" *ngIf = "item.isNew">
-                      New
-                    </div>
-
-                    <div class="col-md-12" *ngIf = "color.img">
-                        <img [src]="color.img" [alt]="item.title" class="img-fluid">
-                    </div>
-
-                </div>
-          </div>
-          <div class="col-12 col-md-6 pl-lg-10">
-
-            <!-- Header -->
-            <div class="row mb-1">
-              <div class="col">
-
-                <!-- Preheading -->
-                <span class="text-muted">{{item.category}}</span>
-
-              </div>
-              <div class="col-auto">
-
-                <!-- Rating -->
-                <div class="rating text-dark h6 mb-4 mb-md-0">
-                  <div *ngFor = "let s of review_star; let i = index">
-                      <i [ngClass]="rateClass(i) "></i>
-                  </div>
-                </div>
-
-                <span class="font-size-sm text-reset ml-2">
-                  Reviews ({{item.reviews.length}})
-                </span>
-
-              </div>
-            </div>
-
-            <!-- Heading -->
-            <h3 class="mb-2">{{item.title}}</h3>
-
-            <!-- Price -->
-            <div class="mb-7">
-              <ng-template [ngIf] = "item.isSale" [ngIfElse] = "elseBlock">
-                  <span class="font-size-lg font-weight-bold text-gray-350 text-decoration-line-through">${{item.current_price | number: '1.2'}}</span>
-                  <span class="ml-1 font-size-h5 font-weight-bolder text-primary">${{item.sale_price | number: '1.2'}}</span>
-              </ng-template>
-              <ng-template #elseBlock>
-                <span class="text-muted">${{item.current_price | number: '1.2'}}</span>
-              </ng-template>
-              <span class="font-size-sm ml-1">(In Stock)</span>
-            </div>
-
-            <!-- Form -->
-            <form [formGroup] = "itemForm">
-              <div class="form-group">
-
-                <!-- Label -->
-                <p class="mb-5" *ngIf = "color.color">
-                  Color: <strong>{{color.color}}</strong>
-                </p>
-
-                <button class="btn btn-outline-dark mb-2" data-toggle="dropdown">
-                  Select Colors  <i class="fas fa-tint ml-2"></i>
-                </button>
-
-                <div class="dropdown-menu">
-                  <div class="card colors_dropdown" style="width: 20rem;">
-                    <div class="card-body">
-                      <ul class="list-styled font-size-sm">
-                        <li class="list-styled-item shadow-sm p-3 mb-5 bg-white cursor" *ngFor = "let color of item.colors" (click) = "selectColor(color)">
-
-                          <div class="card mb-3">
-                            <div class="row no-gutters">
-                              <div class="col-md-4">
-                                <img [src]="color.img" class="card-img">
-                              </div>
-                              <div class="col-md-8">
-                                <div class="card-body">
-                                  <span class="card-text font-weight-bold text-monospace">{{color.color}}</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <div class="form-group">
-
-                <!-- Label -->
-                <p class="mb-5" *ngIf = "sizes.length">
-                  Size: <strong><span id="sizeCaption">{{itemForm.value.size}}</span> US</strong>
-                </p>
-
-                <!-- Radio -->
-                <div class="mb-2">
-                    <ul class="d-flex flex-wrap">
-                      <li 
-                          *ngFor = "let size of sizes , let i = index"
-                          [ngClass] = "size_class(size)"
-                          (click) = "setSize(size , i)"
-                      >
-                          {{size.value}}
-                      </li>
-                    </ul>
-                </div>
-
-                <!-- Size chart -->
-                <p class="mb-8">
-                    <i class="fas fa-pencil-ruler"> <a class="text-reset text-decoration-underline ml-3" data-toggle="modal" href="#modalSizeChart">Size chart</a></i>
-                </p>
-
-                <div class="form-row mb-7">
-                  <div class="col-12 col-lg-auto">
-                    <!-- Quantity -->
-                    <select class="custom-select mb-2" formControlName = "amount">
-                      <option value={{amount}} *ngFor = "let amount of amounts">{{amount}}</option>
-                    </select>
-
-                  </div>
-                  <div class="col-12 col-lg">
-
-                    <!-- Submit -->
-                    <button type="submit" class="btn btn-block btn-dark mb-2" (click) = "addToShoppingCart()">
-                      Add to Cart <i class="fas fa-shopping-cart ml-2"></i>
-                    </button>
-
-                  </div>
-                  <div class="col-12 col-lg-auto">
-
-                    <!-- Wishlist -->
-                    <button class="btn btn-outline-dark btn-block mb-2" (click) = "addToWidhlist()">
-                      Wishlist <i class="fas fa-heart ml-2" [class.text-danger] = "in_widhlist"></i>
-                    </button>
-
-                  </div>
-                </div>
-
-              </div>
-            </form>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-    <!-- size chart -->
-    <app-size-chart></app-size-chart>
-
-    <!-- Description -->
-    <div class="container">
+<ng-template [ngIf] = "item" [ngIfElse] = "elseBlock">
+  <nav class="py-5">
+      <div class="container">
         <div class="row">
           <div class="col-12">
 
-            <!-- Nav -->
-            <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom">
-              <a class="nav-link border-0 active" data-toggle="tab" href="#descriptionTab">
-                Description
-              </a>
-              <a class="nav-link border-0" data-toggle="tab" href="#sizeTab">
-                Size &amp; Fit
-              </a>
-              <a class="nav-link border-0" data-toggle="tab" href="#shippingTab">
-                Shipping &amp; Return
-              </a>
-            </div>
-
-            <!-- Content -->
-            <div class="tab-content">
-              <div class="tab-pane active fade show" id="descriptionTab">
-                <div class="row justify-content-center py-9">
-                  <div class="col-12 col-lg-10 col-xl-8">
-                    <div class="row">
-                      <div class="col-12">
-
-                        <!-- Text -->
-                        <p class="text-gray-500">
-                          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi nostrum maiores ad sed? Maxime ratione magni commodi eius recusandae repudiandae, ad voluptates, ea eveniet adipisci sapiente provident sit. Eveniet, quaerat eius delectus, maiores, eaque quas unde omnis impedit beatae quis voluptatem a adipisci voluptas quibusdam eligendi animi nisi cum magni!
-                        </p>
-
-                      </div>
-                      <div class="col-12 col-md-6">
-
-                        <!-- List -->
-                        <ul class="list list-unstyled mb-md-0 text-gray-500">
-                          <li>
-                            <strong class="text-body">SKU</strong>: #61590437
-                          </li>
-                          <li>
-                            <strong class="text-body">Occasion</strong>: Lifestyle, Sport
-                          </li>
-                          <li>
-                            <strong class="text-body">Country</strong>: USA
-                          </li>
-                        </ul>
-
-                      </div>
-                      <div class="col-12 col-md-6">
-
-                        <!-- List -->
-                        <ul class="list list-unstyled mb-0">
-                          <li>
-                            <strong>Outer</strong>: Leather 100%, Polyamide 100%
-                          </li>
-                          <li>
-                            <strong>Lining</strong>: Polyester 100%
-                          </li>
-                          <li>
-                            <strong>CounSoletry</strong>: Rubber 100%
-                          </li>
-                        </ul>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane fade" id="sizeTab">
-                <div class="row justify-content-center py-9">
-                  <div class="col-12 col-lg-10 col-xl-8">
-                    <div class="row">
-                      <div class="col-12 col-md-6">
-
-                        <!-- Text -->
-                        <p class="mb-4">
-                          <strong>Fitting information:</strong>
-                        </p>
-
-                        <!-- List -->
-                        <ul class="mb-md-0 text-gray-500">
-                          <li>
-                            Upon seas hath every years have whose
-                            subdue creeping they're it were.
-                          </li>
-                          <li>
-                            Make great day bearing.
-                          </li>
-                          <li>
-                            For the moveth is days don't said days.
-                          </li>
-                        </ul>
-
-                      </div>
-                      <div class="col-12 col-md-6">
-
-                        <!-- Text -->
-                        <p class="mb-4">
-                          <strong>Model measurements:</strong>
-                        </p>
-
-                        <!-- List -->
-                        <ul class="list-unstyled text-gray-500">
-                          <li>Height: 1.80 m</li>
-                          <li>Bust/Chest: 89 cm</li>
-                          <li>Hips: 91 cm</li>
-                          <li>Waist: 65 cm</li>
-                          <li>Model size: M</li>
-                        </ul>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="tab-pane fade show" id="shippingTab">
-                <div class="row justify-content-center py-9">
-                  <div class="col-12 col-lg-10 col-xl-8">
-
-                    <!-- Table -->
-                    <div class="table-responsive">
-                      <table class="table table-bordered table-sm table-hover">
-                        <thead>
-                          <tr>
-                            <th>Shipping Options</th>
-                            <th>Delivery Time</th>
-                            <th>Price</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Standard Shipping</td>
-                            <td>Delivery in 5 - 7 working days</td>
-                            <td>$8.00</td>
-                          </tr>
-                          <tr>
-                            <td>Express Shipping</td>
-                            <td>Delivery in 3 - 5 working days</td>
-                            <td>$12.00</td>
-                          </tr>
-                          <tr>
-                            <td>1 - 2 day Shipping</td>
-                            <td>Delivery in 1 - 2 working days</td>
-                            <td>$12.00</td>
-                          </tr>
-                          <tr>
-                            <td>Free Shipping</td>
-                            <td>
-                              Living won't the He one every subdue meat replenish
-                              face was you morning firmament darkness.
-                            </td>
-                            <td>$0.00</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb mb-0 font-size-xs text-gray-400">
+              <li class="breadcrumb-item">
+                <a class="text-gray-400" [routerLink] = "['/']">Home</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a class="text-gray-400" href="shop.html">Women's Shoes</a>
+              </li>
+              <li class="breadcrumb-item active">
+                {{item.title}}
+              </li>
+            </ol>
 
           </div>
         </div>
       </div>
+  </nav>
 
-    <!-- review -->
-    <app-item-reviews></app-item-reviews>
+  <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+              <div class="col-12 col-md-6">
+                  <!-- Card -->
+                  <div class="card">
+
+                  <!-- Badge -->
+                      <div class="badge badge-primary card-badge text-uppercase" *ngIf = "item.isSale">
+                          Sale
+                      </div>
+
+                      <div class="badge badge-dark card-badge text-uppercase" *ngIf = "item.isNew">
+                        New
+                      </div>
+
+                      <div class="col-md-12" *ngIf = "color.img">
+                          <img [src]="color.img" [alt]="item.title" class="img-fluid">
+                      </div>
+
+                  </div>
+            </div>
+            <div class="col-12 col-md-6 pl-lg-10">
+
+              <!-- Header -->
+              <div class="row mb-1">
+                <div class="col">
+
+                  <!-- Preheading -->
+                  <span class="text-muted">{{item.category}}</span>
+
+                </div>
+                <div class="col-auto">
+
+                  <!-- Rating -->
+                  <div class="rating text-dark h6 mb-4 mb-md-0">
+                    <div *ngFor = "let s of review_star; let i = index">
+                        <i [ngClass]="rateClass(i) "></i>
+                    </div>
+                  </div>
+
+                  <span class="font-size-sm text-reset ml-2">
+                    Reviews ({{item.reviews.length}})
+                  </span>
+
+                </div>
+              </div>
+
+              <!-- Heading -->
+              <h3 class="mb-2">{{item.title}}</h3>
+
+              <!-- Price -->
+              <div class="mb-7">
+                <ng-template [ngIf] = "item.isSale" [ngIfElse] = "elseBlock">
+                    <span class="font-size-lg font-weight-bold text-gray-350 text-decoration-line-through">${{item.current_price | number: '1.2'}}</span>
+                    <span class="ml-1 font-size-h5 font-weight-bolder text-primary">${{item.sale_price | number: '1.2'}}</span>
+                </ng-template>
+                <ng-template #elseBlock>
+                  <span class="text-muted">${{item.current_price | number: '1.2'}}</span>
+                </ng-template>
+                <span class="font-size-sm ml-1">(In Stock)</span>
+              </div>
+
+              <!-- Form -->
+              <form [formGroup] = "itemForm">
+                <div class="form-group">
+
+                  <!-- Label -->
+                  <p class="mb-5" *ngIf = "color.color">
+                    Color: <strong>{{color.color}}</strong>
+                  </p>
+
+                  <button class="btn btn-outline-dark mb-2" data-toggle="dropdown">
+                    Select Colors  <i class="fas fa-tint ml-2"></i>
+                  </button>
+
+                  <div class="dropdown-menu">
+                    <div class="card colors_dropdown" style="width: 20rem;">
+                      <div class="card-body">
+                        <ul class="list-styled font-size-sm">
+                          <li class="list-styled-item shadow-sm p-3 mb-5 bg-white cursor" *ngFor = "let color of item.colors" (click) = "selectColor(color)">
+
+                            <div class="card mb-3">
+                              <div class="row no-gutters">
+                                <div class="col-md-4">
+                                  <img [src]="color.img" class="card-img">
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="card-body">
+                                    <span class="card-text font-weight-bold text-monospace">{{color.color}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="form-group">
+
+                  <!-- Label -->
+                  <p class="mb-5" *ngIf = "sizes.length">
+                    Size: <strong><span id="sizeCaption">{{itemForm.value.size}}</span> US</strong>
+                  </p>
+
+                  <!-- Radio -->
+                  <div class="mb-2">
+                      <ul class="d-flex flex-wrap">
+                        <li 
+                            *ngFor = "let size of sizes , let i = index"
+                            [ngClass] = "size_class(size)"
+                            (click) = "setSize(size , i)"
+                        >
+                            {{size.value}}
+                        </li>
+                      </ul>
+                  </div>
+
+                  <!-- Size chart -->
+                  <p class="mb-8">
+                      <i class="fas fa-pencil-ruler"> <a class="text-reset text-decoration-underline ml-3" data-toggle="modal" href="#modalSizeChart">Size chart</a></i>
+                  </p>
+
+                  <div class="form-row mb-7">
+                    <div class="col-12 col-lg-auto">
+                      <!-- Quantity -->
+                      <select class="custom-select mb-2" formControlName = "amount">
+                        <option value={{amount}} *ngFor = "let amount of amounts">{{amount}}</option>
+                      </select>
+
+                    </div>
+                    <div class="col-12 col-lg">
+
+                      <!-- Submit -->
+                      <button type="submit" class="btn btn-block btn-dark mb-2" (click) = "addToShoppingCart()">
+                        Add to Cart <i class="fas fa-shopping-cart ml-2"></i>
+                      </button>
+
+                    </div>
+                    <div class="col-12 col-lg-auto">
+
+                      <!-- Wishlist -->
+                      <button class="btn btn-outline-dark btn-block mb-2" (click) = "addToWidhlist()">
+                        Wishlist <i class="fas fa-heart ml-2" [class.text-danger] = "in_widhlist"></i>
+                      </button>
+
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- size chart -->
+  <app-size-chart></app-size-chart>
+
+  <!-- Description -->
+  <div class="container">
+      <div class="row">
+        <div class="col-12">
+
+          <!-- Nav -->
+          <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom">
+            <a class="nav-link border-0 active" data-toggle="tab" href="#descriptionTab">
+              Description
+            </a>
+            <a class="nav-link border-0" data-toggle="tab" href="#sizeTab">
+              Size &amp; Fit
+            </a>
+            <a class="nav-link border-0" data-toggle="tab" href="#shippingTab">
+              Shipping &amp; Return
+            </a>
+          </div>
+
+          <!-- Content -->
+          <div class="tab-content">
+            <div class="tab-pane active fade show" id="descriptionTab">
+              <div class="row justify-content-center py-9">
+                <div class="col-12 col-lg-10 col-xl-8">
+                  <div class="row">
+                    <div class="col-12">
+
+                      <!-- Text -->
+                      <p class="text-gray-500">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi nostrum maiores ad sed? Maxime ratione magni commodi eius recusandae repudiandae, ad voluptates, ea eveniet adipisci sapiente provident sit. Eveniet, quaerat eius delectus, maiores, eaque quas unde omnis impedit beatae quis voluptatem a adipisci voluptas quibusdam eligendi animi nisi cum magni!
+                      </p>
+
+                    </div>
+                    <div class="col-12 col-md-6">
+
+                      <!-- List -->
+                      <ul class="list list-unstyled mb-md-0 text-gray-500">
+                        <li>
+                          <strong class="text-body">SKU</strong>: #61590437
+                        </li>
+                        <li>
+                          <strong class="text-body">Occasion</strong>: Lifestyle, Sport
+                        </li>
+                        <li>
+                          <strong class="text-body">Country</strong>: USA
+                        </li>
+                      </ul>
+
+                    </div>
+                    <div class="col-12 col-md-6">
+
+                      <!-- List -->
+                      <ul class="list list-unstyled mb-0">
+                        <li>
+                          <strong>Outer</strong>: Leather 100%, Polyamide 100%
+                        </li>
+                        <li>
+                          <strong>Lining</strong>: Polyester 100%
+                        </li>
+                        <li>
+                          <strong>CounSoletry</strong>: Rubber 100%
+                        </li>
+                      </ul>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="sizeTab">
+              <div class="row justify-content-center py-9">
+                <div class="col-12 col-lg-10 col-xl-8">
+                  <div class="row">
+                    <div class="col-12 col-md-6">
+
+                      <!-- Text -->
+                      <p class="mb-4">
+                        <strong>Fitting information:</strong>
+                      </p>
+
+                      <!-- List -->
+                      <ul class="mb-md-0 text-gray-500">
+                        <li>
+                          Upon seas hath every years have whose
+                          subdue creeping they're it were.
+                        </li>
+                        <li>
+                          Make great day bearing.
+                        </li>
+                        <li>
+                          For the moveth is days don't said days.
+                        </li>
+                      </ul>
+
+                    </div>
+                    <div class="col-12 col-md-6">
+
+                      <!-- Text -->
+                      <p class="mb-4">
+                        <strong>Model measurements:</strong>
+                      </p>
+
+                      <!-- List -->
+                      <ul class="list-unstyled text-gray-500">
+                        <li>Height: 1.80 m</li>
+                        <li>Bust/Chest: 89 cm</li>
+                        <li>Hips: 91 cm</li>
+                        <li>Waist: 65 cm</li>
+                        <li>Model size: M</li>
+                      </ul>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade show" id="shippingTab">
+              <div class="row justify-content-center py-9">
+                <div class="col-12 col-lg-10 col-xl-8">
+
+                  <!-- Table -->
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-sm table-hover">
+                      <thead>
+                        <tr>
+                          <th>Shipping Options</th>
+                          <th>Delivery Time</th>
+                          <th>Price</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Standard Shipping</td>
+                          <td>Delivery in 5 - 7 working days</td>
+                          <td>$8.00</td>
+                        </tr>
+                        <tr>
+                          <td>Express Shipping</td>
+                          <td>Delivery in 3 - 5 working days</td>
+                          <td>$12.00</td>
+                        </tr>
+                        <tr>
+                          <td>1 - 2 day Shipping</td>
+                          <td>Delivery in 1 - 2 working days</td>
+                          <td>$12.00</td>
+                        </tr>
+                        <tr>
+                          <td>Free Shipping</td>
+                          <td>
+                            Living won't the He one every subdue meat replenish
+                            face was you morning firmament darkness.
+                          </td>
+                          <td>$0.00</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  <!-- review -->
+  <app-item-reviews></app-item-reviews>
+</ng-template>
+
+<ng-template #elseBlock>
+  <app-page-not-found></app-page-not-found>
+</ng-template>

@@ -1,4 +1,4 @@
-<nav class="py-5">
+<nav class="py-5" *ngIf = "items.length">
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -11,6 +11,9 @@
             <li class="breadcrumb-item active">
               Catalog
             </li>
+            <li class="breadcrumb-item active">
+              {{current_catalog}}
+            </li>
           </ol>
 
         </div>
@@ -18,7 +21,7 @@
     </div>
   </nav>
 
-<div class="py-11 mt-5">
+<div class="py-11 mt-5" *ngIf = "items.length">
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3">
@@ -51,8 +54,8 @@
                       <div [ngClass]="slide_class(i)" *ngFor = "let image of slide_imgs , let i = index">
                         <img [src]="image.img" [alt]="image.title">
                         <div class="carousel-caption d-none d-md-block black_tp_background">
-                          <h5>{{image.title}}</h5>
-                          <p>{{image.category}}</p>
+                          <h5 class="text-monospace">{{image.title}}</h5>
+                          <p class="text-monospace">{{image.category}}</p>
                         </div>
                       </div>
 
@@ -71,7 +74,7 @@
                     <div class="col-12 col-md">
       
                       <!-- Heading -->
-                      <h3 class="mb-1">Womens' Clothing</h3>
+                      <h3 class="mb-1">{{current_catalog}}</h3>
       
                       <!-- Breadcrumb -->
                       <ol class="breadcrumb mb-md-0 font-size-xs bg-transparent">
@@ -105,7 +108,7 @@
 
                   <!-- Producs -->
                   <div class="row">
-                    <div class="col-6 col-md-4" *ngFor = "let item of items">
+                    <div class="col-6 col-md-4" *ngFor = "let item of display_items">
                         <div class="card mb-7 border-0">
                           <div class="badge badge-primary card-badge text-uppercase" *ngIf = "item.isSale">
                             Sale
@@ -158,40 +161,29 @@
 
                   <!-- Pagination -->
 
-                <nav class="d-flex justify-content-center justify-content-md-end">
+                  <nav class="d-flex justify-content-center justify-content-md-end" *ngIf = "items.length > item_display_amount">
                     <ul class="pagination pagination-sm text-gray-400">
-                    <li class="page-item">
-                        <a class="page-link page-link-arrow" href="#">
-                        <i class="fa fa-caret-left"></i>
-                        </a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">6</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link page-link-arrow" href="#">
-                        <i class="fa fa-caret-right"></i>
-                        </a>
-                    </li>
+                      <li class="page-item">
+                        <span class="page-link page-link-arrow cursor" (click) = "change_page('prev')">
+                          <i class="fa fa-caret-left"></i>
+                        </span>
+                      </li>
+                      <li [ngClass] = "pagination_class(i)" *ngFor = "let num of item_length; let i = index" >
+                        <span class="page-link cursor" (click) = "change_page_number(i)">{{i + 1}}</span>
+                      </li>
+                      <li class="page-item">
+                        <span class="page-link page-link-arrow cursor" (click) = "change_page('next')" >
+                          <i class="fa fa-caret-right"></i>
+                        </span>
+                      </li>
                     </ul>
-                </nav>
+                  </nav>
             </div>
                 
         </div>
     </div>
 </div> 
+
+<ng-template [ngIf] = "items.length === 0">
+  <app-page-not-found></app-page-not-found>
+</ng-template>

@@ -18,8 +18,8 @@ export class NavbarComponent implements OnInit {
   catalog: any = {
     nav_keys: ['Women' , 'Men'],
     nav_content: {
-      "Women": ["Shoes", "Slides" , "Tops" , "T-Shirts", "Crews", "Hoodies" , "Jackets" , "Backpacks", "Bags" , "Hats" , "Skirts"],
-      "Men": ["Shoes" , "Slides" , "Tops", "T-Shirts" ,"Crews" , "Hoodies" , "Jackets" , "Backpacks", "Bags" , "Hats", "Tights"], 
+      "Women": ["Shoes", "Slides" , "Tops" , "T-Shirts", "Crews", "Hoodies" , "Jackets" , "Backpacks", "Bags" , "Hats" , "Skirts" , "Pants", "Caps"],
+      "Men": ["Shoes" , "Tops", "T-Shirts" ,"Crews" , "Hoodies" , "Jackets" , "Backpacks", "Bags" , "Hats", "Beanies" , "Pants" , "Caps"], 
     }
   }
 
@@ -38,6 +38,7 @@ export class NavbarComponent implements OnInit {
   }
 
   getCatalogs(gender , category){
+    console.log(gender)
     this.catalog_store.dispatch(new AppActions.DisplayCatalogs(gender , category.substring(0,category.length - 1)))
   }
 
