@@ -7,10 +7,6 @@ export const initState: User = {
     first_name: '',
     last_name: '',
     shipping_details: [
-        {first_name: 'Daniel' , last_name: 'Robinson', email: 'vienpham2019@gmail.com' , address1: '3997 Raccoon Run', address2: '',city: 'New', state: 'Kingston', zip: '45644', country: 'United States', phone: '6146389574' },
-        {first_name: 'Daniel' , last_name: 'Robinson', email: 'vienpham2019@gmail.com' , address1: '3997 Raccoon Run', address2: '',city: 'New', state: 'Kingston', zip: '45644', country: 'United States', phone: '6146389574' },
-        {first_name: 'Daniel' , last_name: 'Robinson', email: 'vienpham2019@gmail.com' , address1: '3997 Raccoon Run', address2: '',city: 'New', state: 'Kingston', zip: '45644', country: 'United States', phone: '6146389574' },
-        {first_name: 'Daniel' , last_name: 'Robinson', email: 'vienpham2019@gmail.com' , address1: '3997 Raccoon Run', address2: '',city: 'New', state: 'Kingston', zip: '45644', country: 'United States', phone: '6146389574' }
     ],
     edit_shipping_index: null ,
     edit_shipping_detail: null ,
