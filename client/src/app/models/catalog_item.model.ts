@@ -7,7 +7,7 @@ export interface CatalogItem {
     sizes: string[], 
     isNew: boolean, 
     isSale: boolean,
-    colors: string[], 
+    colors: {color: string , img: string}[], 
     img: string,
     category: string, 
     season: string,  

@@ -24,10 +24,12 @@ export class ItemComponent implements OnInit {
       this.item = value.display_catalog_item 
       this.sizes = this.item.sizes.map((value, i) => ({value , selected: i === 0}))
       this.setUpForm()
-      this.itemForm.patchValue({
-        size: this.sizes[0].value,
-        color: this.item.colors[0]
-      })
+      if(this.sizes[0]){
+        this.itemForm.patchValue({
+          size: this.sizes[0].value,
+        })
+      }
+      this.color = this.item.colors[0]
       this.getTotalReview()
     })
 
@@ -47,16 +49,21 @@ export class ItemComponent implements OnInit {
 
   itemForm: FormGroup
 
+  color: {color: string, img: string}
+
   ngOnInit(): void {
     window.scrollTo(0,0)
   }
 
   setUpForm(){
     this.itemForm = this._fb.group({
-      color: [""],
       size: [""],
       amount: ["1"]
     })
+  }
+
+  selectColor(color):void{
+    this.color = color 
   }
 
   setSize(size , i ){
@@ -83,8 +90,9 @@ export class ItemComponent implements OnInit {
   }
 
   filterItem(){
-    let {id , title , current_price , sale_price , isSale , isNew, img , category , season , brand} = this.item
-    let { size , color , amount } = this.itemForm.value 
+    let {id , title , current_price , sale_price , isSale , isNew , category , season , brand} = this.item
+    let { size , amount } = this.itemForm.value 
+    let { color , img } = this.color
     return {id , title , current_price , sale_price , size , isNew , isSale , color , amount: Math.floor(amount) , img , category , season , brand}
   }
 

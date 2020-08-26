@@ -25,48 +25,8 @@
                 <div class="mb-10 mb-md-0">
                     <ul class="nav nav-vertical" id="filterNav">
                         <li class="nav-item">
-                            <a class="nav-link dropdown-toggle font-size-lg text-reset border-bottom mb-6 collapsed" data-toggle="collapse" href="#categoryCollapse" aria-expanded="false">
-                                <strong> Category </strong>
-                            </a>
-
-                            <div class="collapse" id="categoryCollapse">
-                                <div class="form-group">
-                                    <ul class="list-styled mb-0" id="productsNav">
-                                        <li class="list-styled-item text-left ml-4">
-                                            <a href="#" class="list-styled-link">All products</a>
-                                        </li>
-                                        <li class="list-styled-item text-left ml-4">
-                                            <a href="#" class="list-styled-link">All products</a>
-                                        </li>
-                                        <li class="list-styled-item text-left ml-4">
-                                            <a href="#" class="list-styled-link">All products</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link dropdown-toggle font-size-lg text-reset border-bottom mb-6" data-toggle="collapse" href="#sizeCollapse" aria-expanded="true">
-                                <strong> Size </strong>
-                            </a>
-
-                            <div class="collapse show" id="sizeCollapse" data-toggle="simplebar" data-target="#sizeGroup">
-                                <ul class="d-flex flex-wrap">
-                                    <li 
-                                        *ngFor = "let size of sizes , let i = index"
-                                        [ngClass] = "size_class(size.selected)"
-                                        (click) = "select_size(size , i)"
-                                    >
-                                        {{size.value}}
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
                             <a class="nav-link dropdown-toggle font-size-lg text-reset border-bottom mb-6" data-toggle="collapse" href="#priceCollapse" aria-expanded="true">
-                                <strong> Price </strong>
+                              <strong> Price </strong>
                             </a>
 
                             <div class="collapse show" id="priceCollapse" data-toggle="simplebar" data-target="#priceGroup">
@@ -87,17 +47,12 @@
             <div class="col-12 col-md-8 col-lg-9">
                 <!-- slider image  -->
                 <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-                    </ol>
                     <div class="carousel-inner">
                       <div [ngClass]="slide_class(i)" *ngFor = "let image of slide_imgs , let i = index">
-                        <img src={{image}} alt="...">
+                        <img [src]="image.img" [alt]="image.title">
                         <div class="carousel-caption d-none d-md-block black_tp_background">
-                          <h5>First slide label</h5>
-                          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                          <h5>{{image.title}}</h5>
+                          <p>{{image.category}}</p>
                         </div>
                       </div>
 
@@ -129,14 +84,6 @@
                       </ol>
       
                     </div>
-                    <div class="col-12 col-md-auto">
-      
-                      <!-- Select -->
-                      <select class="custom-select custom-select-xs">
-                        <option selected="">Most popular</option>
-                      </select>
-      
-                    </div>
                   </div>
 
                   <!-- Tags -->
@@ -158,179 +105,48 @@
 
                   <!-- Producs -->
                   <div class="row">
-                    <div class="col-6 col-md-4">
-                      <div class="card mb-7 border-0">
-                        <div class="badge badge-white card-badge card-badge-left text-uppercase">
-                          New
-                        </div>
-
-                        <div class="card-img">
-      
-                          <!-- Image -->
-                          <a class="card-img-hover" href="product.html">
-                            <img class="card-img-top" src="https://assets.adidas.com/images/h_320,f_auto,q_auto:sensitive,fl_lossy/449c838942da409f8ba9a97f00d3cffe_9366/Runfalcon_Shoes_Black_F36199_01_standard.jpg" alt="...">
-                          </a>
-
-                          <!-- action -->
-                          <div class="card-actions">
-                            <span class="card-action">
-                              <button class="btn btn-xs btn-circle btn-light mx-2" data-toggle="modal" data-target="#modalProduct" [routerLink] = "['/item']">
-                                <i class="fas fa-eye"></i>
-                              </button>
-                            </span>
-                            <span class="card-action">
-                              <button class="btn btn-xs btn-circle btn-light mx-2" data-toggle="button" (click) = "addToShoppingCart()">
-                                <i class="fas fa-shopping-cart"></i>
-                              </button>
-                            </span>
-                            <span class="card-action">
-                              <button class="btn btn-xs btn-circle btn-light mx-2" data-toggle="button">
-                                <i class="fas fa-heart"></i>
-                              </button>
-                            </span>
-                          </div>
-      
-                        </div>
-      
-                        <!-- Body -->
-                        <div class="card-body px-0">
-      
-                          <!-- Category -->
-                          <div class="font-size-xs">
-                            <a class="text-muted" href="shop.html">Shoes</a>
-                          </div>
-      
-                          <!-- Title -->
-                          <div class="font-weight-bold">
-                            <a class="text-body" href="product.html">
-                              Leather mid-heel Sandals
-                            </a>
-                          </div>
-      
-                          <!-- Price -->
-                          <div class="font-weight-bold text-muted">
-                            $129.00
-                          </div>
-      
-                        </div>
-      
-                      </div>
-      
-                    </div>
-                    <div class="col-6 col-md-4">
-      
-                      <!-- Card -->
-                      <div class="card mb-7 border-0">
-      
-                        <!-- Image -->
-                        <div class="card-img">
-      
-                          <!-- Image -->
-                          <a class="card-img-hover" href="product.html">
-                            <img class="card-img-top" src="https://assets.adidas.com/images/h_320,f_auto,q_auto:sensitive,fl_lossy/449c838942da409f8ba9a97f00d3cffe_9366/Runfalcon_Shoes_Black_F36199_01_standard.jpg" alt="...">
-                          </a>
-
-                          <!-- action -->
-                          <div class="card-actions">
-                            <span class="card-action">
-                              <button class="btn btn-xs btn-circle btn-light mx-2" data-toggle="modal" data-target="#modalProduct">
-                                <i class="fas fa-eye"></i>
-                              </button>
-                            </span>
-                            <span class="card-action">
-                              <button class="btn btn-xs btn-circle btn-light mx-2" data-toggle="button">
-                                <i class="fas fa-shopping-cart"></i>
-                              </button>
-                            </span>
-                            <span class="card-action">
-                              <button class="btn btn-xs btn-circle btn-light mx-2" data-toggle="button">
-                                <i class="fas fa-heart"></i>
-                              </button>
-                            </span>
-                          </div>
-      
-                        </div>
-      
-                        <!-- Body -->
-                        <div class="card-body px-0">
-      
-                          <!-- Category -->
-                          <div class="font-size-xs">
-                            <a class="text-muted" href="shop.html">Dresses</a>
-                          </div>
-      
-                          <!-- Title -->
-                          <div class="font-weight-bold">
-                            <a class="text-body" href="product.html">
-                              Cotton floral print Dress
-                            </a>
-                          </div>
-      
-                          <!-- Price -->
-                          <div class="font-weight-bold text-muted">
-                            $40.00
-                          </div>
-      
-                        </div>
-      
-                      </div>
-      
-                    </div>
-
-                    <div class="col-6 col-md-4">
+                    <div class="col-6 col-md-4" *ngFor = "let item of items">
                         <div class="card mb-7 border-0">
-                          <div class="badge badge-dark card-badge card-badge-left text-uppercase">
+                          <div class="badge badge-primary card-badge text-uppercase" *ngIf = "item.isSale">
                             Sale
+                          </div>
+      
+                          <div class="badge badge-dark card-badge text-uppercase" *ngIf = "item.isNew">
+                            New
                           </div>
 
                           <div class="card-img">
         
-                            <!-- Image -->
-                            <a class="card-img-hover" href="product.html">
-                              <img class="card-img-top" src="https://assets.adidas.com/images/h_320,f_auto,q_auto:sensitive,fl_lossy/449c838942da409f8ba9a97f00d3cffe_9366/Runfalcon_Shoes_Black_F36199_01_standard.jpg" alt="...">
-                            </a>
-
-                            <!-- action -->
-                            <div class="card-actions">
-                              <span class="card-action">
-                                <button class="btn btn-xs btn-circle btn-light mx-2" data-toggle="modal" data-target="#modalProduct">
-                                  <i class="fas fa-eye"></i>
-                                </button>
-                              </span>
-                              <span class="card-action">
-                                <button class="btn btn-xs btn-circle btn-light mx-2" data-toggle="button">
-                                  <i class="fas fa-shopping-cart"></i>
-                                </button>
-                              </span>
-                              <span class="card-action">
-                                <button class="btn btn-xs btn-circle btn-light mx-2" data-toggle="button">
-                                  <i class="fas fa-heart"></i>
-                                </button>
-                              </span>
-                            </div>
+                            <button class="btn btn-xs btn-block btn-dark card-btn" [routerLink] = "['/item']" (click) = "viewItem(item)">
+                              <i class="far fa-eye mr-2 mb-1"></i> Quick View
+                            </button>
+                            <img [src]="item.img" class="card-img-top" [alt]="item.title">
         
                           </div>
         
                           <!-- Body -->
-                          <div class="card-body px-0">
+                          <div class="card-body px-0 px-4">
         
                             <!-- Category -->
                             <div class="font-size-xs">
-                              <a class="text-muted" href="shop.html">Shoes</a>
+                              <span class="text-muted">{{item.category}}</span>
                             </div>
         
                             <!-- Title -->
                             <div class="font-weight-bold">
-                              <a class="text-body" href="product.html">
-                                Leather mid-heel Sandals
-                              </a>
+                              <span class="text-body">
+                                {{item.title}}
+                              </span>
                             </div>
-        
-                            <!-- Price -->
-                            <div class="font-weight-bold">
-                                <span class="font-size-xs text-gray-350 text-decoration-line-through">$182.00</span>
-                                <span class="text-primary">$129.00</span>
-                            </div>
+                              <ng-template [ngIf] = "item.isSale" [ngIfElse] = "elseBlock">
+                                <p class="text-right">
+                                  <span class="text-muted text-decoration-line-through">${{item.current_price | number: '1.2'}}</span>
+                                  <span class="ml-1 font-size-h6 font-weight-bolder text-primary">${{item.sale_price | number: '1.2'}}</span>
+                                </p>
+                              </ng-template>
+                              <ng-template #elseBlock>
+                                <p class="text-muted text-right">${{item.current_price | number: '1.2'}}</p>
+                              </ng-template>
         
                           </div>
         

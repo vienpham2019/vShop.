@@ -42,7 +42,7 @@
                           <!-- Links -->
                           <ul class="list-styled mb-0 font-size-sm shadow-sm p-3 mb-5 bg-white ml-3">
                             <li class="list-styled-item" *ngFor = "let content of catalog.nav_content[catalog_title]">
-                              <a class="list-styled-link" [routerLink] = "['/catalog']">{{content}}</a>
+                              <a class="list-styled-link" [routerLink] = "['/catalog']" (click) = "getCatalogs(content_title, content)">{{content}}</a>
                             </li>
                           </ul>
 

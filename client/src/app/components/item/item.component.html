@@ -6,7 +6,7 @@
           <!-- Breadcrumb -->
           <ol class="breadcrumb mb-0 font-size-xs text-gray-400">
             <li class="breadcrumb-item">
-              <a class="text-gray-400" href="index.html">Home</a>
+              <a class="text-gray-400" [routerLink] = "['/']">Home</a>
             </li>
             <li class="breadcrumb-item">
               <a class="text-gray-400" href="shop.html">Women's Shoes</a>
@@ -38,8 +38,8 @@
                       New
                     </div>
 
-                    <div class="col-md-11">
-                        <img [src]="item.img" [alt]="item.title" class="img-fluid">
+                    <div class="col-md-12" *ngIf = "color.img">
+                        <img [src]="color.img" [alt]="item.title" class="img-fluid">
                     </div>
 
                 </div>
@@ -90,18 +90,36 @@
               <div class="form-group">
 
                 <!-- Label -->
-                <p class="mb-5">
-                  Color: <strong id="colorCaption">{{itemForm.value.color}}</strong>
+                <p class="mb-5" *ngIf = "color.color">
+                  Color: <strong>{{color.color}}</strong>
                 </p>
 
-                <!-- Radio -->
-                
-                <div class="mb-8 ml-n1">
-                  <div class="col-12 col-lg-auto">
-                    <!-- Quantity -->
-                    <select class="custom-select mb-2 w-50" formControlName = "color">
-                        <option value={{color}} *ngFor = "let color of item.colors">{{color}}</option> 
-                    </select>
+                <button class="btn btn-outline-dark mb-2" data-toggle="dropdown">
+                  Select Colors  <i class="fas fa-tint ml-2"></i>
+                </button>
+
+                <div class="dropdown-menu">
+                  <div class="card colors_dropdown" style="width: 20rem;">
+                    <div class="card-body">
+                      <ul class="list-styled font-size-sm">
+                        <li class="list-styled-item shadow-sm p-3 mb-5 bg-white cursor" *ngFor = "let color of item.colors" (click) = "selectColor(color)">
+
+                          <div class="card mb-3">
+                            <div class="row no-gutters">
+                              <div class="col-md-4">
+                                <img [src]="color.img" class="card-img">
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <span class="card-text font-weight-bold text-monospace">{{color.color}}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
 
@@ -109,7 +127,7 @@
               <div class="form-group">
 
                 <!-- Label -->
-                <p class="mb-5">
+                <p class="mb-5" *ngIf = "sizes.length">
                   Size: <strong><span id="sizeCaption">{{itemForm.value.size}}</span> US</strong>
                 </p>
 

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ShoppingItemService } from '../../services/shopping-item/shopping-item.service'
+import { Store , select } from '@ngrx/store'
+import { AppInitState } from '../../models/app_initState.model'
+import { CatalogItem } from '../../models/catalog_item.model'
+import { CatalogItemInit } from '../../models/catalog_item_init.model'
+import * as CatagoryItemActions from '../../actions/catalogItem.action'
 
 @Component({
   selector: 'app-catalogs',
@@ -7,26 +11,25 @@ import { ShoppingItemService } from '../../services/shopping-item/shopping-item.
   styleUrls: ['./catalogs.component.css']
 })
 export class CatalogsComponent implements OnInit {
+  constructor(
+    private store: Store<{main_reducer: AppInitState}> ,
+    private catagory_item_store: Store<{catalog_item: CatalogItemInit}>,
+    ) {
+      store.pipe(select('main_reducer')).subscribe(value => {
+        let shuffelArray = [...value.display_catalogs]
+        this.slide_imgs = shuffelArray.sort((a,b) => 0.5 - Math.random()).slice(0,3)
+        this.items = value.display_catalogs
+      })
+    }
 
-  sizes: any[] = [
-    {value: "3XS", selected: false }, 
-    {value: "2XS", selected: false },
-    {value: "XS", selected: false },
-    {value: "S", selected: false },
-    {value: "M", selected: false },
-    {value: "L", selected: false },
-    {value: "XL", selected: false },
-    {value: "2XL", selected: false },
-    {value: "3XL", selected: false },
-    {value: "XL", selected: false }
-  ]
   price_range: string[] = ["$10.00 - $49.00" , "$50.00 - $99.00", "$100.00 - $199.00" , "$200.00 and Up"]
-  slide_imgs: string[] = ["https://media.offbroadwayshoes.com/images/2020/Q3/homepage/20200715-cb-adidas.jpg" , "https://confidentialman.com/wp-content/uploads/2016/10/Shoes-too-Consider-if-You-Cant-Afford-the-Nike-Air-MAG-950x600.jpg" , "https://theplaybook.asia/wp-content/uploads/sites/27/2016/10/DSC_2539-950x634-950x600.jpg"]
+  slide_imgs: CatalogItem[]
+
   current_catalog: string = "Women's Clothing"
 
-  filter_details: any = []
+  filter_details: any[] = []
 
-  constructor(private shopping_item_s: ShoppingItemService) { }
+  items:CatalogItem[] 
 
   ngOnInit(): void {
     window.scrollTo(0,0)
@@ -38,28 +41,9 @@ export class CatalogsComponent implements OnInit {
 
   remove_filter(detail){
     this.filter_details = this.filter_details.filter(d => d.value !== detail.value)
-    if(detail.title === "size"){
-      this.sizes[detail.index] = {value: detail.value, selected: false}
-    }
     if(detail.title === 'price'){
       let input = document.getElementById(detail.value)
-      console.log(input)
     }
-  }
-
-  size_class(selected){
-    let default_class = "list-group-item m-2 p-4 text-center border cursor"
-    return `${default_class} ${selected ? " border-success" : ""}`
-  }
-
-  select_size(size , index){
-    let {value , selected} = size 
-    if(!selected){
-      this.filter_details.push({value , title: 'size' , index})
-    }else{
-      this.filter_details = this.filter_details.filter(d => d.value !== value)
-    }
-    this.sizes[index] = {value, selected: !selected}
   }
 
   select_price(price){
@@ -69,8 +53,8 @@ export class CatalogsComponent implements OnInit {
     this.filter_details.push({value: price , title: "price"})
   }
 
-  addToShoppingCart(){
-    this.shopping_item_s.addToShoppingItem({new: "new"})
+  viewItem(item):void{
+    this.catagory_item_store.dispatch(new CatagoryItemActions.AddDisplayItem(item))
   }
 
 }

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ShoppingItemService } from '../../services/shopping-item/shopping-item.service'
 
 import { ShoppingItem } from '../../models/shopping_item.model'
-import { Observable } from 'rxjs'
 import { select , Store } from '@ngrx/store'
-import { AddItem } from '../../actions/shopping_items.actions'
+import { AppInitState } from '../../models/app_initState.model'
+import * as AppActions from '../../actions/app.action'
 
 @Component({
   selector: 'app-navbar',
@@ -18,15 +18,16 @@ export class NavbarComponent implements OnInit {
   catalog: any = {
     nav_keys: ['Women' , 'Men'],
     nav_content: {
-      "Women": ["Shoes" , "Top & T-shirts" , "Hoodies" , "Jackets" , "Backpacks & Bags" , "Hats" , "Skirts & Dresses"],
-      "Men": ["Shoes" , "Top & T-shirts" , "Hoodies" , "Jackets" , "Backpacks & Bags" , "Hats" , "Pants & Tights"], 
+      "Women": ["Shoes", "Slides" , "Tops" , "T-Shirts", "Crews", "Hoodies" , "Jackets" , "Backpacks", "Bags" , "Hats" , "Skirts"],
+      "Men": ["Shoes" , "Slides" , "Tops", "T-Shirts" ,"Crews" , "Hoodies" , "Jackets" , "Backpacks", "Bags" , "Hats", "Tights"], 
     }
   }
 
   shopping_items: number 
   constructor(
     private shopping_item_s: ShoppingItemService, 
-    private store: Store<{shopping_items: ShoppingItem[]}> 
+    private store: Store<{shopping_items: ShoppingItem[]}> ,
+    private catalog_store: Store<{main_reducer: AppInitState}>
   ) {
     store.pipe(select('shopping_items')).subscribe(values => {
       this.shopping_items = values.length
@@ -34,6 +35,10 @@ export class NavbarComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+
+  getCatalogs(gender , category){
+    this.catalog_store.dispatch(new AppActions.DisplayCatalogs(gender , category.substring(0,category.length - 1)))
   }
 
 }
