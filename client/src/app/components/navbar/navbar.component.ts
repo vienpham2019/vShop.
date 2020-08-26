@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
   catalog: any = {
     nav_keys: ['Women' , 'Men'],
     nav_content: {
-      "Women": ["Shoes", "Slides" , "Tops" , "T-Shirts", "Crews", "Hoodies" , "Jackets" , "Backpacks", "Bags" , "Hats" , "Skirts" , "Pants", "Caps"],
+      "Women": ["Shoes", "Slides" , "Tops", "Tanks", "Crews", "Hoodies" , "Jackets" , "Backpacks", "Bags" , "Hats" , "Skirts", "Caps"],
       "Men": ["Shoes" , "Tops", "T-Shirts" ,"Crews" , "Hoodies" , "Jackets" , "Backpacks", "Bags" , "Hats", "Beanies" , "Pants" , "Caps"], 
     }
   }

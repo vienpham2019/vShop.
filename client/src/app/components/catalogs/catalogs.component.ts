@@ -21,16 +21,18 @@ export class CatalogsComponent implements OnInit {
         let shuffelArray = [...value.display_catalogs]
         this.slide_imgs = shuffelArray.sort((a,b) => 0.5 - Math.random()).slice(0,3)
         this.items = value.display_catalogs
+        this.clone_items = [...this.items]
         this.start_index = 0 
         this.end_index = 9
         this.item_display_amount = 9 
+        this.filter_price_index = -1
+        this.filter_details = []
         this.slice_items() 
         this.current_catalog = value.current_catalog
-        this.item_length = new Array(Math.ceil(this.items.length / this.item_display_amount)).fill(0)
       })
     }
 
-  price_range: string[] = ["$10.00 - $49.00" , "$50.00 - $99.00", "$100.00 - $199.00" , "$200.00 and Up"]
+  price_range: any[] = [[10, 25] , [25 , 50] , [50 , 100] ,[100 , 200] , [200 , 300]]
   slide_imgs: CatalogItem[]
 
   current_catalog: string = ""
@@ -38,12 +40,15 @@ export class CatalogsComponent implements OnInit {
   filter_details: any[] = []
 
   items:CatalogItem[] 
+  clone_items:CatalogItem[] 
 
   item_length: number[]
   display_items: any[]
   start_index: number 
   end_index: number
   item_display_amount: number 
+
+  filter_price_index: number = -1
 
   ngOnInit(): void {
     window.scrollTo(0,0)
@@ -53,18 +58,28 @@ export class CatalogsComponent implements OnInit {
     return index === 0 ? "carousel-item active" : "carousel-item"
   }
 
-  remove_filter(detail){
-    this.filter_details = this.filter_details.filter(d => d.value !== detail.value)
-    if(detail.title === 'price'){
-      let input = document.getElementById(detail.value)
+  remove_filter(index , title){
+    this.filter_details = this.filter_details.filter((_,i)=> i !== index)
+    this.filter([...this.items])
+    if(title === 'price'){
+      this.filter_price_index = -1
     }
+    // if(detail.title === 'price'){
+    //   let input = document.getElementById(detail.value)
+    // }
   }
 
-  select_price(price){
-    if(this.filter_details.find(d => d.title === 'price')){
-      this.filter_details = this.filter_details.filter(d => d.title !== 'price')
-    }
-    this.filter_details.push({value: price , title: "price"})
+  filter(items){
+    this.clone_items = items 
+    this.slice_items()
+  }
+
+  filter_price(price , index){
+    this.filter_details = this.filter_details.filter(d => d.title !== 'price')
+    this.filter_details.push({value: `$${price[0]}.00 - ${price[1]}.00` , title: "price"})
+    this.filter_price_index = index
+    let filterPrice = [...this.items].filter(item => item.sale_price >= price[0] && item.sale_price <= price[1])
+    this.filter(filterPrice)
   }
 
   viewItem(item):void{
@@ -72,7 +87,8 @@ export class CatalogsComponent implements OnInit {
   }
 
   slice_items(){
-    this.display_items = this.pagination_s.slice_arrays(this.items , this.start_index , this.end_index)
+    this.item_length = new Array(Math.ceil(this.clone_items.length / this.item_display_amount)).fill(0)
+    this.display_items = this.pagination_s.slice_arrays(this.clone_items , this.start_index , this.end_index)
   }
 
   change_page(value):void{

@@ -33,15 +33,11 @@
                             </a>
 
                             <div class="collapse show" id="priceCollapse" data-toggle="simplebar" data-target="#priceGroup">
-                                <ul>
-                                    <p *ngFor = "let price of price_range">
-                                        <label>
-                                            <input type="radio" name="group1" id={{price}} class="mr-2" (click) = "select_price(price)"/>
-                                            <span>{{price}}</span>
-                                        </label>
-                                    </p>
-                                    
-                                </ul>
+                              <ul class="list-group list-group-flush">
+                                <li class="list-group-item w-100 cursor list-group-item-action list-group-item-light"  *ngFor = "let price of price_range , let i = index" (click) = "filter_price(price , i)">
+                                  <span [class.text-info] = "i === filter_price_index">${{price[0] | number: '1.2'}} - ${{price[1] | number: '1.2'}}</span>
+                                </li>
+                              </ul>
                             </div>
                         </li>
                     </ul>
@@ -95,10 +91,10 @@
       
                         <span 
                             class="btn btn-xs btn-light font-weight-normal text-muted mr-3 mb-3"
-                            *ngFor = "let detail of filter_details"
+                            *ngFor = "let detail of filter_details; let i = index"
                             >
                                 {{detail.value}}
-                            <a class="text-reset ml-2" role="button" (click) = "remove_filter(detail)">
+                            <a class="text-reset ml-2" role="button" (click) = "remove_filter(i , detail.title)">
                                 <i class="fas fa-times"></i>
                             </a>
                         </span>
@@ -141,27 +137,31 @@
                                 {{item.title}}
                               </span>
                             </div>
-                              <ng-template [ngIf] = "item.isSale" [ngIfElse] = "elseBlock">
-                                <p class="text-right">
-                                  <span class="text-muted text-decoration-line-through">${{item.current_price | number: '1.2'}}</span>
-                                  <span class="ml-1 font-size-h6 font-weight-bolder text-primary">${{item.sale_price | number: '1.2'}}</span>
-                                </p>
-                              </ng-template>
-                              <ng-template #elseBlock>
-                                <p class="text-muted text-right">${{item.current_price | number: '1.2'}}</p>
-                              </ng-template>
+                            <ng-template [ngIf] = "item.isSale" [ngIfElse] = "elseBlock">
+                              <p class="text-right">
+                                <span class="text-muted text-decoration-line-through">${{item.current_price | number: '1.2'}}</span>
+                                <span class="ml-1 font-size-h6 font-weight-bolder text-primary">${{item.sale_price | number: '1.2'}}</span>
+                              </p>
+                            </ng-template>
+                            <ng-template #elseBlock>
+                              <p class="text-muted text-right">${{item.current_price | number: '1.2'}}</p>
+                            </ng-template>
         
                           </div>
         
                         </div>
         
                       </div>
+
+                      <div class="container text-center" *ngIf = "clone_items.length === 0">
+                        <h3 class="text-monospace">Item not found</h3>
+                      </div>
                     
                   </div>
 
                   <!-- Pagination -->
 
-                  <nav class="d-flex justify-content-center justify-content-md-end" *ngIf = "items.length > item_display_amount">
+                  <nav class="d-flex justify-content-center justify-content-md-end" *ngIf = "clone_items.length > item_display_amount">
                     <ul class="pagination pagination-sm text-gray-400">
                       <li class="page-item">
                         <span class="page-link page-link-arrow cursor" (click) = "change_page('prev')">
