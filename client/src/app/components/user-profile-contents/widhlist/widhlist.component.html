@@ -23,7 +23,7 @@
                     </span>
 
                     <!-- Button -->
-                    <button class="btn btn-xs btn-block btn-dark card-btn">
+                    <button class="btn btn-xs btn-block btn-dark card-btn" (click) = "viewItem(item)" [routerLink] = "['/item']">
                         <i class="far fa-eye mr-2 mb-1"></i> Quick View
                     </button>
 
@@ -33,18 +33,32 @@
                 </div>
 
                 <!-- Body -->
-                <div class="card-body font-weight-bold text-center">
-                    <span class="text-body" >{{item.title}}</span> <br>
-                    <span *ngIf = "item.isSale; else elseBlock">
-                        <span class="font-size-xs text-gray-350 text-decoration-line-through">${{item.current_price | number: '1.2'}}</span>
-                        <span class="ml-2 text-primary">${{item.sale_price | number: '1.2'}}</span>
+                <div class="card-body px-0 px-4">
+      
+                  <!-- Category -->
+                  <div class="font-size-xs">
+                    <span class="text-muted">{{item.category}}</span>
+                  </div>
+
+                  <!-- Title -->
+                  <div class="font-weight-bold">
+                    <span class="text-body">
+                      {{item.title}}
                     </span>
-                    <ng-template #elseBlock>
-                        <span class="text-muted">${{item.current_price | number: '1.2'}}</span>
-                    </ng-template>
+                  </div>
+                  <ng-template [ngIf] = "item.isSale" [ngIfElse] = "elseBlock">
+                    <p class="text-right">
+                      <span class="text-muted text-decoration-line-through">${{item.current_price | number: '1.2'}}</span>
+                      <span class="ml-1 font-size-h6 font-weight-bolder text-primary">${{item.sale_price | number: '1.2'}}</span>
+                    </p>
+                  </ng-template>
+                  <ng-template #elseBlock>
+                    <p class="text-muted text-right">${{item.current_price | number: '1.2'}}</p>
+                  </ng-template>
+
                 </div>
 
-            </div>
+              </div>
         </div>
 
     </div>

@@ -1,12 +1,14 @@
 import { Action } from '@ngrx/store'
 import { ShippingDetail } from './../models/shipping_detail.model'
 import { OrderDetail } from './../models/order_detail.model'
-import { ShoppingItem } from '../models/shopping_item.model'
+import { CatalogItem  } from '../models/catalog_item.model'
 import { UserInfo } from '../models/user_info.model'
  
 export const add_shipping = '[User Profile Component] Add Shipping' 
+export const remove_shipping = '[User Profile Component] Remove Shipping' 
 export const add_edit_shipping = '[User Profile Component] Add Edit Shipping' 
 export const edit_shipping = '[User Profile Component] Edit Shipping'
+export const set_default_shipping = '[User Profile Component] Set Default Shipping'
 export const add_order = '[Payment Component] Add Order'
 export const remove_order = '[Payment Component] Remove Order'
 export const select_display_order_details = '[User Profile Order Component] Display Order Detail'
@@ -20,6 +22,12 @@ export class AddShipping implements Action {
 	constructor(public shipping: ShippingDetail) {} 
 }
 
+export class RemoveShipping implements Action {
+	readonly type = remove_shipping
+	
+	constructor(public index: number) {} 
+}
+
 export class AddEditShipping implements Action {
 	readonly type = add_edit_shipping
 	
@@ -29,6 +37,11 @@ export class AddEditShipping implements Action {
 export class EditShipping implements Action {
     readonly type = edit_shipping 
     constructor(public shipping: ShippingDetail ){}
+}
+
+export class SetDefaultShipping implements Action {
+    readonly type = set_default_shipping 
+    constructor(public shippings: ShippingDetail[] ){}
 }
 
 export class AddOrder implements Action { 
@@ -48,7 +61,7 @@ export class DisplayOrderDetail implements Action{
 
 export class AddWidhlist implements Action {
 	readonly type = add_widhlist
-	constructor (public item: ShoppingItem){}
+	constructor (public item: CatalogItem){}
 }
 
 export class RemoveWidhlist implements Action {
@@ -61,4 +74,4 @@ export class UpdateUserInfo implements Action {
 	constructor (public user_info: UserInfo){}
 }
 
-export type Actions = AddShipping | AddEditShipping | EditShipping | AddOrder | RemoveOrder | DisplayOrderDetail | AddWidhlist | RemoveWidhlist | UpdateUserInfo
+export type Actions = AddShipping | RemoveShipping| AddEditShipping | EditShipping | SetDefaultShipping | AddOrder | RemoveOrder | DisplayOrderDetail | AddWidhlist | RemoveWidhlist | UpdateUserInfo

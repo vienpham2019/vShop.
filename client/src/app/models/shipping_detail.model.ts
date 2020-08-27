@@ -8,5 +8,6 @@ export interface ShippingDetail {
     state: string, 
     zip: string, 
     country: string, 
-    phone: string 
+    phone: string,
+    default_address: boolean
 }

@@ -301,7 +301,7 @@
               <div class="modal-body">
                 <div class="row d-flex justify-content-center" *ngIf = "user_addresses.length; else elseBlock">
                   <div class="col-6 cursor" *ngFor = "let address of user_addresses ; let i = index" (click) = "getShippingAddress(address , i)">
-                    <div class="card card-lg bg-light mb-8 border" [class.border-success] = "i === selected_address_index">
+                    <div class="card card-lg bg-light mb-8 border" [class.border-info] = "i === selected_address_index">
                       <div class="card-body">
               
                         <!-- Heading -->
@@ -360,9 +360,7 @@
               <div class="col-4">
 
                 <!-- Image -->
-                <a href="product.html">
-                  <img [src]="item.img" [alt]="item.title" class="img-fluid">
-                </a>
+                <img [src]="item.img" [alt]="item.title" class="img-fluid">
 
               </div>
               <div class="col">
@@ -461,32 +459,54 @@
       <div class="container text-center">
         <h1 style="font-size: 3em;">Thanks for your order!</h1>
         <p class="mb-2">You order has been placed, and a translator will start work shortly...</p>
-        <hr>
-        <div class="my-2 text-left">
-          <div class="row justify-content-md-center">
-            <div class="col col-lg-2">
-              <strong>EMAIL ADDRESS: </strong><br>
-              <hr>
-              <strong>ORDER NUMBER: </strong><br>
-              <hr>
-              <strong>TOTAL: </strong><br>
-              <hr>
-              <strong>SHIPPING TO: </strong><br>
-            </div>
-            <div class="col col-lg-2">
-              <span>{{payment_form.value.email}}</span><br>
-              <hr>
-              <span>1234</span><br>
-              <hr>
-              <span>${{payment_form.value.total | number:'1.2'}} USD</span><br>
-              <hr>
-              <span>
-                {{payment_form.value.address1}} <br>
-                {{payment_form.value.town_city}} {{payment_form.value.state}} , {{payment_form.value.zip}} <br>
-                {{payment_form.value.country}}
-              </span><br>
-            </div>
-          </div>
+
+        <i class="fas fa-boxes my-5" style="font-size: 2em;"></i>
+
+        <div class="my-2 text-left table-responsive shadow-sm p-3 mb-5 bg-white col-6 container">
+          <table class="table table-borderless table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <strong>EMAIL ADDRESS: </strong>
+                </td>
+                <td>
+                  {{payment_form.value.email}}
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <strong>ORDER NUMBER: </strong>
+                </td>
+                <td>
+                  {{order_id}}
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <strong>TOTAL: </strong>
+                </td>
+                <td>
+                  <span>${{order_total | number:'1.2'}} USD</span>
+                </td>
+              </tr>
+        
+              <tr>
+                <td>
+                  <strong>SHIPPING TO: </strong>
+                </td>
+                <td>
+                  <span>
+                    {{payment_form.value.address1}} <br>
+                    {{payment_form.value.town_city}} {{payment_form.value.state}} , {{payment_form.value.zip}} <br>
+                    {{payment_form.value.country}}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          
+          </table>
         </div>
 
         <button class="btn btn-dark my-5" [routerLink] = "['/user-profile']">

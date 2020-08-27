@@ -2,11 +2,11 @@
     <div class="col-12 col-lg-6" *ngFor = "let shipping of shipping_details; let i = index">
 
       <!-- Card -->
-      <div class="card card-lg bg-light mb-8">
-        <div class="card-body">
+      <div class="card card-lg bg-light mb-2 border" [class.border-info] = 'shipping.default_address' >
+        <div class="card-body border-bottom">
 
           <h6 class="mb-6">
-            Shipping Detail 
+            {{shipping.default_address ? 'Default Shipping Detail' : 'Shipping Detail'}} 
           </h6>
 
           <p class="mb-0">
@@ -27,13 +27,13 @@
               <i class="fa fa-pen"></i>
             </button>
 
-            <button class="btn btn-xs btn-circle btn-white-primary" >
+            <button class="btn btn-xs btn-circle btn-white-primary" (click) = "removeShipping(i)" >
               <i class="fas fa-times"></i>
             </button>
 
           </div>
-
         </div>
+        <p class="text-right p-0 my-2 mx-0">Set default shipping detail <input type="checkbox" class="mr-2 cursor" [checked] = "shipping.default_address" (click) = "setDefaultShipping(i)"></p>
       </div>
 
     </div>

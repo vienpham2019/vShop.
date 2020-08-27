@@ -7,6 +7,10 @@ export const initState: User = {
     first_name: '',
     last_name: '',
     shipping_details: [
+        {first_name: 'Daniel' , last_name: 'Robinson', email: 'vienpham2019@gmail.com' , address1: '3997 Raccoon Run', address2: '',city: 'New', state: 'Kingston', zip: '45644', country: 'United States', phone: '6146389574', default_address: false },
+        {first_name: 'Daniel' , last_name: 'Robinson', email: 'vienpham2019@gmail.com' , address1: '3997 Raccoon Run', address2: '',city: 'New', state: 'Kingston', zip: '45644', country: 'United States', phone: '6146389574', default_address: false },
+        {first_name: 'Vien' , last_name: 'Pham', email: 'vienpham2019@gmail.com' , address1: '3997 Raccoon Run', address2: '',city: 'New', state: 'Kingston', zip: '45644', country: 'United States', phone: '6146389574', default_address: true },
+        {first_name: 'Daniel' , last_name: 'Robinson', email: 'vienpham2019@gmail.com' , address1: '3997 Raccoon Run', address2: '',city: 'New', state: 'Kingston', zip: '45644', country: 'United States', phone: '6146389574', default_address: false}
     ],
     edit_shipping_index: null ,
     edit_shipping_detail: null ,
@@ -28,8 +32,14 @@ export function UserReducer(state = initState , action: UserActions.Actions) {
             shipping_details[state.edit_shipping_index] = action.shipping
             return {...action , shipping_details}
         
+        case UserActions.set_default_shipping: 
+            return {...action, shipping_details: action.shippings}
+        
         case UserActions.add_shipping: 
             return {...state, shipping_details: [action.shipping, ...state.shipping_details]}
+
+        case UserActions.remove_shipping: 
+            return {...state, shipping_details: state.shipping_details.filter((_,i) => i !== action.index)}
 
         case UserActions.add_order: 
             return {...state, order_details: [action.order , ...state.order_details]}

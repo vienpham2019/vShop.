@@ -64,9 +64,6 @@ export class CatalogsComponent implements OnInit {
     if(title === 'price'){
       this.filter_price_index = -1
     }
-    // if(detail.title === 'price'){
-    //   let input = document.getElementById(detail.value)
-    // }
   }
 
   filter(items){

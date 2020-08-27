@@ -111,7 +111,7 @@ export class ItemComponent implements OnInit {
     if(this.in_widhlist){
       Swal.fire('This item already in your widhlist.')
     }else{
-      this.catalog_store.dispatch(new UserActions.AddWidhlist(this.filterItem()))
+      this.catalog_store.dispatch(new UserActions.AddWidhlist(this.item))
       Swal.fire({
         position: 'top-end',
         icon: 'success',

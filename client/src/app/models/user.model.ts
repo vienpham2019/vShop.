@@ -1,6 +1,6 @@
 import { ShippingDetail } from './shipping_detail.model'
 import { OrderDetail } from './order_detail.model'
-import { ShoppingItem } from './shopping_item.model'
+import { CatalogItem } from './catalog_item.model'
 import { UserInfo } from './user_info.model'
 export interface User {
     current_user: boolean, 
@@ -11,6 +11,6 @@ export interface User {
     edit_shipping_detail: ShippingDetail | null ,
     order_details: OrderDetail[],
     display_order_detail: OrderDetail | null ,
-    widhlist: ShoppingItem[],
+    widhlist: CatalogItem[],
     user_info: UserInfo
 }

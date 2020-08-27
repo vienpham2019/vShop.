@@ -30,5 +30,14 @@ export class AddressComponent implements OnInit {
     this.store.dispatch(new UserActions.AddEditShipping(index , shipping))
   }
 
+  setDefaultShipping(index):void{
+    let shipping_details = this.shipping_details.map((value,i) => ({...value, default_address: i === index}))
+    this.store.dispatch(new UserActions.SetDefaultShipping(shipping_details))
+  }
+
+  removeShipping(index: number):void{
+    this.store.dispatch(new UserActions.RemoveShipping(index))
+  }
+
 
 }

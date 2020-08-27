@@ -19,6 +19,7 @@ export class EditAddressModalComponent implements OnInit {
   ) {
     store.pipe(select('user')).subscribe(value => {
       this.edit_shipping_detail = value.edit_shipping_detail
+      this.shipping_details = value.shipping_details
       this.setUpForm()
     })
    }
@@ -39,6 +40,7 @@ export class EditAddressModalComponent implements OnInit {
 
   submit_invalid: boolean = false 
   edit_shipping_detail: ShippingDetail
+  shipping_details: ShippingDetail[]
   form_title: string = "Add Shipping"
 
   ngOnInit(): void {
@@ -62,9 +64,10 @@ export class EditAddressModalComponent implements OnInit {
     this.submit_invalid = this.editAddressForm.status === "INVALID"
     if(!this.submit_invalid){
       if(this.edit_shipping_detail){
-        this.store.dispatch(new UserActions.EditShipping(this.editAddressForm.value))
+        let { default_address } = this.edit_shipping_detail
+        this.store.dispatch(new UserActions.EditShipping({...this.editAddressForm.value, default_address}))
       }else{
-        this.store.dispatch(new UserActions.AddShipping(this.editAddressForm.value))
+        this.store.dispatch(new UserActions.AddShipping({...this.editAddressForm.value, default_address: this.shipping_details.length === 0 }))
       }
       document.getElementById('editUserAddressCloseBtn').click()
     }

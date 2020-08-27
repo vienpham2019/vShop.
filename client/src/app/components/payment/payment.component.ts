@@ -35,9 +35,11 @@ export class PaymentComponent implements OnInit {
       this.current_user = value.current_user 
       this.user_addresses = value.shipping_details
       this.setPaymentForm()
-      if(this.user_addresses[0]){
-        this.getShippingAddress(this.user_addresses[0] , 0)
-      }
+      value.shipping_details.forEach((value, index) => {
+        if(value.default_address){
+          this.getShippingAddress(value , index)
+        }
+      })
       this.select_shipping(0)
     })
    }
@@ -56,6 +58,8 @@ export class PaymentComponent implements OnInit {
     "1 - 2 Shipping": [1,2]
   }
 
+  order_id: string 
+
   shopping_items: ShoppingItem[]
   current_user: boolean = false 
 
@@ -67,6 +71,7 @@ export class PaymentComponent implements OnInit {
   amounts: any[] = Array.from(Array(5) , (_, i) => i + 1)
   payment_complete: boolean = false 
   shipping_price: number = 0
+  order_total: number 
   user_addresses: any[] = []
   selected_address_index: number = -1
 
@@ -88,9 +93,9 @@ export class PaymentComponent implements OnInit {
       zip: ['', Validators.required],
       phone: ['' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]],
       shipping_details: this._fb.group({
-        type: [''],
-        detail: [''],
-        price: ['']
+        type: ['Free Shipping'],
+        detail: ['Delivery in 8 - 10 working days'],
+        price: [0]
       }),
       order_notes: ['GUYS GO VOTE FOR Red Velvet  AT THE VMA SO THEY CAN WIN FOR THeir latest  SONG PSYCHO. PLEASE ANY ONE GO DO IT .I REALLY REALLY WANT THEM TO WIN. THAt  SONG DESERVE IT. PLEASE I HOPE PEOPLE SEE THIS'],
       total: ['']
@@ -143,7 +148,7 @@ export class PaymentComponent implements OnInit {
     if(!this.submit_invalid){
       this.payment_complete = true
       let { type , detail } = this.payment_form.value.shipping_details
-      let order_id = UUID.UUID()
+      let order_id = this.order_id = UUID.UUID()
       let order_date = this.shopping_item_s.currentDate(new Date())
       let shipping_date = [
         this.shopping_item_s.currentDate(new Date(new Date().setDate(new Date().getDate() + this.shipping_date[type][0]))),
@@ -152,8 +157,9 @@ export class PaymentComponent implements OnInit {
       let {first_name, last_name, email , address1 , address2 , city , state, zip , country , phone , order_notes } = this.payment_form.value 
       let shipping_feed = this.shipping_price
       let {total , subtotal , tax , shopping_items } = this
+      this.order_total = total
       let shipping_method = [type,detail]
-      let shipping_address = {first_name, last_name, email, address1 , address2 , city , state, zip , country , phone }
+      let shipping_address = {first_name, last_name, email, address1 , address2 , city , state, zip , country , phone , default_address: false }
       this.store.dispatch(new UserActions.AddOrder({
         order_id, order_date , shipping_date, subtotal , tax , shipping_feed , total , shipping_address , shipping_method , order_notes , shopping_items 
       }))
@@ -197,10 +203,9 @@ export class PaymentComponent implements OnInit {
     }
   }
 
-  getShippingAddress(address , index){
-    let { first_name , last_name , email , company_name , country , address1 , address2, city , state , zip , phone} = address 
+  getShippingAddress(value , index){
+    let { first_name , last_name , email , company_name , country , address1 , address2, city , state , zip , phone} = value 
     this.payment_form.patchValue({ first_name , last_name , email , company_name , country , address1 , address2, city , state , zip , phone})
-    console.log(index)
     this.selected_address_index = index
   } 
 
