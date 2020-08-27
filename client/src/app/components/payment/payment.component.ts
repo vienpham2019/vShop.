@@ -83,7 +83,7 @@ export class PaymentComponent implements OnInit {
     this.payment_form = this._fb.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      email: ['' , [Validators.required , Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
+      email: ['' , [Validators.required , Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
       company_name: [''],
       country: ['' , Validators.required],
       address1: ['' , Validators.required],

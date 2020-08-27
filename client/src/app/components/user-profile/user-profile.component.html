@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf = "current_user">
     <div class="row">
       <div class="col-12">
 
@@ -17,7 +17,7 @@
 </div>
 
 
-<div class="container my-10">
+<div class="container my-10" *ngIf = "current_user">
     <div class="row">
       <div class="col-12 text-center">
 
@@ -65,3 +65,7 @@
 
     </div>
   </div>
+
+<ng-template [ngIf] = "!current_user">
+  <app-page-not-found></app-page-not-found>
+</ng-template>

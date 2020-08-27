@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms'
-import { ActivatedRoute , ParamMap } from '@angular/router'
+import { ActivatedRoute , ParamMap , Router } from '@angular/router'
+import { Store , select } from '@ngrx/store'
+import * as UserActions from '../../actions/user.actions'
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,12 +12,25 @@ import { ActivatedRoute , ParamMap } from '@angular/router'
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private _fb: FormBuilder , private _route: ActivatedRoute ) { }
+  constructor(
+    private _fb: FormBuilder , 
+    private router: Router, 
+    private _route: ActivatedRoute ,
+    private store: Store<{user: User}> 
+  ) { 
+    store.pipe(select('user')).subscribe(value => {
+      this.current_user = value.current_user
+      if(!this.current_user){
+        router.navigate(['/'])
+      }
+    })
+  }
   selectContentValue: string = "Orders"
   address: boolean 
   personal_info: boolean
   widhlist: boolean  
   order: boolean 
+  current_user: boolean
 
   navTitle: any[]
 

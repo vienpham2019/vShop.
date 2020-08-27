@@ -5,7 +5,6 @@ import { CatalogItemInit } from '../../models/catalog_item_init.model'
 import { CatalogItem } from '../../models/catalog_item.model'
 import * as ShoppingItemActions from '../../actions/shopping_items.actions'
 import * as UserActions from '../../actions/user.actions'
-import { ShoppingItem } from 'src/app/models/shopping_item.model';
 import { User } from 'src/app/models/user.model';
 import Swal from 'sweetalert2'
 
@@ -35,14 +34,16 @@ export class ItemComponent implements OnInit {
 
     user_store.pipe(select('user')).subscribe(value => {
       this.in_widhlist = !!value.widhlist.find(item => item.id === this.item.id)
+      this.current_user = value.current_user
     })
   }
 
   item: CatalogItem 
   in_widhlist: boolean
   select_size: string
-  sizes: any = []
+  sizes: any[] = []
   total_review: number 
+  current_user: boolean
 
   amounts: any = Array.from(Array(5), (_, i) => i + 1)
   review_star: number[] = new Array(5).fill(0)
@@ -108,17 +109,21 @@ export class ItemComponent implements OnInit {
   }
 
   addToWidhlist(){
-    if(this.in_widhlist){
-      Swal.fire('This item already in your widhlist.')
+    if(this.current_user){
+      if(this.in_widhlist){
+        Swal.fire('This item already in your widhlist.')
+      }else{
+        this.catalog_store.dispatch(new UserActions.AddWidhlist(this.item))
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'This item has been add to your widhlist.',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
     }else{
-      this.catalog_store.dispatch(new UserActions.AddWidhlist(this.item))
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'This item has been add to your widhlist.',
-        showConfirmButton: false,
-        timer: 1000
-      })
+      document.getElementById('loginModalButton').click()
     }
   }
 

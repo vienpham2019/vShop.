@@ -16,6 +16,8 @@ export const add_widhlist = '[User Profile Component] Add Widhlist'
 export const remove_widhlist = '[User Profile Component] Remove Widhlist'
 export const update_user_info = '[User Profile Component] Update User Info'
 
+export const user_logout = '[Navbar Component] UserLogout'
+
 export class AddShipping implements Action {
 	readonly type = add_shipping
 	
@@ -74,4 +76,9 @@ export class UpdateUserInfo implements Action {
 	constructor (public user_info: UserInfo){}
 }
 
-export type Actions = AddShipping | RemoveShipping| AddEditShipping | EditShipping | SetDefaultShipping | AddOrder | RemoveOrder | DisplayOrderDetail | AddWidhlist | RemoveWidhlist | UpdateUserInfo
+export class UserLogout {
+	readonly type = user_logout
+	constructor(public current_user: boolean) {}
+}
+
+export type Actions = AddShipping | RemoveShipping| AddEditShipping | EditShipping | SetDefaultShipping | AddOrder | RemoveOrder | DisplayOrderDetail | AddWidhlist | RemoveWidhlist | UpdateUserInfo | UserLogout
