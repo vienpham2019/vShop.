@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store'
 import { AppInitState } from './models/app_initState.model'
 import * as AppActions from './actions/app.action'
 
+import axios from 'axios'
+
 
 @Component({
   selector: 'app-root',
@@ -13,19 +15,18 @@ export class AppComponent implements OnInit{
   constructor(private store: Store<{main_reducer: AppInitState}>){}
 
   ngOnInit(){
-    fetch('http://localhost:5000/api/menCatalog')
-    .then(res => res.json())
-    .then(data => {
-      if(data){
-        this.store.dispatch(new AppActions.AddMenCatalogs(data))
+    axios('http://localhost:5000/api/menCatalog')
+    .then(menCatalogs => {
+      if(menCatalogs.data){
+        console.log(menCatalogs.data)
+        this.store.dispatch(new AppActions.AddMenCatalogs(menCatalogs.data))
       }
     })
 
-    fetch('http://localhost:5000/api/womenCatalog')
-    .then(res => res.json())
-    .then(data => {
-      if(data){
-        this.store.dispatch(new AppActions.AddWomenCatalogs(data))
+    axios('http://localhost:5000/api/womenCatalog')
+    .then(womenCatalogs => {
+      if(womenCatalogs.data){
+        this.store.dispatch(new AppActions.AddWomenCatalogs(womenCatalogs.data))
       }
     })
   }
