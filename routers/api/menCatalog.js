@@ -9,6 +9,7 @@ router.get('/', (req , res) => {
     .catch(error => res.status(400).json({msg: error}))
 })
 
+// add catagory review
 router.post('/' , (req , res) => {
     let newMenCatalog = new menCatalog({...req.body})
     newMenCatalog.save()

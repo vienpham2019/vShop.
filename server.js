@@ -17,6 +17,15 @@ mongoose.connection.once('open' , () => console.log('Connect to database ....'))
 app.use('/api/menCatalog' , require('./routers/api/menCatalog'))
 app.use('/api/womenCatalog' , require('./routers/api/womenCatalog'))
 
+// Serve static assets if in production 
+if(process.env.NODE_ENV === "production"){
+    // set static folder
+    app.use(express.static('client/build'))
+
+    app.get('*' , (req,res) => {
+        res.sendFile(path.resolve(__dirname, 'client' , 'build', 'index.html'))
+    })
+}
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT , () => console.log(`Listen to PORT ${PORT}`))

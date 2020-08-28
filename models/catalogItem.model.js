@@ -48,6 +48,11 @@ const CatalogSchema = new Schema({
         trim: true, 
         required: true
     }, 
+    catalog_type: {
+        type: String, 
+        trim: true, 
+        required: true
+    },
     reviews: {
         type: Array, 
         required: true
