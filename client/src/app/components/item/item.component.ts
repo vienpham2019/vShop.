@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { Store , select } from '@ngrx/store'
-import { CatalogItemInit } from '../../models/catalog_item_init.model'
+
+import { ShoppingItem } from '../../models/shopping_item.model'
+import { AppInitState } from '../../models/app_initState.model'
 import { CatalogItem } from '../../models/catalog_item.model'
 import * as ShoppingItemActions from '../../actions/shopping_items.actions'
 import * as UserActions from '../../actions/user.actions'
@@ -16,11 +18,12 @@ import Swal from 'sweetalert2'
 export class ItemComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
-    private catalog_store: Store<{catalog_item: CatalogItemInit}>,
-    private user_store: Store<{user: User}> 
+    private store: Store<{main_reducer: AppInitState}>,
+    private user_store: Store<{user: User}> ,
+    private shopping_item_store: Store<{shopping_items: ShoppingItem[]}>
   ) { 
-    catalog_store.pipe(select('catalog_item')).subscribe(value => {
-      this.item = value.display_catalog_item 
+    store.pipe(select('main_reducer')).subscribe(value => {
+      this.item = value.display_catalog_item
       this.sizes = this.item.sizes.map((value, i) => ({value , selected: i === 0}))
       this.setUpForm()
       if(this.sizes[0]){
@@ -98,7 +101,7 @@ export class ItemComponent implements OnInit {
   }
 
   addToShoppingCart(){
-    this.catalog_store.dispatch(new ShoppingItemActions.AddItem(this.filterItem()))
+    this.shopping_item_store.dispatch(new ShoppingItemActions.AddItem(this.filterItem()))
     Swal.fire({
       position: 'top-end',
       icon: 'success',
@@ -113,7 +116,7 @@ export class ItemComponent implements OnInit {
       if(this.in_widhlist){
         Swal.fire('This item already in your widhlist.')
       }else{
-        this.catalog_store.dispatch(new UserActions.AddWidhlist(this.item))
+        this.user_store.dispatch(new UserActions.AddWidhlist(this.item))
         Swal.fire({
           position: 'top-end',
           icon: 'success',

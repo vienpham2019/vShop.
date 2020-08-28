@@ -12,5 +12,6 @@ export interface CatalogItem {
     category: string, 
     season: string,  
     brand: string, 
+    catalog_type: string, 
     reviews: CatalogItemReview[]
 }

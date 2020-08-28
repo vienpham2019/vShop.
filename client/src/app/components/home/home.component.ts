@@ -3,11 +3,9 @@ import { PaginationService } from '../../services/pagination/pagination.service'
 
 import { Store , select } from '@ngrx/store'
 import { CatalogItem } from '../../models/catalog_item.model'
-import { AppInitState } from '../../models/app_initState.model'
-import { CatalogItemInit } from '../../models/catalog_item_init.model'
 
-import * as CatagoryItemActions from '../../actions/catalogItem.action'
-import { ShoppingItemService } from 'src/app/services/shopping-item/shopping-item.service';
+import { AppInitState } from '../../models/app_initState.model'
+import * as AppActions from '../../actions/app.action'
 
 @Component({
   selector: 'app-home',
@@ -28,7 +26,6 @@ export class HomeComponent implements OnInit {
   
   constructor(
     private pagination_s: PaginationService ,
-    private catagory_item_store: Store<{catalog_item: CatalogItemInit}>,
     private app_store: Store<{main_reducer: AppInitState}> 
   ) {
     app_store.pipe(select('main_reducer')).subscribe(value => {
@@ -48,7 +45,7 @@ export class HomeComponent implements OnInit {
   }
 
   viewItem(item){
-    this.catagory_item_store.dispatch(new CatagoryItemActions.AddDisplayItem(item))
+    this.app_store.dispatch(new AppActions.AddDisplayCatalogItem(item))
   }
 
   slice_new_arrivals(){

@@ -3,9 +3,9 @@ import { FormBuilder , Validators , FormGroup } from '@angular/forms'
 import { PaginationService } from '../../services/pagination/pagination.service' 
 
 import { Store , select } from '@ngrx/store'
-import { CatalogItemInit } from '../../models/catalog_item_init.model'
+import { AppInitState } from '../../models/app_initState.model'
 import { CatalogItemReview } from '../../models/catalog_item_review.model'
-import * as CatalogItemActions from '../../actions/catalogItem.action'
+import * as AppActions from '../../actions/app.action'
 
 @Component({
   selector: 'app-item-reviews',
@@ -16,9 +16,9 @@ export class ItemReviewsComponent implements OnInit {
   constructor(
     private _fb: FormBuilder , 
     private _pagination_s: PaginationService,
-    private store: Store<{catalog_item: CatalogItemInit}>
+    private store: Store<{main_reducer: AppInitState}>
   ) { 
-    store.pipe(select('catalog_item')).subscribe(value => {
+    store.pipe(select('main_reducer')).subscribe(value => {
       this.reviews = value.display_catalog_item.reviews
       this.getTotalReview()
       this.slice_reviews()
@@ -103,7 +103,7 @@ export class ItemReviewsComponent implements OnInit {
       let date = this.currentDate()
       let rate = this.score
       let {name , review_title , review} = this.new_review.value
-      this.store.dispatch(new CatalogItemActions.AddReview({date, rate , name , review_title , review}))
+      this.store.dispatch(new AppActions.AddCatalogItemReview({date, rate , name , review_title , review}))
       document.getElementById('write_review_btn').click()
       this.resetForm()
     }

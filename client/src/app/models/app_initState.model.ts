@@ -3,5 +3,6 @@ export interface AppInitState{
     men_catalogs: CatalogItem[],
     women_catalogs: CatalogItem[],
     display_catalogs: CatalogItem[],
-    current_catalog: string 
+    current_catalog: string ,
+    display_catalog_item: CatalogItem | null 
 }

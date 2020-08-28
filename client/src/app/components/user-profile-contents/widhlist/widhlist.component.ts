@@ -6,8 +6,8 @@ import { Store , select } from '@ngrx/store'
 import { User } from '../../../models/user.model'
 import * as UserActions from '../../../actions/user.actions'
 
-import { CatalogItemInit } from '../../../models/catalog_item_init.model'
-import * as CatagoryItemActions from '../../../actions/catalogItem.action'
+import { AppInitState } from '../../../models/app_initState.model'
+import * as AppActions from '../../../actions/app.action'
 
 @Component({
   selector: 'app-widhlist',
@@ -19,7 +19,7 @@ export class WidhlistComponent implements OnInit {
   constructor(
     private pagination_s: PaginationService,
     private store: Store<{user: User}> ,
-    private catagory_item_store: Store<{catalog_item: CatalogItemInit}>,
+    private app_store: Store<{main_reducer: AppInitState}>,
   ) { 
     store.pipe(select('user')).subscribe(value => {
       this.widhlist = value.widhlist
@@ -83,7 +83,7 @@ export class WidhlistComponent implements OnInit {
   }
 
   viewItem(item):void{
-    this.catagory_item_store.dispatch(new CatagoryItemActions.AddDisplayItem(item))
+    this.app_store.dispatch(new AppActions.AddDisplayCatalogItem(item))
   }
 
 }

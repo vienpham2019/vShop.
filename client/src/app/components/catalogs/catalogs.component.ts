@@ -3,8 +3,7 @@ import { Store , select } from '@ngrx/store'
 import { PaginationService } from '../../services/pagination/pagination.service'
 import { AppInitState } from '../../models/app_initState.model'
 import { CatalogItem } from '../../models/catalog_item.model'
-import { CatalogItemInit } from '../../models/catalog_item_init.model'
-import * as CatagoryItemActions from '../../actions/catalogItem.action'
+import * as AppActions from '../../actions/app.action'
 
 @Component({
   selector: 'app-catalogs',
@@ -15,7 +14,6 @@ export class CatalogsComponent implements OnInit {
   constructor(
     private pagination_s: PaginationService,
     private store: Store<{main_reducer: AppInitState}> ,
-    private catagory_item_store: Store<{catalog_item: CatalogItemInit}>,
     ) {
       store.pipe(select('main_reducer')).subscribe(value => {
         let shuffelArray = [...value.display_catalogs]
@@ -80,7 +78,7 @@ export class CatalogsComponent implements OnInit {
   }
 
   viewItem(item):void{
-    this.catagory_item_store.dispatch(new CatagoryItemActions.AddDisplayItem(item))
+    this.store.dispatch(new AppActions.AddDisplayCatalogItem(item))
   }
 
   slice_items(){

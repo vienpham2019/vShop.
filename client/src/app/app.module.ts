@@ -24,7 +24,6 @@ import { ShoppingItemService } from './services/shopping-item/shopping-item.serv
 import { StoreModule } from '@ngrx/store'
 import { shoppingItemReducer } from './reducers/shopping_items.reducer';
 import { UserReducer } from './reducers/user.reducer' 
-import { CatalogItemReducer } from './reducers/catalog_items.reducer' 
 import { AppReducer } from './reducers/app.reducer'
 
 import { OrderComponent } from './components/user-profile-contents/order/order.component';
@@ -63,7 +62,6 @@ import { OrderDetailMordalComponent } from './components/user-profile-contents/o
     StoreModule.forRoot({
       shopping_items: shoppingItemReducer,
       user: UserReducer ,
-      catalog_item: CatalogItemReducer,
       main_reducer: AppReducer
     })
   ],
