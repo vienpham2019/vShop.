@@ -7,6 +7,9 @@ import { AppInitState } from '../../models/app_initState.model'
 import { CatalogItemReview } from '../../models/catalog_item_review.model'
 import * as AppActions from '../../actions/app.action'
 
+import axios from 'axios'
+import { CatalogItem } from 'src/app/models/catalog_item.model';
+
 @Component({
   selector: 'app-item-reviews',
   templateUrl: './item-reviews.component.html',
@@ -20,6 +23,8 @@ export class ItemReviewsComponent implements OnInit {
   ) { 
     store.pipe(select('main_reducer')).subscribe(value => {
       this.reviews = value.display_catalog_item.reviews
+      this.current_catalog_item = value.display_catalog_item
+      this.reviews_length = new Array(Math.ceil(this.reviews.length / this.display_review_amount)).fill(0)
       this.getTotalReview()
       this.slice_reviews()
     })
@@ -35,18 +40,20 @@ export class ItemReviewsComponent implements OnInit {
   submit_invalid: boolean = false
 
   start_index: number = 0 
-  display_review_amount: number = 10
+  display_review_amount: number = 6
   end_index: number = this.display_review_amount
 
   display_reviews: any[] 
-  reviews_length: any[] = new Array(Math.ceil(this.reviews.length / this.display_review_amount)).fill(0)
+  reviews_length: any[]
+
+  current_catalog_item: CatalogItem 
 
   ngOnInit(): void {
     this.new_review = this._fb.group({
       rate: [''],
       date: [''],
       name: ['', Validators.required], 
-      email: ['', [Validators.required , Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
+      email: ['', [Validators.required , Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
       review_title: ['', [Validators.required , Validators.minLength(4)]],
       review: ['', [Validators.required , Validators.minLength(10)]]
     })
@@ -103,9 +110,16 @@ export class ItemReviewsComponent implements OnInit {
       let date = this.currentDate()
       let rate = this.score
       let {name , review_title , review} = this.new_review.value
-      this.store.dispatch(new AppActions.AddCatalogItemReview({date, rate , name , review_title , review}))
-      document.getElementById('write_review_btn').click()
-      this.resetForm()
+      let uri = this.current_catalog_item.catalog_type === "Men" ? '/api/menCatalog/add_review' : '/api/womenCatalog/add_review'
+      axios.post(
+        uri , {review: {date, rate , name , review_title , review} , _id: this.current_catalog_item._id}
+      )
+        .then(_ => {
+          this.store.dispatch(new AppActions.AddCatalogItemReview({date, rate , name , review_title , review}))
+          document.getElementById('write_review_btn').click()
+          this.resetForm()
+        })
+        .catch(error => console.log(error))
     }
   }
 
@@ -133,10 +147,6 @@ export class ItemReviewsComponent implements OnInit {
 
   pagination_class(current_index){
     return this._pagination_s.pagination_class(current_index , this.start_index , this.display_review_amount)
-  }
-
-  displayPagination(){
-    return this.reviews.length > this.display_review_amount
   }
 
 }

@@ -45,7 +45,7 @@
                             <!-- Rating form -->
                             <div class="rating-form">
 
-                            <!-- Rating -->
+                                <!-- Rating -->
                                 <div class="rating h5 text-dark" data-value="5">
                                     <div class = "cursor" *ngFor = "let s of review_star; let i = index" (click) = "setScore(i)">
                                         <i [ngClass]="rateClass(score, i)"></i>
@@ -228,7 +228,7 @@
             </div>
 
             <!-- Pagination -->
-            <nav class="d-flex mx-auto mt-9" *ngIf = "displayPagination()">
+            <nav class="d-flex mx-auto mt-9" *ngIf = "reviews.length > display_review_amount">
                 <ul class="pagination pagination-sm text-gray-400">
                     <li class="page-item">
                         <label class="page-link page-link-arrow cursor" (click) = "change_page('prev')">

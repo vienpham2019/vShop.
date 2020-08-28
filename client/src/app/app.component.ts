@@ -18,7 +18,6 @@ export class AppComponent implements OnInit{
     axios('/api/menCatalog')
     .then(menCatalogs => {
       if(menCatalogs.data){
-        console.log(menCatalogs.data)
         this.store.dispatch(new AppActions.AddMenCatalogs(menCatalogs.data))
       }
     })
