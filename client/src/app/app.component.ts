@@ -13,7 +13,7 @@ export class AppComponent implements OnInit{
   constructor(private store: Store<{main_reducer: AppInitState}>){}
 
   ngOnInit(){
-    fetch('http://localhost:3000/Men')
+    fetch('http://localhost:5000/api/menCatalog')
     .then(res => res.json())
     .then(data => {
       if(data){
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit{
       }
     })
 
-    fetch('http://localhost:3000/Women')
+    fetch('http://localhost:5000/api/womenCatalog')
     .then(res => res.json())
     .then(data => {
       if(data){

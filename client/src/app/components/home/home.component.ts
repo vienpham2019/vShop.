@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
       if(men_catalogs.length && women_catalogs.length){
         let all_catalogs = [...men_catalogs , ...women_catalogs]
         this.top_selling = [[all_catalogs[20] , all_catalogs[27]] , all_catalogs[40] , [all_catalogs[60] , all_catalogs[94]] , all_catalogs[100]]
-        this.new_arrivals = all_catalogs.filter(item => item.isNew)
+        this.new_arrivals = all_catalogs.filter(item => item.is_New)
         this.slice_new_arrivals() 
         this.new_arrival_length = new Array(Math.ceil(this.new_arrivals.length / this.new_arrival_display_amount)).fill(0)
       }
@@ -48,7 +48,6 @@ export class HomeComponent implements OnInit {
   }
 
   viewItem(item){
-    console.log(item)
     this.catagory_item_store.dispatch(new CatagoryItemActions.AddDisplayItem(item))
   }
 

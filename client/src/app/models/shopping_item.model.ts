@@ -1,10 +1,10 @@
 export interface ShoppingItem{
-    id: string, 
+    _id: string, 
     title: string, 
     current_price: number,
     sale_price: number,  
     size: string, 
-    isNew: boolean, 
+    is_New: boolean, 
     isSale: boolean,
     color: string, 
     amount: number, 

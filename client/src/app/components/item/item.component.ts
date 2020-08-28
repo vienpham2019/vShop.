@@ -33,7 +33,7 @@ export class ItemComponent implements OnInit {
     })
 
     user_store.pipe(select('user')).subscribe(value => {
-      this.in_widhlist = !!value.widhlist.find(item => item.id === this.item.id)
+      this.in_widhlist = !!value.widhlist.find(item => item._id === this.item._id)
       this.current_user = value.current_user
     })
   }
@@ -91,10 +91,10 @@ export class ItemComponent implements OnInit {
   }
 
   filterItem(){
-    let {id , title , current_price , sale_price , isSale , isNew , category , season , brand} = this.item
+    let {_id , title , current_price , sale_price , isSale , is_New , category , season , brand} = this.item
     let { size , amount } = this.itemForm.value 
     let { color , img } = this.color
-    return {id , title , current_price , sale_price , size , isNew , isSale , color , amount: Math.floor(amount) , img , category , season , brand}
+    return {_id , title , current_price , sale_price , size , is_New , isSale , color , amount: Math.floor(amount) , img , category , season , brand}
   }
 
   addToShoppingCart(){
