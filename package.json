@@ -1,10 +1,10 @@
 {
-  "name": "vShop.",
+  "name": "vshop",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nod server.js",
+    "start": "node server.js",
     "dev": "nodemon server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
