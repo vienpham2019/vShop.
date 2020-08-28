@@ -15,7 +15,7 @@ export class AppComponent implements OnInit{
   constructor(private store: Store<{main_reducer: AppInitState}>){}
 
   ngOnInit(){
-    axios('/api/menCatalog')
+    axios('http://localhost:4200/api/menCatalog')
     .then(menCatalogs => {
       if(menCatalogs.data){
         console.log(menCatalogs.data)
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit{
       }
     })
 
-    axios('/api/womenCatalog')
+    axios('http://localhost:4200/api/womenCatalog')
     .then(womenCatalogs => {
       if(womenCatalogs.data){
         this.store.dispatch(new AppActions.AddWomenCatalogs(womenCatalogs.data))
