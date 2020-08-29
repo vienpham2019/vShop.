@@ -8,7 +8,9 @@ import { CatalogItem } from '../../models/catalog_item.model'
 import * as ShoppingItemActions from '../../actions/shopping_items.actions'
 import * as UserActions from '../../actions/user.actions'
 import { User } from 'src/app/models/user.model';
+
 import Swal from 'sweetalert2'
+import axios from 'axios';
 
 @Component({
   selector: 'app-item',
@@ -38,8 +40,11 @@ export class ItemComponent implements OnInit {
     user_store.pipe(select('user')).subscribe(value => {
       this.in_widhlist = !!value.widhlist.find(item => item._id === this.item._id)
       this.current_user = value.current_user
+      this.token = value.token
     })
   }
+
+  token: string 
 
   item: CatalogItem 
   in_widhlist: boolean
@@ -126,14 +131,20 @@ export class ItemComponent implements OnInit {
           this.err_add_to_widhlist = false
         }, 3800);
       }else{
-        this.user_store.dispatch(new UserActions.AddWidhlist(this.item))
-        this.add_to_widhlist = true
-        setTimeout(() => {
-          document.getElementById('addToWidhlistAlert').className = "alert alert-success animate__animated animate__bounceOutLeft text-center"
-        }, 3000);
-        setTimeout(() => {
-          this.add_to_widhlist = false
-        }, 3800);
+        let { token , item } = this
+        axios.post('/api/user/add_to_widhlist' , {token , item})
+        .then(res => {
+          if(res.data.msg) {
+            this.user_store.dispatch(new UserActions.AddWidhlist(item))
+            this.add_to_widhlist = true
+            setTimeout(() => {
+              document.getElementById('addToWidhlistAlert').className = "alert alert-success animate__animated animate__bounceOutLeft text-center"
+            }, 3000);
+            setTimeout(() => {
+              this.add_to_widhlist = false
+            }, 3800);
+          }
+        })
       }
     }else{
       document.getElementById('loginModalButton').click()

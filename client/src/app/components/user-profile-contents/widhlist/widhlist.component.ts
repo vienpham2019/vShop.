@@ -9,6 +9,8 @@ import * as UserActions from '../../../actions/user.actions'
 import { AppInitState } from '../../../models/app_initState.model'
 import * as AppActions from '../../../actions/app.action'
 
+import axios from 'axios'
+
 @Component({
   selector: 'app-widhlist',
   templateUrl: './widhlist.component.html',
@@ -22,14 +24,15 @@ export class WidhlistComponent implements OnInit {
     private app_store: Store<{main_reducer: AppInitState}>,
   ) { 
     store.pipe(select('user')).subscribe(value => {
-      if(value.current_user){
-        this.widhlist = value.widhlist
-        this.widhlist_length = new Array(Math.ceil(this.widhlist.length / this.widhlist_display_amount)).fill(0)
-        this.checkCurrentPage()
-        this.slice_order_detail()
-      }
+      this.widhlist = value.widhlist
+      this.widhlist_length = new Array(Math.ceil(this.widhlist.length / this.widhlist_display_amount)).fill(0)
+      this.token = value.token 
+      this.checkCurrentPage()
+      this.slice_order_detail()
     })
   }
+
+  token: string 
 
   widhlist: CatalogItem[] = []
 
@@ -46,7 +49,11 @@ export class WidhlistComponent implements OnInit {
   }
 
   removeWidhlist(index):void {
-    this.store.dispatch(new UserActions.RemoveWidhlist(index))
+    let {token} = this
+    axios.post('/api/user/remove_from_widhlist' , {token , index}) 
+    .then(res => {
+      if(res.data.msg) this.store.dispatch(new UserActions.RemoveWidhlist(index))
+    })
   }
 
   checkCurrentPage(){

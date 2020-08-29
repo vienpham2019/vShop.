@@ -11,6 +11,7 @@ import * as ShoppingItemActions from '../../actions/shopping_items.actions'
 import * as UserActions from '../../actions/user.actions'
 
 import { UUID } from 'angular2-uuid'
+import axios from 'axios'
 
 @Component({
   selector: 'app-payment',
@@ -33,6 +34,7 @@ export class PaymentComponent implements OnInit {
 
     user_store.pipe(select('user')).subscribe(value => {
       this.current_user = value.current_user 
+      this.token = value.token
       this.user_addresses = value.addresses
       this.setPaymentForm()
       value.addresses.forEach((value, index) => {
@@ -58,6 +60,7 @@ export class PaymentComponent implements OnInit {
     "1 - 2 Shipping": [1,2]
   }
 
+  token: string 
   order_id: string 
 
   shopping_items: ShoppingItem[]
@@ -81,23 +84,23 @@ export class PaymentComponent implements OnInit {
 
   setPaymentForm(){
     this.payment_form = this._fb.group({
-      first_name: ['vien', Validators.required],
-      last_name: ['pham', Validators.required],
-      email: ['vienpham2019@gmail.com' , [Validators.required , Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      email: ['' , [Validators.required , Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
       company_name: [''],
-      country: ['USA' , Validators.required],
-      address1: ['1932 briar grove dr' , Validators.required],
+      country: ['' , Validators.required],
+      address1: ['' , Validators.required],
       address2: [''] , 
-      city: ['Conroe' , Validators.required],
-      state: ['TX' , Validators.required],
-      zip: ['77301', Validators.required],
-      phone: ['5022960606' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]],
+      city: ['' , Validators.required],
+      state: ['' , Validators.required],
+      zip: ['', Validators.required],
+      phone: ['' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]],
       shipping_details: this._fb.group({
         type: ['Free Shipping'],
         detail: ['Delivery in 8 - 10 working days'],
         price: [0]
       }),
-      order_notes: ['GUYS GO VOTE FOR Red Velvet  AT THE VMA SO THEY CAN WIN FOR THeir latest  SONG PSYCHO. PLEASE ANY ONE GO DO IT .I REALLY REALLY WANT THEM TO WIN. THAt  SONG DESERVE IT. PLEASE I HOPE PEOPLE SEE THIS'],
+      order_notes: [''],
       total: ['']
     })
   }
@@ -161,9 +164,14 @@ export class PaymentComponent implements OnInit {
       let shipping_method = [type,detail]
       let shipping_address = {first_name, last_name, email, address1 , address2 , city , state, zip , country , phone , default_address: false }
       if(this.current_user){
-        this.store.dispatch(new UserActions.AddOrder({
+        let { token } = this
+        let order = {
           order_id, order_date , shipping_date, subtotal , tax , shipping_feed , total , shipping_address , shipping_method , order_notes , shopping_items 
-        }))
+        }
+        axios.post('/api/user/add_to_orders' , {token , order})
+        .then(res => {
+          if(res.data.msg) this.store.dispatch(new UserActions.AddOrder(order))
+        })
       }
       this.store.dispatch(new ShoppingItemActions.ResetItem())
     }
@@ -206,8 +214,7 @@ export class PaymentComponent implements OnInit {
   }
 
   getShippingAddress(value , index){
-    let { first_name , last_name , email , company_name , country , address1 , address2, city , state , zip , phone} = value 
-    this.payment_form.patchValue({ first_name , last_name , email , company_name , country , address1 , address2, city , state , zip , phone})
+    this.payment_form.patchValue({...value})
     this.selected_address_index = index
   } 
 

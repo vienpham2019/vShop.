@@ -6,6 +6,8 @@ import * as UserActions from '../../../actions/user.actions'
 import Swal from 'sweetalert2';
 import { PaginationService } from '../../../services/pagination/pagination.service'
 
+import axios from 'axios'
+
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -18,14 +20,16 @@ export class OrderComponent implements OnInit {
     private pagination_s: PaginationService
   ) { 
     store.pipe(select('user')).subscribe(value => {
-      if(value.current_user){
-        this.order_details = value.orders
-        this.order_details_length = new Array(Math.ceil(this.order_details.length / this.order_details_display_amount)).fill(0)
-        this.checkCurrentPage()
-        this.slice_order_detail()
-      }
+      this.order_details = value.orders
+      this.order_details_length = new Array(Math.ceil(this.order_details.length / this.order_details_display_amount)).fill(0)
+      this.checkCurrentPage()
+      this.slice_order_detail()
+      this.token = value.token
     })
   }
+
+  token: string 
+
   order_details: OrderDetail[] = []
 
   display_order_details: OrderDetail[]
@@ -62,12 +66,18 @@ export class OrderComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.value) {
-        this.store.dispatch(new UserActions.RemoveOrder(index))
-        Swal.fire(
-          'Deleted!',
-          'Your order has been deleted.',
-          'success'
-        )
+        let { token } = this
+        axios.post('/api/user/remove_from_order' , {token , index})
+        .then(res => {
+          if(res.data.msg){
+            this.store.dispatch(new UserActions.RemoveOrder(index))
+            Swal.fire(
+              'Deleted!',
+              'Your order has been deleted.',
+              'success'
+            )
+          }
+        })
       }
     })
   }
