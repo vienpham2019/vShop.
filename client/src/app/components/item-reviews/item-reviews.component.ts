@@ -4,6 +4,7 @@ import { PaginationService } from '../../services/pagination/pagination.service'
 
 import { Store , select } from '@ngrx/store'
 import { AppInitState } from '../../models/app_initState.model'
+import { User } from '../../models/user.model'
 import { CatalogItemReview } from '../../models/catalog_item_review.model'
 import * as AppActions from '../../actions/app.action'
 
@@ -19,7 +20,8 @@ export class ItemReviewsComponent implements OnInit {
   constructor(
     private _fb: FormBuilder , 
     private _pagination_s: PaginationService,
-    private store: Store<{main_reducer: AppInitState}>
+    private store: Store<{main_reducer: AppInitState}>,
+    private user_store: Store<{user: User}> 
   ) { 
     store.pipe(select('main_reducer')).subscribe(value => {
       this.reviews = value.display_catalog_item.reviews
@@ -28,7 +30,19 @@ export class ItemReviewsComponent implements OnInit {
       this.getTotalReview()
       this.slice_reviews()
     })
+
+    user_store.pipe(select('user')).subscribe(value => {
+      if(value.current_user){
+        let { first_name , last_name , email } = value 
+        this.user_info = { name: `${first_name} ${last_name}` , email }
+      }else{
+        this.user_info = null 
+      }
+    })
   }
+
+  user_info: any 
+
   review_star: any[] = new Array(5).fill(0)
   reviews: CatalogItemReview[] = []
 
@@ -63,6 +77,9 @@ export class ItemReviewsComponent implements OnInit {
     this.score = 5
     this.new_review.reset()
     this.submit_invalid = false 
+    if(this.user_info){
+      this.new_review.patchValue({...this.user_info})
+    }
   }
 
   setScore(index){

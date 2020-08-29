@@ -1,7 +1,7 @@
 <div class="modal fade show" id="loginModal" tabindex="-1" role="dialog" aria-modal="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <button class="close close-absolute" type="button" data-dismiss="modal" aria-label="Close" (click) = "resetAllForm()">
+        <button class="close close-absolute" id="closeLoginAndRegisterButton" type="button" data-dismiss="modal" aria-label="Close" (click) = "resetAllForm()">
             <span aria-hidden="true">&times;</span>
         </button>
         <div class="modal-body p-5">
@@ -17,10 +17,14 @@
           <div class="tab-content">
             <div class="tab-pane fade px-3 active show" id="loginModalTabLogin" role="tabpanel" aria-labelledby="loginModalLinkLogin">
                 <!-- form -->
+              <div class="alert alert-danger animate__animated animate__backInDown" role="alert" *ngIf = "!!invalid_login || login_submit_inValid" style="animation-duration: 0.6s">
+                <i class="fas fa-exclamation-triangle"></i> Please correct all the fields marked in red. 
+              </div>
               <form [formGroup] = "loginForm">
                 <div class="form-group">
                   <label class="form-label">Email *</label>
-                  <input class="form-control" type="text" formControlName = "email" [ngClass] = "classes('email' , 'Login')">
+                  <input class="form-control" type="text" formControlName = "email" [class.is-invalid] = "displayError('email' , 'Login') || !!invalid_login">
+                  <small class="text-danger" *ngIf = "!!invalid_login">{{invalid_login}}</small>
                   <div *ngIf = "displayError('email' , 'Login')">
                     <ng-template [ngIf] = "getControl('email' , 'Login').errors?.required" [ngIfElse] = "elseBlock">
                       <small class="text-danger">Email is required</small>
@@ -33,7 +37,8 @@
 
                 <div class="form-group">
                   <label class="form-label">Password *</label>
-                  <input class="form-control" type="password" formControlName = "password" [ngClass] = "classes('password' , 'Login')">
+                  <input class="form-control" type="password" formControlName = "password" [class.is-invalid] = "displayError('password' , 'Login') || !!invalid_login">
+                  <small class="text-danger" *ngIf = "!!invalid_login">{{invalid_login}}</small>
                   <small class="text-danger" *ngIf = "displayError('password', 'Login')">Password is required</small>
                 </div>
                 
@@ -45,7 +50,13 @@
               </form>
             </div>
             <div class="tab-pane fade px-3" id="loginModalTabRegister" role="tabpanel" aria-labelledby="loginModalLinkRegister">
-                <!-- form -->
+              <div class="alert alert-success animate__animated animate__backInDown" role="alert" *ngIf = "register_success" style="animation-duration: 0.6s">
+                <i class="fas fa-check"></i> Registration successful. 
+              </div>
+              <div class="alert alert-danger animate__animated animate__backInDown" role="alert" *ngIf = "register_submit_inValid" style="animation-duration: 0.6s">
+                <i class="fas fa-exclamation-triangle"></i> Please correct all the fields marked in red. 
+              </div>
+              <!-- form -->
               <form [formGroup] = "registerForm">
 
                 <div class="form-row mb-4">
@@ -63,7 +74,8 @@
 
                 <div class="form-group">
                   <label class="form-label" >Email *</label>
-                  <input class="form-control" type="text" formControlName = "email" [ngClass] = "classes('email' , 'Register')">
+                  <input class="form-control" type="text" formControlName = "email" [ngClass] = "emailClasses()">
+                  <small class="text-danger" *ngIf = "!!email_unique_error">{{email_unique_error}}</small>
                   <div *ngIf = "displayError('email' , 'Register')">
                     <ng-template [ngIf] = "getControl('email' , 'Register').errors?.required" [ngIfElse] = "elseBlock">
                       <small class="text-danger">Email is required</small>

@@ -3,23 +3,18 @@ import * as UserActions from './../actions/user.actions'
 
 
 export const initState: User = {
-    current_user: true, 
+    current_user: false, 
+    token: '',
     first_name: '',
     last_name: '',
-    shipping_details: [
-        {first_name: 'Daniel' , last_name: 'Robinson', email: 'vienpham2019@gmail.com' , address1: '3997 Raccoon Run', address2: '',city: 'New', state: 'Kingston', zip: '45644', country: 'United States', phone: '6146389574', default_address: false },
-        {first_name: 'Daniel' , last_name: 'Robinson', email: 'vienpham2019@gmail.com' , address1: '3997 Raccoon Run', address2: '',city: 'New', state: 'Kingston', zip: '45644', country: 'United States', phone: '6146389574', default_address: false },
-        {first_name: 'Vien' , last_name: 'Pham', email: 'vienpham2019@gmail.com' , address1: '3997 Raccoon Run', address2: '',city: 'New', state: 'Kingston', zip: '45644', country: 'United States', phone: '6146389574', default_address: true },
-        {first_name: 'Daniel' , last_name: 'Robinson', email: 'vienpham2019@gmail.com' , address1: '3997 Raccoon Run', address2: '',city: 'New', state: 'Kingston', zip: '45644', country: 'United States', phone: '6146389574', default_address: false}
-    ],
+    email: '',
+    gender: '',
+    shipping_details: [],
     edit_shipping_index: null ,
     edit_shipping_detail: null ,
     order_details: [], 
     display_order_detail: null,
     widhlist: [],
-    user_info: {
-        first_name: 'Vien', last_name: 'Pham' , email: 'vienpham2019@gmail.com' , gender: 'Male'
-    }
 }
 
 export function UserReducer(state = initState , action: UserActions.Actions) {
@@ -58,6 +53,9 @@ export function UserReducer(state = initState , action: UserActions.Actions) {
 
         case UserActions.update_user_info: 
             return {...state, user_info: action.user_info}
+
+        case UserActions.user_login: 
+            return {...state , ...action.user , current_user: true}
 
         case UserActions.user_logout: 
             return {...state , current_user: false, shipping_details: [] , order_details: [] , widhlist: [] , user_info: {} }

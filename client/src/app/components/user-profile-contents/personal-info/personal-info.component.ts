@@ -17,7 +17,7 @@ export class PersonalInfoComponent implements OnInit {
   ) { 
     store.pipe(select('user')).subscribe(value => {
       this.setUserInfo()
-      this.patchUserInfo(value.user_info)
+      this.patchUserInfo(value)
     })
   }
 
