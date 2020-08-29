@@ -5,6 +5,8 @@ import * as UserActions from '../../../actions/user.actions'
 import { ShippingDetail } from '../../../models/shipping_detail.model'
 import { User } from '../../../models/user.model'
 
+import axios from 'axios'
+
 
 @Component({
   selector: 'app-edit-address-modal',
@@ -20,6 +22,8 @@ export class EditAddressModalComponent implements OnInit {
     store.pipe(select('user')).subscribe(value => {
       this.edit_shipping_detail = value.edit_shipping_detail
       this.shipping_details = value.addresses
+      this.token = value.token
+      this.edit_shipping_index = value.edit_shipping_index
       this.setUpForm()
     })
    }
@@ -42,13 +46,14 @@ export class EditAddressModalComponent implements OnInit {
   edit_shipping_detail: ShippingDetail
   shipping_details: ShippingDetail[]
   form_title: string = "Add Shipping"
+  token: string 
+  edit_shipping_index: number 
 
   ngOnInit(): void {
   }
 
   setUpForm(){
     if(this.edit_shipping_detail){
-      let {first_name , last_name , email, country , address1, address2 , city , state , zip , phone} = this.edit_shipping_detail
       this.form_title = "Edit Shipping"
       this.editAddressForm.patchValue(
         {...this.edit_shipping_detail}
@@ -64,11 +69,18 @@ export class EditAddressModalComponent implements OnInit {
     this.submit_invalid = this.editAddressForm.status === "INVALID"
     if(!this.submit_invalid){
       let default_address =  this.edit_shipping_detail ? this.edit_shipping_detail.default_address : this.shipping_details.length === 0 
+      let { token , edit_shipping_index } = this
 
       if(this.edit_shipping_detail){
-        this.store.dispatch(new UserActions.EditShipping({...this.editAddressForm.value, default_address}))
+        axios.post('/api/user/edit_address' , {token, address: {...this.editAddressForm.value, default_address } , index: edit_shipping_index })
+        .then(res => {
+          if(res.data.msg) this.store.dispatch(new UserActions.EditShipping({...this.editAddressForm.value, default_address}))
+        })
       }else{
-        this.store.dispatch(new UserActions.AddShipping({...this.editAddressForm.value, default_address}))
+        axios.post('/api/user/add_address' , {token, address: {...this.editAddressForm.value, default_address}})
+        .then(res => {
+          if(res.data.msg) this.store.dispatch(new UserActions.AddShipping({...this.editAddressForm.value, default_address}))
+        })
       }
       document.getElementById('editUserAddressCloseBtn').click()
     }

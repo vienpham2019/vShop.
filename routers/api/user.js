@@ -50,4 +50,62 @@ router.post('/login' , (req , res) => {
     })
 })
 
+// add address 
+router.post('/add_address' , (req , res) => {
+    let { token } = req.body 
+    jwt.verify(token, process.env.jwt_key, (err , decoded) => {
+        if(err) throw err 
+        User.findOne({_id: decoded.id})
+        .then(user => {
+            if(user){
+                user.addresses.push(req.body.address)
+                user.save()
+                .then(user => {
+                   if(user) res.json({msg: 'Add Address Success.'})
+                })
+                .catch(err => res.status(400).json({error: err}))
+            }
+        })
+    })
+})
+
+// edit address 
+router.post('/edit_address' , (req , res) => {
+    let {token } = req.body 
+    jwt.verify(token , process.env.jwt_key , (err , decored) => {
+        if(err) throw err 
+        User.findOne({_id: decored.id})
+        .then(user => {
+            if(user){
+                let { index , address } = req.body 
+                user.addresses.splice(index , 1 , address) 
+                user.save()
+                .then(user => {
+                    if(user) res.json({msg: "Edit Address Success."})
+                })
+                .catch(err => res.status(400).json({error: err}))
+            }
+        })
+    })
+})
+
+// set default address 
+router.post('/set_default_address' , (req , res) => {
+    let { token , addresses } = req.body 
+    jwt.verify(token , process.env.jwt_key , (err , decored) => {
+        if(err) throw err 
+        User.findOne({_id: decored.id})
+        .then(user => {
+            if(user){
+                user.addresses = addresses 
+                user.save()
+                .then(user => {
+                    if(user) res.json({msg: 'Set Address Success.'})
+                })
+                .catch(err => res.status(400).json({error: err}))
+            }
+        })
+    })
+})
+
 module.exports = router

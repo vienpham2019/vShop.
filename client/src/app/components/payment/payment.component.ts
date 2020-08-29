@@ -81,17 +81,17 @@ export class PaymentComponent implements OnInit {
 
   setPaymentForm(){
     this.payment_form = this._fb.group({
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      email: ['' , [Validators.required , Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
+      first_name: ['vien', Validators.required],
+      last_name: ['pham', Validators.required],
+      email: ['vienpham2019@gmail.com' , [Validators.required , Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
       company_name: [''],
-      country: ['' , Validators.required],
-      address1: ['' , Validators.required],
+      country: ['USA' , Validators.required],
+      address1: ['1932 briar grove dr' , Validators.required],
       address2: [''] , 
-      city: ['' , Validators.required],
-      state: ['' , Validators.required],
-      zip: ['', Validators.required],
-      phone: ['' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]],
+      city: ['Conroe' , Validators.required],
+      state: ['TX' , Validators.required],
+      zip: ['77301', Validators.required],
+      phone: ['5022960606' , [Validators.required , Validators.pattern(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)]],
       shipping_details: this._fb.group({
         type: ['Free Shipping'],
         detail: ['Delivery in 8 - 10 working days'],
@@ -160,9 +160,11 @@ export class PaymentComponent implements OnInit {
       this.order_total = total
       let shipping_method = [type,detail]
       let shipping_address = {first_name, last_name, email, address1 , address2 , city , state, zip , country , phone , default_address: false }
-      this.store.dispatch(new UserActions.AddOrder({
-        order_id, order_date , shipping_date, subtotal , tax , shipping_feed , total , shipping_address , shipping_method , order_notes , shopping_items 
-      }))
+      if(this.current_user){
+        this.store.dispatch(new UserActions.AddOrder({
+          order_id, order_date , shipping_date, subtotal , tax , shipping_feed , total , shipping_address , shipping_method , order_notes , shopping_items 
+        }))
+      }
       this.store.dispatch(new ShoppingItemActions.ResetItem())
     }
   }

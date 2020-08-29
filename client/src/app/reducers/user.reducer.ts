@@ -31,7 +31,7 @@ export function UserReducer(state = initState , action: UserActions.Actions) {
             return {...state, addresses: action.shippings}
         
         case UserActions.add_shipping: 
-            return {...state, addresses: [action.shipping, ...state.addresses]}
+            return {...state, addresses: [...state.addresses,action.shipping]}
 
         case UserActions.remove_shipping: 
             return {...state, addresses: state.addresses.filter((_,i) => i !== action.index)}

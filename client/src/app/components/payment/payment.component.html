@@ -43,7 +43,7 @@
         <form [formGroup] = "payment_form">
           <!-- Heading -->
           <h6 class="mb-4">Billing Details</h6>
-          <span class="text-monospace cursor ml-2 link-item" data-toggle="modal" data-target="#shippingAdressModal">Select shipping address? </span>
+          <span class="text-monospace cursor ml-2 link-item" data-toggle="modal" data-target="#shippingAdressModal" *ngIf = "current_user">Select shipping address? </span>
 
           <!-- Billing details -->
           <div class="row mb-9 mt-4">
@@ -499,7 +499,7 @@
                 <td>
                   <span>
                     {{payment_form.value.address1}} <br>
-                    {{payment_form.value.town_city}} {{payment_form.value.state}} , {{payment_form.value.zip}} <br>
+                    {{payment_form.value.city}} {{payment_form.value.state}} , {{payment_form.value.zip}} <br>
                     {{payment_form.value.country}}
                   </span>
                 </td>
@@ -509,9 +509,17 @@
           </table>
         </div>
 
-        <button class="btn btn-dark my-5" [routerLink] = "['/user-profile']">
-          View order
-        </button>
+        <ng-template [ngIf] = "current_user" [ngIfElse] = "elseBlock">
+          <button class="btn btn-dark my-5" [routerLink] = "['/user-profile']">
+            View order
+          </button>
+        </ng-template>
+
+        <ng-template #elseBlock> 
+          <button class="btn btn-dark my-5" [routerLink] = "['/']">
+            Home page
+          </button>
+        </ng-template>
       </div>
     </div>
   </ng-template>
