@@ -17,6 +17,7 @@ mongoose.connection.once('open' , () => console.log('Connect to database ....'))
 // routers 
 app.use('/api/menCatalog' , require('./routers/api/menCatalog'))
 app.use('/api/womenCatalog' , require('./routers/api/womenCatalog'))
+app.use('/api/user' , require('./routers/api/user'))
 
 // Serve static assets if in production 
 if(process.env.NODE_ENV === "production"){
