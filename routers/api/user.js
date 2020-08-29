@@ -108,4 +108,111 @@ router.post('/set_default_address' , (req , res) => {
     })
 })
 
+// update user info 
+router.post('/user_info' , (req , res) => {
+    let { first_name , last_name , email , gender , new_password , token} = req.body 
+    jwt.verify( token , process.env.jwt_key , (err , decored) => {
+        if(err) throw err 
+        User.findOne({_id: decored.id})
+        .then(user => {
+            if(user){
+                bcrypt.genSalt(10 , (err , salt) => {
+                    bcrypt.hash(new_password , salt , (err , hash) => {
+                        if(err) throw err
+                        user.first_name = first_name 
+                        user.last_name = last_name 
+                        user.email = email
+                        user.gender = gender 
+
+                        if(new_password) user.password = hash 
+
+                        user.save()
+                        .then(user => {
+                            if(user) res.json({msg: "Update User Info Success"})
+                        })
+                        .catch(err => res.status(400).json({error: err}))
+                    })
+                })
+            }
+        })
+    })
+})
+
+// add to widhlist 
+router.post('/add_to_widhlist' , (req , res) => {
+    let { token , item } = req.body 
+    jwt.verify(token , process.env.jwt_key , (err , decored) => {
+        if(err) throw err 
+        User.findOne({_id: decored.id})
+        .then(user => {
+            if(user){
+                user.widhlist.unshift(item)
+                user.save()
+                .then(user => {
+                    if(user) res.json({msg: 'Add to widhlist success.'})
+                })
+                .catch(err => res.status(400).json({error: err}))
+            }
+        })
+    })
+})
+
+// remove from widhlist 
+router.post('/remove_from_widhlist' , (req , res) => {
+    let {token , index} = req.body 
+    jwt.verify(token , process.env.jwt_key , (err , decored) => {
+        if(err) throw err 
+        User.findOne({_id: decored.id})
+        .then(user => {
+            if(user){
+                user.widhlist.splice(index , 1)
+                user.save()
+                .then(user => {
+                    if(user) res.json({msg: 'Remove form widhlist success.'})
+                })
+                .catch(err => res.status(400).json({error: err}))
+            }
+        })
+    })
+})
+
+// add to orders 
+router.post('/add_to_orders' , (req , res) => {
+    let {token , order} = req.body 
+    jwt.verify(token , process.env.jwt_key , (err , decored) => {
+        if(err) throw err 
+        User.findOne({_id: decored.id})
+        .then(user => {
+            if(user){
+                user.orders.unshift(order)
+                user.save()
+                .then(user => {
+                    if(user) res.json({msg: "Add to orders success"})
+                })
+                .catch(err => res.status(400).json({error: err}))
+            }
+        })
+    })
+})
+
+//remove from order 
+router.post('/remove_from_order' , (req , res) => {
+    let {token , index} = req.body 
+    jwt.verify(token , process.env.jwt_key , (err , decored) => {
+        if(err) throw err 
+        User.findOne({_id: decored.id})
+        .then(user => {
+            if(user){
+                user.orders.splice(index , 1)
+                user.save()
+                .then(user => {
+                    if(user) res.json({msg: 'Remove form orders success.'})
+                })
+                .catch(err => res.status(400).json({error: err}))
+            }
+        })
+    })
+})
+
+
 module.exports = router
