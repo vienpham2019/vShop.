@@ -4,6 +4,8 @@ import { Store , select } from '@ngrx/store'
 import { User } from '../../../models/user.model'
 import * as UserActions from '../../../actions/user.actions'
 
+import axios from 'axios'
+
 @Component({
   selector: 'app-personal-info',
   templateUrl: './personal-info.component.html',
@@ -18,11 +20,14 @@ export class PersonalInfoComponent implements OnInit {
     store.pipe(select('user')).subscribe(value => {
       this.setUserInfo()
       this.patchUserInfo(value)
+      this.token = value.token
     })
   }
 
   user_info_form: FormGroup
   submit_invalid: boolean = false
+  token: string 
+  update_success: boolean = false 
 
   ngOnInit(): void {
     
@@ -84,8 +89,21 @@ export class PersonalInfoComponent implements OnInit {
   onSubmit() {
     this.submit_invalid = this.user_info_form.status === "INVALID"
     if(!this.submit_invalid){
-      let {first_name, last_name , email , gender} = this.user_info_form.value
-      this.store.dispatch(new UserActions.UpdateUserInfo({first_name, last_name , email , gender}))
+      let { token } = this
+      let {first_name, last_name , email , gender , new_password} = this.user_info_form.value
+      axios.post('/api/user/user_info' , {first_name, last_name , email , gender , new_password , token})
+      .then(res => {
+        if(res.data.msg) {
+          this.store.dispatch(new UserActions.UpdateUserInfo({first_name, last_name , email , gender}))
+          this.update_success = true
+          setTimeout(() => {
+            document.getElementById('successUpdateUserInfo').className = 'alert alert-success animate__animated animate__backOutDown'
+          }, 3000);
+          setTimeout(() => {
+            this.update_success = false 
+          }, 4000);
+        }
+      })
     }
   }
 }

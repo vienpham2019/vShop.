@@ -52,7 +52,7 @@ export function UserReducer(state = initState , action: UserActions.Actions) {
             return {...state , widhlist: state.widhlist.filter((_,i) => i !== action.index)}
 
         case UserActions.update_user_info: 
-            return {...state, user_info: action.user_info}
+            return {...state, ...action.user_info}
 
         case UserActions.user_login: 
             return {...state , ...action.user , current_user: true}

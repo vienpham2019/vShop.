@@ -55,6 +55,10 @@ export class ItemComponent implements OnInit {
 
   color: {color: string, img: string}
 
+  add_to_shopping_cart: boolean = false
+  add_to_widhlist: boolean = false 
+  err_add_to_widhlist: boolean = false 
+
   ngOnInit(): void {
     window.scrollTo(0,0)
   }
@@ -102,28 +106,34 @@ export class ItemComponent implements OnInit {
 
   addToShoppingCart(){
     this.shopping_item_store.dispatch(new ShoppingItemActions.AddItem(this.filterItem()))
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: 'This item has been add to your cart',
-      showConfirmButton: false,
-      timer: 1000
-    })
+    this.add_to_shopping_cart = true
+    setTimeout(() => {
+      document.getElementById('addToShoppingCartAlert').className = "alert alert-success animate__animated animate__bounceOutLeft text-center"
+    }, 3000);
+    setTimeout(() => {
+      this.add_to_shopping_cart = false
+    }, 3800);
   }
 
   addToWidhlist(){
     if(this.current_user){
       if(this.in_widhlist){
-        Swal.fire('This item already in your widhlist.')
+        this.err_add_to_widhlist = true
+        setTimeout(() => {
+          document.getElementById('errAddToWidhlistAlert').className = "alert alert-danger animate__animated animate__bounceOutLeft text-center"
+        }, 3000);
+        setTimeout(() => {
+          this.err_add_to_widhlist = false
+        }, 3800);
       }else{
         this.user_store.dispatch(new UserActions.AddWidhlist(this.item))
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'This item has been add to your widhlist.',
-          showConfirmButton: false,
-          timer: 1000
-        })
+        this.add_to_widhlist = true
+        setTimeout(() => {
+          document.getElementById('addToWidhlistAlert').className = "alert alert-success animate__animated animate__bounceOutLeft text-center"
+        }, 3000);
+        setTimeout(() => {
+          this.add_to_widhlist = false
+        }, 3800);
       }
     }else{
       document.getElementById('loginModalButton').click()

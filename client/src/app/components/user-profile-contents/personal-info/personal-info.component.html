@@ -1,5 +1,9 @@
 
 <!-- Form -->
+<div class="alert alert-success animate__animated animate__backInDown" id="successUpdateUserInfo" role="alert" style="animation-duration: 0.6s" *ngIf = "update_success">
+  <i class="fas fa-check"></i> Your profile information was updated. 
+</div>
+
 <form [formGroup] = "user_info_form">
   <div class="row">
     <div class="col-12 col-md-6">
@@ -63,13 +67,13 @@
       <!-- Checkbox -->
       <div class="custom-control custom-checkbox">
         <input class="custom-control-input" id="checkoutChangePassword" type="checkbox" formControlName = "change_pass">
-        <label class="custom-control-label font-size-sm" data-toggle="collapse" data-target="#checkoutChangePassword" for="checkoutChangePassword" aria-expanded="false">
-          Change Password. 
+        <label class="custom-control-label font-size-sm" for="checkoutChangePassword">
+          Change Password.
         </label>
       </div>
 
       <!-- Collapse -->
-      <div class="collapse" id="checkoutChangePassword">
+      <div *ngIf = "user_info_form.value.change_pass">
         <div class="row mt-6">
           <div class="col-12 col-md-6">
 
