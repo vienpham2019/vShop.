@@ -62,7 +62,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   logOut(){
-    this.store.dispatch(new UserActions.UserLogout(false) )
+    // this.store.dispatch(new UserActions.UserLogout(false) )
   }
 
 }

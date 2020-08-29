@@ -25,10 +25,10 @@ export function UserReducer(state = initState , action: UserActions.Actions) {
         case UserActions.edit_shipping: 
             let addresses = [...state.addresses]
             addresses[state.edit_shipping_index] = action.shipping
-            return {...action , addresses}
+            return {...state , addresses}
         
         case UserActions.set_default_shipping: 
-            return {...action, addresses: action.shippings}
+            return {...state, addresses: action.shippings}
         
         case UserActions.add_shipping: 
             return {...state, addresses: [action.shipping, ...state.addresses]}

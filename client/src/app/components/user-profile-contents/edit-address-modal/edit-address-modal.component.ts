@@ -19,7 +19,7 @@ export class EditAddressModalComponent implements OnInit {
   ) {
     store.pipe(select('user')).subscribe(value => {
       this.edit_shipping_detail = value.edit_shipping_detail
-      this.shipping_details = value.shipping_details
+      this.shipping_details = value.addresses
       this.setUpForm()
     })
    }
@@ -51,7 +51,7 @@ export class EditAddressModalComponent implements OnInit {
       let {first_name , last_name , email, country , address1, address2 , city , state , zip , phone} = this.edit_shipping_detail
       this.form_title = "Edit Shipping"
       this.editAddressForm.patchValue(
-        {first_name , last_name, email , country , address1, address2 , city , state , zip , phone}
+        {...this.edit_shipping_detail}
       )
     }else{
       this.editAddressForm.reset()
@@ -63,11 +63,12 @@ export class EditAddressModalComponent implements OnInit {
   checkout() {
     this.submit_invalid = this.editAddressForm.status === "INVALID"
     if(!this.submit_invalid){
+      let default_address =  this.edit_shipping_detail ? this.edit_shipping_detail.default_address : this.shipping_details.length === 0 
+
       if(this.edit_shipping_detail){
-        let { default_address } = this.edit_shipping_detail
         this.store.dispatch(new UserActions.EditShipping({...this.editAddressForm.value, default_address}))
       }else{
-        this.store.dispatch(new UserActions.AddShipping({...this.editAddressForm.value, default_address: this.shipping_details.length === 0 }))
+        this.store.dispatch(new UserActions.AddShipping({...this.editAddressForm.value, default_address}))
       }
       document.getElementById('editUserAddressCloseBtn').click()
     }

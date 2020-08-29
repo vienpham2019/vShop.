@@ -22,10 +22,12 @@ export class WidhlistComponent implements OnInit {
     private app_store: Store<{main_reducer: AppInitState}>,
   ) { 
     store.pipe(select('user')).subscribe(value => {
-      this.widhlist = value.widhlist
-      this.widhlist_length = new Array(Math.ceil(this.widhlist.length / this.widhlist_display_amount)).fill(0)
-      this.checkCurrentPage()
-      this.slice_order_detail()
+      if(value.current_user){
+        this.widhlist = value.widhlist
+        this.widhlist_length = new Array(Math.ceil(this.widhlist.length / this.widhlist_display_amount)).fill(0)
+        this.checkCurrentPage()
+        this.slice_order_detail()
+      }
     })
   }
 
