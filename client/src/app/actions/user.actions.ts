@@ -84,7 +84,7 @@ export class UserLogin implements Action {
 
 export class UserLogout {
 	readonly type = user_logout
-	constructor(public current_user: boolean) {}
+	constructor(public user: any) {}
 }
 
 export type Actions = AddShipping | RemoveShipping| AddEditShipping | EditShipping | SetDefaultShipping | AddOrder | RemoveOrder | DisplayOrderDetail | AddWidhlist | RemoveWidhlist | UpdateUserInfo | UserLogout | UserLogin 

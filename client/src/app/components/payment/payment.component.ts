@@ -33,9 +33,9 @@ export class PaymentComponent implements OnInit {
 
     user_store.pipe(select('user')).subscribe(value => {
       this.current_user = value.current_user 
-      this.user_addresses = value.shipping_details
+      this.user_addresses = value.addresses
       this.setPaymentForm()
-      value.shipping_details.forEach((value, index) => {
+      value.addresses.forEach((value, index) => {
         if(value.default_address){
           this.getShippingAddress(value , index)
         }

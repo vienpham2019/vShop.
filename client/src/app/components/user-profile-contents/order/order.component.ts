@@ -18,7 +18,7 @@ export class OrderComponent implements OnInit {
     private pagination_s: PaginationService
   ) { 
     store.pipe(select('user')).subscribe(value => {
-      this.order_details = value.order_details
+      this.order_details = value.orders
       this.order_details_length = new Array(Math.ceil(this.order_details.length / this.order_details_display_amount)).fill(0)
       this.checkCurrentPage()
       this.slice_order_detail()

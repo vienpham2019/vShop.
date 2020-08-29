@@ -9,12 +9,12 @@ export const initState: User = {
     last_name: '',
     email: '',
     gender: '',
-    shipping_details: [],
+    addresses: [],
+    orders: [], 
+    widhlist: [],
     edit_shipping_index: null ,
     edit_shipping_detail: null ,
-    order_details: [], 
     display_order_detail: null,
-    widhlist: [],
 }
 
 export function UserReducer(state = initState , action: UserActions.Actions) {
@@ -23,26 +23,26 @@ export function UserReducer(state = initState , action: UserActions.Actions) {
             return {...state , edit_shipping_index: action.index , edit_shipping_detail: action.shipping}
 
         case UserActions.edit_shipping: 
-            let shipping_details = [...state.shipping_details]
-            shipping_details[state.edit_shipping_index] = action.shipping
-            return {...action , shipping_details}
+            let addresses = [...state.addresses]
+            addresses[state.edit_shipping_index] = action.shipping
+            return {...action , addresses}
         
         case UserActions.set_default_shipping: 
-            return {...action, shipping_details: action.shippings}
+            return {...action, addresses: action.shippings}
         
         case UserActions.add_shipping: 
-            return {...state, shipping_details: [action.shipping, ...state.shipping_details]}
+            return {...state, addresses: [action.shipping, ...state.addresses]}
 
         case UserActions.remove_shipping: 
-            return {...state, shipping_details: state.shipping_details.filter((_,i) => i !== action.index)}
+            return {...state, addresses: state.addresses.filter((_,i) => i !== action.index)}
 
         case UserActions.add_order: 
-            return {...state, order_details: [action.order , ...state.order_details]}
+            return {...state, orders: [action.order , ...state.orders]}
 
         case UserActions.remove_order: 
-            return {...state, order_details: state.order_details.filter((_,i) => i !== action.index)}
+            return {...state, orders: state.orders.filter((_,i) => i !== action.index)}
 
-        case UserActions.select_display_order_details: 
+        case UserActions.select_display_order_details : 
             return {...state , display_order_detail: action.order}
 
         case UserActions.add_widhlist: 
@@ -58,7 +58,8 @@ export function UserReducer(state = initState , action: UserActions.Actions) {
             return {...state , ...action.user , current_user: true}
 
         case UserActions.user_logout: 
-            return {...state , current_user: false, shipping_details: [] , order_details: [] , widhlist: [] , user_info: {} }
+            let resetState = {current_user: false, token: '', first_name: '',last_name: '', email: '',gender: '',addresses: [], orders: [], widhlist: [],}
+            return {...state , ...resetState}
 
         default:
             return state

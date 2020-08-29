@@ -8,10 +8,10 @@ export interface User {
     last_name: string, 
     email: string, 
     gender: string, 
-    shipping_details: ShippingDetail[],
+    addresses: ShippingDetail[],
+    widhlist: CatalogItem[],
+    orders: OrderDetail[],
     edit_shipping_index: number | null ,
     edit_shipping_detail: ShippingDetail | null ,
-    order_details: OrderDetail[],
     display_order_detail: OrderDetail | null ,
-    widhlist: CatalogItem[],
 }
