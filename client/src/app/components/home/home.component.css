@@ -14,12 +14,16 @@
     content: '';
     background: #000;
     width: 0;
-    border-bottom: solid 1px #2e2e2e;  
+    border-bottom: solid 1px #faf7f7;  
     transition: width .3s ease-in-out; 
 }
 
 .home-btn-link:hover::after{
     width: 80%;
+}
+
+.home-btn-link:hover{
+    text-shadow: none;
 }
 
 .new-arrival-badge{
@@ -45,6 +49,13 @@
 }
 /* Optional: show position indicator in red */
 .new-arrival-items::-webkit-scrollbar-thumb {
-    background: #afafaf;
+    background: #fffefe;
 }
+
+.dark-shadow{
+    background: rgba(73, 72, 72, 0.8);
+    box-shadow: 5px 5px 4px #504f4f;
+    text-shadow: 13px 7px rgb(77, 77, 77);
+}
+
 

@@ -51,16 +51,16 @@
                   </div>
 
                 </div>
-                <div class="col-7 col-md-5 offset-n5 offset-md-n1 shadow-sm p-3 mb-5 white_tp_background">
+                <div class="col-7 col-md-5 offset-n5 offset-md-n1 text-white py-3 dark-shadow">
 
                   <!-- Heading -->
                   <h4 class="mb-0">
                     {{t_item.title}}
                   </h4>
-                  <small class="text-muted ml-2">{{t_item.category}}</small> <br>
+                  <span class="ml-2">{{t_item.category}}</span> <br>
 
                   <!-- Link -->
-                  <a class="btn btn-link home-btn-link px-0 text-body" [routerLink] = "['/item']" (click) = "viewItem(t_item)">
+                  <a class="btn btn-link home-btn-link px-0 text-white" [routerLink] = "['/item']" (click) = "viewItem(t_item)">
                     Shop Now <i class="fas fa-angle-right ml-2"></i>
                   </a>
 
@@ -99,16 +99,16 @@
                   </div>
 
                 </div>
-                <div class="col-8 col-lg-7 offset-n3 offset-lg-n1 white_tp_background shadow-sm p-3 mb-5">
+                <div class="col-7 col-lg-6 offset-n3 offset-lg-n1 black_tp_background text-white py-3 dark-shadow">
 
                   <!-- Heading -->
-                  <h4 class="mb-2">
+                  <h6 class="mb-2">
                     {{item.title}}
-                  </h4>
-                  <small class="text-muted ml-2">{{item.category}}</small> <br>
+                  </h6>
+                  <small class="ml-2">{{item.category}}</small> <br>
 
                   <!-- link -->
-                  <a class="btn btn-link home-btn-link px-0 text-body" [routerLink] = "['/item']" (click) = "viewItem(item)">
+                  <a class="btn btn-link home-btn-link px-0 text-white" [routerLink] = "['/item']" (click) = "viewItem(item)">
                     Shop Now <i class="fas fa-angle-right ml-2"></i>
                   </a>
 

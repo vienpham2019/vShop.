@@ -111,38 +111,44 @@ export class ItemComponent implements OnInit {
 
   addToShoppingCart(){
     this.shopping_item_store.dispatch(new ShoppingItemActions.AddItem(this.filterItem()))
-    this.add_to_shopping_cart = true
-    setTimeout(() => {
-      document.getElementById('addToShoppingCartAlert').className = "alert alert-success animate__animated animate__bounceOutLeft text-center"
-    }, 3000);
-    setTimeout(() => {
-      this.add_to_shopping_cart = false
-    }, 3800);
+    if(!this.add_to_shopping_cart){
+      this.add_to_shopping_cart = true
+      setTimeout(() => {
+        document.getElementById('addToShoppingCartAlert').className = "alert alert-success animate__animated animate__bounceOutLeft text-center"
+      }, 3000);
+      setTimeout(() => {
+        this.add_to_shopping_cart = false
+      }, 3800);
+    }
   }
 
   addToWidhlist(){
     if(this.current_user){
       if(this.in_widhlist){
-        this.err_add_to_widhlist = true
-        setTimeout(() => {
-          document.getElementById('errAddToWidhlistAlert').className = "alert alert-danger animate__animated animate__bounceOutLeft text-center"
-        }, 3000);
-        setTimeout(() => {
-          this.err_add_to_widhlist = false
-        }, 3800);
+        if(!this.err_add_to_widhlist){ 
+          this.err_add_to_widhlist = true
+          setTimeout(() => {
+            document.getElementById('errAddToWidhlistAlert').className = "alert alert-danger animate__animated animate__bounceOutLeft text-center"
+          }, 3000);
+          setTimeout(() => {
+            this.err_add_to_widhlist = false
+          }, 3800);
+        }
       }else{
         let { token , item } = this
         axios.post('/api/user/add_to_widhlist' , {token , item})
         .then(res => {
           if(res.data.msg) {
             this.user_store.dispatch(new UserActions.AddWidhlist(item))
-            this.add_to_widhlist = true
-            setTimeout(() => {
-              document.getElementById('addToWidhlistAlert').className = "alert alert-success animate__animated animate__bounceOutLeft text-center"
-            }, 3000);
-            setTimeout(() => {
-              this.add_to_widhlist = false
-            }, 3800);
+            if(!this.add_to_widhlist){
+              this.add_to_widhlist = true
+              setTimeout(() => {
+                document.getElementById('addToWidhlistAlert').className = "alert alert-success animate__animated animate__bounceOutLeft text-center"
+              }, 3000);
+              setTimeout(() => {
+                this.add_to_widhlist = false
+              }, 3800);
+            }
           }
         })
       }
